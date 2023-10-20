@@ -39,6 +39,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
         /// Changes music volume in model.
         /// </summary>
         /// <param name="value"></param>
-        public void SetMusicVolume(float value);
+        public void SetSoundVolume(float value);
     }
 }

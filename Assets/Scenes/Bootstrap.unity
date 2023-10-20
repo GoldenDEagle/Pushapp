@@ -249,7 +249,7 @@ MonoBehaviour:
   _launchParams:
     ManualParamSet: 0
     Language: 0
-    ClearPlayerPrefs: 0
+    ClearPlayerPrefs: 1
     CheatsEnabled: 0
 --- !u!114 &601118956
 MonoBehaviour:

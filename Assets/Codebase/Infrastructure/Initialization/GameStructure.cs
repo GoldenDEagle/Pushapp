@@ -44,14 +44,16 @@ namespace Assets.Codebase.Infrastructure.Initialization
 
             ApplyPreloadParams();
 
-            InitMVPStructure();
+            CreateMVPStructure();
             RegisterServices();
+            // Fills data using asset provider
+            _gameplayModel.InitModel();
 
             ApplyAfterLoadParams();
         }
 
         // MVP structure
-        private void InitMVPStructure()
+        private void CreateMVPStructure()
         {
             CreateModels();
             CreatePresenters();

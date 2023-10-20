@@ -7,6 +7,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
     /// </summary>
     public interface IViewCreatorService : IService
     {
-        public void CreateView(ViewId viewId);
+        public BaseView CreateView(ViewId viewId);
     }
 }

@@ -30,7 +30,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
             _uiRoot = uiRoot;
         }
 
-        public void CreateView(ViewId viewId)
+        public BaseView CreateView(ViewId viewId)
         {
             // Find target presenter
             var presenter = _presenters.FirstOrDefault(x => x.GetCorrespondingViewId() == viewId);
@@ -58,6 +58,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
             var view = _assets.Instantiate(path).GetComponent<BaseView>();
             view.Init(presenter);
             view.transform.SetParent(_uiRoot, false);
+            return view;
         }
     }
 }

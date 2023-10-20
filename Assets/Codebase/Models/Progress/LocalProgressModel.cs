@@ -16,9 +16,13 @@ namespace Assets.Codebase.Models.Progress
 
         private PersistantProgress _persistantProgress;
 
-        protected override void InitModel()
+        public LocalProgressModel()
         {
             LoadProgress();
+        }
+
+        public void InitModel()
+        {
         }
 
         protected bool CanFindSave()
