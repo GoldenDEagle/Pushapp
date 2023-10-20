@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using UniRx;
 
 namespace Assets.Codebase.Models.Progress.Data
 {
@@ -10,8 +11,10 @@ namespace Assets.Codebase.Models.Progress.Data
         // All the properties that need to be saved...
 
         public ReactiveProperty<int> SampleValue;
-        public ReactiveProperty<float> MusicVolume;
-        public ReactiveProperty<float> SFXVolume;
+        public ReactiveProperty<float> SoundVolume;
+        public ReactiveProperty<bool> IsTrainingPlanSelected;
+        public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
+        public ReactiveProperty<int> CurrentTrainingDay;
 
         // .
 
@@ -21,8 +24,10 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProgress()
         {
             SampleValue = new ReactiveProperty<int>(0);
-            MusicVolume = new ReactiveProperty<float>(0.5f);
-            SFXVolume = new ReactiveProperty<float>(0.5f);
+            SoundVolume = new ReactiveProperty<float>(0.5f);
+            IsTrainingPlanSelected = new ReactiveProperty<bool>(false);
+            CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>();
+            CurrentTrainingDay = new ReactiveProperty<int>(0);
         }
 
         /// <summary>
@@ -32,8 +37,10 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProgress(PersistantProgress progress)
         {
             SampleValue = new ReactiveProperty<int>(progress.SampleValue);
-            MusicVolume = new ReactiveProperty<float>();
-            SFXVolume = new ReactiveProperty<float>();
+            SoundVolume = new ReactiveProperty<float>(progress.SoundVolume);
+            IsTrainingPlanSelected = new ReactiveProperty<bool>(progress.IsTrainingPlanSelected);
+            CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>(progress.CurrentTrainingPlan);
+            CurrentTrainingDay = new ReactiveProperty<int>(progress.CurrentTrainingDay);
         }
     }
 }

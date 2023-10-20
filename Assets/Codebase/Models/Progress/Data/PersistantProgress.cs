@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using System;
 
 namespace Assets.Codebase.Models.Progress.Data
 {
@@ -10,15 +11,19 @@ namespace Assets.Codebase.Models.Progress.Data
     {
         // All the same properties as ReactiveProgress, but Serializable
         public int SampleValue;
-        public float MusicVolume;
-        public float SFXVolume;
+        public float SoundVolume;
+        public bool IsTrainingPlanSelected;
+        public TrainingPlan CurrentTrainingPlan;
+        public int CurrentTrainingDay;
 
         public void SetValues(ReactiveProgress progress)
         {
             // Fill all properties
             SampleValue = progress.SampleValue.Value;
-            MusicVolume = progress.MusicVolume.Value;
-            SFXVolume = progress.SFXVolume.Value;
+            SoundVolume = progress.SoundVolume.Value;
+            IsTrainingPlanSelected = progress.IsTrainingPlanSelected.Value;
+            CurrentTrainingDay = progress.CurrentTrainingDay.Value;
+            CurrentTrainingPlan = progress.CurrentTrainingPlan.Value;
         }
     }
 }
