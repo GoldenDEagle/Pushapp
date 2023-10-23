@@ -16,11 +16,13 @@ namespace Assets.Codebase.Models.Gameplay
         private ReactiveProperty<GameState> _state;
         private ReactiveProperty<ViewId> _activeView;
         private ReactiveProperty<TrainingPlan> _previewedPlan;
+        private ReactiveProperty<bool> _stretchingEnabled;
         private TrainingPlansDescriptions _trainingPlansDescriptions;
 
         public ReactiveProperty<GameState> State => _state;
         public ReactiveProperty<ViewId> ActiveView => _activeView;
         public ReactiveProperty<TrainingPlan> PreviewedPlan => _previewedPlan;
+        public ReactiveProperty<bool> StretchingEnabled => _stretchingEnabled;
         public TrainingPlansDescriptions TrainingPlansDescriptions => _trainingPlansDescriptions;
 
         public GameplayModel()
@@ -28,6 +30,7 @@ namespace Assets.Codebase.Models.Gameplay
             _state = new ReactiveProperty<GameState>(GameState.None);
             _activeView = new ReactiveProperty<ViewId>(ViewId.None);
             _previewedPlan = new ReactiveProperty<TrainingPlan>();
+            _stretchingEnabled = new ReactiveProperty<bool>(true);
         }
 
         /// <summary>

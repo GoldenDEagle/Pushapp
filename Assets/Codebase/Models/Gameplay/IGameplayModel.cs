@@ -15,6 +15,7 @@ namespace Assets.Codebase.Models.Gameplay
         public ReactiveProperty<GameState> State { get; }
         public ReactiveProperty<ViewId> ActiveView { get; }
         public ReactiveProperty<TrainingPlan> PreviewedPlan { get; }
+        public ReactiveProperty<bool> StretchingEnabled { get; }
         public TrainingPlansDescriptions TrainingPlansDescriptions { get; }
 
         public void ChangeGameState(GameState state);
