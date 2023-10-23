@@ -47,7 +47,8 @@ namespace Assets.Codebase.Presenters.Base
         /// </summary>
         protected virtual void SubscribeToModelChanges()
         {
-            GameplayModel.ActiveView.Subscribe(_ => CreateView()).AddTo(CompositeDisposable);
+            GameplayModel.ActiveView.Where(activeView => activeView == ViewId).Subscribe(_ => CreateView()).AddTo(CompositeDisposable);
+            GameplayModel.ActiveView.Where(activeView => activeView != ViewId).Subscribe(_ => CloseView()).AddTo(CompositeDisposable);
         }
 
         public void CloseView()
