@@ -37,7 +37,8 @@ namespace Assets.Codebase.Presenters.PlanPreview
 
         public void SelectPlan()
         {
-            ProgressModel.ReactiveProgress.CurrentTrainingPlan = GameplayModel.PreviewedPlan;
+            ProgressModel.ReactiveProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
+            GameplayModel.PreviewedPlan.Value = null;
             GameplayModel.ActivateView(ViewId.MainView);
         }
     }

@@ -11,5 +11,6 @@
         TrainingView = 5,
         StatsView = 6,
         SettingsView = 7,
+        AchievementsView = 8,
     }
 }
