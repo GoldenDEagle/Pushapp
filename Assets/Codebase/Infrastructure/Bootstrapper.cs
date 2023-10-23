@@ -1,5 +1,7 @@
 using Assets.Codebase.Infrastructure.Initialization;
 using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Gameplay;
+using Assets.Codebase.Infrastructure.ServicesManagment.Progress;
 using Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation;
 using Assets.Codebase.Utils.GOComponents;
 using Assets.Codebase.Views.Base;
@@ -20,6 +22,24 @@ namespace Assets.Codebase.Infrastructure
 
             // Start the game
             ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId.ExampleView);
+
+            // Need views to test
+            //StartGame();
+        }
+
+        private void StartGame()
+        {
+            var progressModel = ServiceLocator.Container.Single<IProgressService>().ProgressModel.ReactiveProgress;
+            var gameplayModel = ServiceLocator.Container.Single<IGameplayService>().GameplayModel;
+
+            if (progressModel.IsTrainingPlanSelected.Value)
+            {
+                gameplayModel.ActivateView(ViewId.MainView);
+            }
+            else
+            {
+                gameplayModel.ActivateView(ViewId.PlanSelectionView);
+            }
         }
     }
 }

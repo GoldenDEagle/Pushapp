@@ -5,6 +5,7 @@ using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.PlanPreview;
 using UniRx;
+using Assets.Codebase.Models.Progress;
 
 namespace Assets.Codebase.Presenters.PlanPreview
 {
@@ -37,6 +38,7 @@ namespace Assets.Codebase.Presenters.PlanPreview
 
         public void SelectPlan()
         {
+            ProgressModel.ReactiveProgress.IsTrainingPlanSelected.Value = true;
             ProgressModel.ReactiveProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
             GameplayModel.PreviewedPlan.Value = null;
             GameplayModel.ActivateView(ViewId.MainView);
