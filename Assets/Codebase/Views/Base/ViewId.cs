@@ -12,5 +12,7 @@
         StatsView = 6,
         SettingsView = 7,
         AchievementsView = 8,
+        WarmupView = 9,
+        TrainingResultView = 10,
     }
 }

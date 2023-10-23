@@ -14,7 +14,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public float SoundVolume;
         public bool IsTrainingPlanSelected;
         public TrainingPlan CurrentTrainingPlan;
-        public int CurrentTrainingDay;
+        public TrainingDay CurrentTrainingDay;
 
         public void SetValues(ReactiveProgress progress)
         {

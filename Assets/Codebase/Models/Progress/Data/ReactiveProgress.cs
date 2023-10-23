@@ -14,7 +14,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProperty<float> SoundVolume;
         public ReactiveProperty<bool> IsTrainingPlanSelected;
         public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
-        public ReactiveProperty<int> CurrentTrainingDay;
+        public ReactiveProperty<TrainingDay> CurrentTrainingDay;
 
         // .
 
@@ -27,7 +27,7 @@ namespace Assets.Codebase.Models.Progress.Data
             SoundVolume = new ReactiveProperty<float>(0.5f);
             IsTrainingPlanSelected = new ReactiveProperty<bool>(false);
             CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>();
-            CurrentTrainingDay = new ReactiveProperty<int>(0);
+            CurrentTrainingDay = new ReactiveProperty<TrainingDay>();
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Assets.Codebase.Models.Progress.Data
             SoundVolume = new ReactiveProperty<float>(progress.SoundVolume);
             IsTrainingPlanSelected = new ReactiveProperty<bool>(progress.IsTrainingPlanSelected);
             CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>(progress.CurrentTrainingPlan);
-            CurrentTrainingDay = new ReactiveProperty<int>(progress.CurrentTrainingDay);
+            CurrentTrainingDay = new ReactiveProperty<TrainingDay>(progress.CurrentTrainingDay);
         }
     }
 }

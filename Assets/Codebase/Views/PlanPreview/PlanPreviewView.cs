@@ -9,6 +9,7 @@ namespace Assets.Codebase.Views.PlanPreview
 {
     public class PlanPreviewView : BaseView
     {
+        [SerializeField] private Button _backButton;
         [SerializeField] private Button _acceptButton;
 
         private IPlanPreviewPresenter _presenter;
@@ -23,6 +24,7 @@ namespace Assets.Codebase.Views.PlanPreview
         protected override void SubscribeToUserInput()
         {
             _acceptButton.OnClickAsObservable().Subscribe(_ => _presenter.SelectPlan()).AddTo(CompositeDisposable);
+            _backButton.OnClickAsObservable().Subscribe(_ => _presenter.BackToSelection()).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToPresenterEvents()

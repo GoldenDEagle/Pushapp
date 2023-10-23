@@ -1,6 +1,5 @@
 ﻿using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Views.Base;
-using System;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.MainMenu

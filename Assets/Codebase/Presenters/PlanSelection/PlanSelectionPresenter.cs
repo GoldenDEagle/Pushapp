@@ -45,10 +45,18 @@ namespace Assets.Codebase.Presenters.PlanSelection
             base.SubscribeToModelChanges();
         }
 
-        public void SelectPlan(TrainingPlan plan)
+        public void ViewPlan(TrainingPlan plan)
         {
             GameplayModel.PreviewedPlan.Value = plan;
             GameplayModel.ActivateView(ViewId.PlanPreviewView);
+        }
+
+        public void BackToMenu()
+        {
+            // Better hide button
+            if (!ProgressModel.ReactiveProgress.IsTrainingPlanSelected.Value) return;
+
+            GameplayModel.ActivateView(ViewId.MainView);
         }
     }
 }

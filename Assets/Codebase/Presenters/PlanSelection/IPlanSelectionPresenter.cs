@@ -9,6 +9,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
     {
         public Subject<TrainingPlanButton> OnPlanButtonAdded { get; }
 
-        public void SelectPlan(TrainingPlan plan);
+        public void ViewPlan(TrainingPlan plan);
+        public void BackToMenu();
     }
 }

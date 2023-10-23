@@ -2,11 +2,15 @@
 using Assets.Codebase.Presenters.PlanSelection;
 using Assets.Codebase.Views.Base;
 using UniRx;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Views.PlanSelection
 {
     public class PlanSelectionView : BaseView
     {
+        [SerializeField] private Button _backButton;
+
         private IPlanSelectionPresenter _presenter;
 
         public override void Init(IPresenter presenter)
@@ -18,7 +22,7 @@ namespace Assets.Codebase.Views.PlanSelection
 
         protected override void SubscribeToUserInput()
         {
-            
+            _backButton.OnClickAsObservable().Subscribe(_ => _presenter.BackToMenu()).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToPresenterEvents()
@@ -36,7 +40,7 @@ namespace Assets.Codebase.Views.PlanSelection
         {
             // parent under layout group
             planButton.transform.SetParent(transform, false);
-            planButton.OnPlanSelected.Subscribe(plan => _presenter.SelectPlan(plan)).AddTo(CompositeDisposable);
+            planButton.OnPlanSelected.Subscribe(plan => _presenter.ViewPlan(plan)).AddTo(CompositeDisposable);
         }
     }
 }

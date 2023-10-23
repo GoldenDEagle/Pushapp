@@ -40,8 +40,14 @@ namespace Assets.Codebase.Presenters.PlanPreview
         {
             ProgressModel.ReactiveProgress.IsTrainingPlanSelected.Value = true;
             ProgressModel.ReactiveProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
+            ProgressModel.ReactiveProgress.CurrentTrainingDay.Value = GameplayModel.PreviewedPlan.Value.TrainingDays[0];
             GameplayModel.PreviewedPlan.Value = null;
             GameplayModel.ActivateView(ViewId.MainView);
+        }
+
+        public void BackToSelection()
+        {
+            GameplayModel.ActivateView(ViewId.PlanSelectionView);
         }
     }
 }

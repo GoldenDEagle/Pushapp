@@ -10,5 +10,6 @@ namespace Assets.Codebase.Presenters.PlanPreview
         public Subject<TrainingDayWidget> OnTrainingDayAdded { get; }
 
         public void SelectPlan();
+        public void BackToSelection();
     }
 }
