@@ -1,11 +1,7 @@
 ﻿using Assets.Codebase.Presenter.Base;
-using Assets.Codebase.Presenter.MainMenu;
 using Assets.Codebase.Presenters.PlanSelection;
 using Assets.Codebase.Views.Base;
-using System;
-using TMPro;
 using UniRx;
-using UnityEngine;
 
 namespace Assets.Codebase.Views.PlanSelection
 {
@@ -28,10 +24,12 @@ namespace Assets.Codebase.Views.PlanSelection
         protected override void SubscribeToPresenterEvents()
         {
             base.SubscribeToPresenterEvents();
+            _presenter.OnPlanButtonAdded.Subscribe(_ => AddPlanButton(_)).AddTo(CompositeDisposable);
         }
 
         private void AddPlanButton(TrainingPlanButton planButton)
         {
+            // parent under layout group
             planButton.transform.SetParent(transform, false);
             planButton.OnPlanSelected.Subscribe(plan => _presenter.SelectPlan(plan)).AddTo(CompositeDisposable);
         }

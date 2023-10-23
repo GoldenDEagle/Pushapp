@@ -26,9 +26,14 @@ namespace Assets.Codebase.Views.PlanSelection
             _selectButton.onClick.RemoveListener(SelectPlan);
         }
 
+        public void AttachPlan(TrainingPlan plan)
+        {
+            _plan = plan;
+        }
+
         private void SelectPlan()
         {
-            OnPlanSelected.OnNext(_plan);
+            OnPlanSelected?.OnNext(_plan);
         }
     }
 }

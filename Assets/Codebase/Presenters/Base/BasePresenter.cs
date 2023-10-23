@@ -68,7 +68,7 @@ namespace Assets.Codebase.Presenters.Base
         /// <summary>
         /// Creates corresponding view
         /// </summary>
-        public void CreateView()
+        public virtual void CreateView()
         {
             var view = ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId);
             view.Init(this);

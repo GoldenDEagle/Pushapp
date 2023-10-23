@@ -26,6 +26,9 @@ namespace Assets.Codebase.Models.Gameplay
             _activeView = new ReactiveProperty<ViewId>(ViewId.None);
         }
 
+        /// <summary>
+        /// Load everything needed from resources
+        /// </summary>
         public void InitModel()
         {
             var assetProvider = ServiceLocator.Container.Single<IAssetProvider>();
