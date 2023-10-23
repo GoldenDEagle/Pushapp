@@ -27,6 +27,11 @@ namespace Assets.Codebase.Views.PlanSelection
             _presenter.OnPlanButtonAdded.Subscribe(_ => AddPlanButton(_)).AddTo(CompositeDisposable);
         }
 
+
+        /// <summary>
+        /// Manages plan buttons layout
+        /// </summary>
+        /// <param name="planButton"></param>
         private void AddPlanButton(TrainingPlanButton planButton)
         {
             // parent under layout group

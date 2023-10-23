@@ -26,7 +26,7 @@ namespace Assets.Codebase.Views.PlanSelection
             _selectButton.onClick.RemoveListener(SelectPlan);
         }
 
-        public void AttachPlan(TrainingPlan plan)
+        public void Init(TrainingPlan plan)
         {
             _plan = plan;
         }

@@ -32,9 +32,10 @@ namespace Assets.Codebase.Presenters.PlanSelection
 
         private void SummonPlanButtons()
         {
+            var uiFactory = ServiceLocator.Container.Single<IUiFactory>();
             foreach (var plan in _trainingPlans)
             {
-                var button = ServiceLocator.Container.Single<IUiFactory>().CreateTrainingPlanButton(plan);
+                var button = uiFactory.CreateTrainingPlanButton(plan);
                 OnPlanButtonAdded?.OnNext(button);
             }
         }
