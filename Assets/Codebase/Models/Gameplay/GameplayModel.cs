@@ -3,6 +3,7 @@ using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Gameplay.Data;
+using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Views.Base;
 using UniRx;
 
@@ -14,16 +15,19 @@ namespace Assets.Codebase.Models.Gameplay
 
         private ReactiveProperty<GameState> _state;
         private ReactiveProperty<ViewId> _activeView;
+        private ReactiveProperty<TrainingPlan> _previewedPlan;
         private TrainingPlansDescriptions _trainingPlansDescriptions;
 
         public ReactiveProperty<GameState> State => _state;
         public ReactiveProperty<ViewId> ActiveView => _activeView;
+        public ReactiveProperty<TrainingPlan> PreviewedPlan => _previewedPlan;
         public TrainingPlansDescriptions TrainingPlansDescriptions => _trainingPlansDescriptions;
 
         public GameplayModel()
         {
             _state = new ReactiveProperty<GameState>(GameState.None);
             _activeView = new ReactiveProperty<ViewId>(ViewId.None);
+            _previewedPlan = new ReactiveProperty<TrainingPlan>();
         }
 
         /// <summary>

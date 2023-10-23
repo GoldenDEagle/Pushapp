@@ -6,10 +6,10 @@
         None = 0,
         ExampleView = 1,
         PlanSelectionView = 2,
-        MainView = 3,
-        TrainingView = 4,
-        StatsView = 5,
-        CustomExcercisesView = 6,
+        PlanPreviewView = 3,
+        MainView = 4,
+        TrainingView = 5,
+        StatsView = 6,
         SettingsView = 7,
     }
 }

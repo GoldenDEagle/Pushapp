@@ -27,6 +27,11 @@ namespace Assets.Codebase.Presenters.PlanSelection
         {
             base.CreateView();
 
+            SummonPlanButtons();
+        }
+
+        private void SummonPlanButtons()
+        {
             foreach (var plan in _trainingPlans)
             {
                 var button = ServiceLocator.Container.Single<IUiFactory>().CreateTrainingPlanButton(plan);
@@ -41,7 +46,8 @@ namespace Assets.Codebase.Presenters.PlanSelection
 
         public void SelectPlan(TrainingPlan plan)
         {
-            ProgressModel.ReactiveProgress.CurrentTrainingPlan.Value = plan;
+            GameplayModel.PreviewedPlan.Value = plan;
+            GameplayModel.ActivateView(ViewId.PlanPreviewView);
         }
     }
 }
