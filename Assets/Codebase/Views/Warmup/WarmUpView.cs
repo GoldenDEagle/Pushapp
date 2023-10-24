@@ -1,6 +1,7 @@
 ﻿using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Warmup;
+using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
 using TMPro;
 using UniRx;
@@ -14,6 +15,7 @@ namespace Assets.Codebase.Views.Warmup
         [SerializeField] private Button _skipButton;
         [SerializeField] private Button _nextStepButton;
         [SerializeField] private TMP_Text _stepDescriptionText;
+        [SerializeField] private TMP_Text _timerText;
 
         private IWarmUpPresenter _presenter;
 
@@ -34,12 +36,13 @@ namespace Assets.Codebase.Views.Warmup
         {
             base.SubscribeToPresenterEvents();
             _presenter.OnNewWarmupStep.Subscribe(step => ConfigureView(step)).AddTo(CompositeDisposable);
+            _presenter.TimerText.SubscribeToTMPText(_timerText).AddTo(CompositeDisposable);
         }
 
 
         private void ConfigureView(WarmupStep step)
         {
-            // Show step parameters
+            // Show step info (description, picture)
             _stepDescriptionText.text = step.StepDescription;
         }
     }
