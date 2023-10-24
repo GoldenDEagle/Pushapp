@@ -43,5 +43,10 @@ namespace Assets.Codebase.Models.Gameplay
         /// </summary>
         /// <param name="viewId"></param>
         public void ActivateView(ViewId viewId);
+        /// <summary>
+        /// Get warmup/stretching description (based on mode)
+        /// </summary>
+        /// <returns></returns>
+        public WarmupDescription GetWarmupDescription();
     }
 }

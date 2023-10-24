@@ -13,14 +13,16 @@ namespace Assets.Codebase.Models.Gameplay
     public class GameplayModel : BaseModel, IGameplayModel
     {
         private const string TrainingPlansPath = "Content/TrainingPlans";
+        private const string WarmupDescriptionPath = "Content/Warmups/WarmUp";
+        private const string StretchinDescriptionPath = "Content/Warmups/Stretching";
 
-        // Internal fields
+        // Internal
         private ReactiveProperty<GameState> _state;
         private ReactiveProperty<ViewId> _activeView;
         private ReactiveProperty<TrainingPlan> _previewedPlan;
         private ReactiveProperty<bool> _stretchingEnabled;
         private ReactiveProperty<WarmupMode> _warmupMode;
-        private TrainingPlansDescriptions _trainingPlansDescriptions;
+
 
         // Public properties
         public ReactiveProperty<GameState> State => _state;
@@ -28,7 +30,14 @@ namespace Assets.Codebase.Models.Gameplay
         public ReactiveProperty<TrainingPlan> PreviewedPlan => _previewedPlan;
         public ReactiveProperty<bool> StretchingEnabled => _stretchingEnabled;
         public ReactiveProperty<WarmupMode> CurrentWarmupMode => _warmupMode;
+
+
+        // From asset base
+        private TrainingPlansDescriptions _trainingPlansDescriptions;
+        private WarmupDescription _warmupDescription;
+        private WarmupDescription _stretchingDescription;
         public TrainingPlansDescriptions TrainingPlansDescriptions => _trainingPlansDescriptions;
+
 
         public GameplayModel()
         {
@@ -45,6 +54,8 @@ namespace Assets.Codebase.Models.Gameplay
         {
             var assetProvider = ServiceLocator.Container.Single<IAssetProvider>();
             _trainingPlansDescriptions =  assetProvider.LoadResource<TrainingPlansDescriptions>(TrainingPlansPath);
+            _warmupDescription = assetProvider.LoadResource<WarmupDescription>(WarmupDescriptionPath);
+            _stretchingDescription = assetProvider.LoadResource<WarmupDescription>(StretchinDescriptionPath);
         }
 
         public void ChangeGameState(GameState state)
@@ -57,6 +68,19 @@ namespace Assets.Codebase.Models.Gameplay
             if (ActiveView.Value == viewId) { return; }
 
             ActiveView.Value = viewId;
+        }
+
+        public WarmupDescription GetWarmupDescription()
+        {
+            switch (_warmupMode.Value)
+            {
+                case WarmupMode.Warmup:
+                    return _warmupDescription;
+                case WarmupMode.Stretching:
+                    return _stretchingDescription;
+                default:
+                    return null;
+            }
         }
     }
 }
