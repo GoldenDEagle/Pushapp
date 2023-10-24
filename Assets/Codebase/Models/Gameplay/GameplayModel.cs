@@ -1,4 +1,5 @@
 ﻿using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Models.Base;
@@ -13,16 +14,20 @@ namespace Assets.Codebase.Models.Gameplay
     {
         private const string TrainingPlansPath = "Content/TrainingPlans";
 
+        // Internal fields
         private ReactiveProperty<GameState> _state;
         private ReactiveProperty<ViewId> _activeView;
         private ReactiveProperty<TrainingPlan> _previewedPlan;
         private ReactiveProperty<bool> _stretchingEnabled;
+        private ReactiveProperty<WarmupMode> _warmupMode;
         private TrainingPlansDescriptions _trainingPlansDescriptions;
 
+        // Public properties
         public ReactiveProperty<GameState> State => _state;
         public ReactiveProperty<ViewId> ActiveView => _activeView;
         public ReactiveProperty<TrainingPlan> PreviewedPlan => _previewedPlan;
         public ReactiveProperty<bool> StretchingEnabled => _stretchingEnabled;
+        public ReactiveProperty<WarmupMode> CurrentWarmupMode => _warmupMode;
         public TrainingPlansDescriptions TrainingPlansDescriptions => _trainingPlansDescriptions;
 
         public GameplayModel()

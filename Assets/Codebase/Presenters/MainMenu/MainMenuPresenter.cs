@@ -1,5 +1,6 @@
 ﻿using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Views.Base;
+using Assets.Codebase.Data.WarmUp;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.MainMenu
@@ -42,6 +43,7 @@ namespace Assets.Codebase.Presenters.MainMenu
 
         public void StartTraining()
         {
+            GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
             GameplayModel.ActivateView(ViewId.TrainingView);
         }
     }
