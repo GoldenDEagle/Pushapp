@@ -1,6 +1,10 @@
 ﻿using Assets.Codebase.Presenter.MainMenu;
 using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Diagnostics;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.Example
@@ -48,6 +52,35 @@ namespace Assets.Codebase.Presenters.Example
             }
 
             ProgressModel.ReactiveProgress.SampleValue.Value++;
+
+            SimpleTimer().Forget();
+        }
+
+        private async UniTaskVoid SimpleTimer()
+        {
+            UnityEngine.Debug.Log("Starting 5 sec timer");
+            // Preparation
+            var timer = 5f;
+            while (timer >= 0)
+            {
+                UnityEngine.Debug.Log(timer.ToString());
+                timer--;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+
+            UnityEngine.Debug.Log("Starting 5 sec timer");
+            // Exercise
+            timer = 3f;
+            while (timer >= 0)
+            {
+                UnityEngine.Debug.Log(timer.ToString());
+                timer--;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+
+            UnityEngine.Debug.Log("Completed!");
+
+            SimpleTimer().Forget();
         }
     }
 }

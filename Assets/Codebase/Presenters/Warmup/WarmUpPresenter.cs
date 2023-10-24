@@ -1,6 +1,8 @@
 ﻿using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
+using Cysharp.Threading.Tasks;
 using System;
 using UniRx;
 
@@ -9,15 +11,21 @@ namespace Assets.Codebase.Presenters.Warmup
     public class WarmUpPresenter : BasePresenter, IWarmUpPresenter
     {
         public Subject<WarmupStep> OnNewWarmupStep { get; private set; }
+        public ReactiveProperty<string> TimerText { get; private set; }
+        public ReactiveProperty<float> TimerSliderValue { get; private set; }
+
 
         private WarmupDescription _description;
         private int _stepNumber;
+        private float _secondsToPrepare = 5f;
 
         public WarmUpPresenter()
         {
             ViewId = ViewId.WarmupView;
 
             OnNewWarmupStep = new Subject<WarmupStep>();
+            TimerText = new ReactiveProperty<string>(string.Empty);
+            TimerSliderValue = new ReactiveProperty<float>(1);
         }
 
         public override void CreateView()
@@ -27,7 +35,7 @@ namespace Assets.Codebase.Presenters.Warmup
 
             base.CreateView();
 
-            OnNewWarmupStep?.OnNext(_description.Steps[_stepNumber]);
+            LaunchStep();
         }
 
         public void BackToMenu()
@@ -46,7 +54,7 @@ namespace Assets.Codebase.Presenters.Warmup
                 return;
             }
 
-            OnNewWarmupStep?.OnNext(_description.Steps[_stepNumber]);
+            LaunchStep();
         }
 
         public void SkipWarmup()
@@ -57,6 +65,40 @@ namespace Assets.Codebase.Presenters.Warmup
         public void StartWarmup()
         {
             throw new NotImplementedException();
+        }
+
+
+        private void LaunchStep()
+        {
+            OnNewWarmupStep?.OnNext(_description.Steps[_stepNumber]);
+            ExerciseCycle().Forget();
+        }
+
+        private async UniTaskVoid ExerciseCycle()
+        {
+            TimerText.Value = "Приготовьтесь!";
+            TimerSliderValue.Value = 1f;
+
+            // Preparation
+            var timer = _secondsToPrepare;
+            while (timer >= 0)
+            {
+                TimerSliderValue.Value = timer / _secondsToPrepare;
+                timer--;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+
+            // Exercise
+            timer = _description.Steps[_stepNumber].StepDurationSeconds;
+            while (timer >= 0)
+            {
+                TimerText.Value = TimeConverter.TimeInMinutes(timer);
+                TimerSliderValue.Value = timer / _description.Steps[_stepNumber].StepDurationSeconds;
+                timer--;
+                await UniTask.Delay(TimeSpan.FromSeconds(1));
+            }
+
+            GoToNextExcercise();
         }
     }
 }
