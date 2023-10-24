@@ -59,7 +59,17 @@ namespace Assets.Codebase.Presenters.Warmup
 
         public void SkipWarmup()
         {
-            GameplayModel.ActivateView(ViewId.TrainingView);
+            switch (GameplayModel.CurrentWarmupMode.Value)
+            {
+                case WarmupMode.Warmup:
+                    GameplayModel.ActivateView(ViewId.TrainingView);
+                    break;
+                case WarmupMode.Stretching:
+                    GameplayModel.ActivateView(ViewId.MainView);
+                    break;
+                default:
+                    break;
+            }
         }
 
         public void StartWarmup()
