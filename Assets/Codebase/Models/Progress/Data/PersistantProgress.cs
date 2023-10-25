@@ -1,5 +1,6 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using Assets.Codebase.Utils.CustomTypes;
 using System;
 using System.Collections.Generic;
 
@@ -22,6 +23,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public int CurrentTrainingDayId;
         public int TotalPushups;
         public bool IsOnTestingStage;
+        public SerializableDateTime NextTrainingDate;
         public List<TrainingResult> AllResults;
 
         // Settings
@@ -42,6 +44,7 @@ namespace Assets.Codebase.Models.Progress.Data
             IsOnTestingStage = progress.IsOnTestingStage.Value;
             AllResults = progress.AllResults;
             IsStretchingEnabled = progress.IsStretchingEnabled.Value;
+            NextTrainingDate = progress.NextTrainingDate.Value;
         }
     }
 }

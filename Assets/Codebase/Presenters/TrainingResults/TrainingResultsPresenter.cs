@@ -38,6 +38,12 @@ namespace Assets.Codebase.Presenters.TrainingResults
             GoToNextView();
         }
 
+        public void RepeatClicked()
+        {
+            GameplayModel.ActivateView(ViewId.TrainingView);
+        }
+
+        // Internal ...................................................
         private void GoToNextView()
         {
             // Go to stretching if needed

@@ -1,8 +1,9 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Gameplay;
-using Assets.Codebase.Models.Gameplay;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using Assets.Codebase.Utils.CustomTypes;
+using Assets.Codebase.Utils.Helpers;
 using System.Collections.Generic;
 using UniRx;
 
@@ -24,6 +25,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProperty<int> CurrentTrainingDayId;
         public ReactiveProperty<int> TotalPushups;
         public ReactiveProperty<bool> IsOnTestingStage;
+        public ReactiveProperty<SerializableDateTime> NextTrainingDate;
         public List<TrainingResult> AllResults;
 
         // Settings
@@ -45,6 +47,7 @@ namespace Assets.Codebase.Models.Progress.Data
             TotalPushups = new ReactiveProperty<int>(0);
             IsOnTestingStage = new ReactiveProperty<bool>(false);
             IsStretchingEnabled = new ReactiveProperty<bool>(true);
+            NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
 
             AllResults = new List<TrainingResult>();
         }
@@ -63,6 +66,7 @@ namespace Assets.Codebase.Models.Progress.Data
             TotalPushups = new ReactiveProperty<int>(progress.TotalPushups);
             IsOnTestingStage = new ReactiveProperty<bool>(progress.IsOnTestingStage);
             IsStretchingEnabled = new ReactiveProperty<bool>(progress.IsStretchingEnabled);
+            NextTrainingDate = new ReactiveProperty<SerializableDateTime>(progress.NextTrainingDate);
 
             AllResults = progress.AllResults;
         }
@@ -79,6 +83,8 @@ namespace Assets.Codebase.Models.Progress.Data
             if (pushups < 0) return;
 
             TotalPushups.Value += pushups;
+
+            // Achievements check
         }
 
         /// <summary>
@@ -101,6 +107,7 @@ namespace Assets.Codebase.Models.Progress.Data
                 IsOnTestingStage.Value = false;
                 CurrentTrainingPlan.Value = ServiceLocator.Container.Single<IGameplayService>().GameplayModel.GetNextLevelTrainingPlan(CurrentTrainingPlan.Value.Level);
                 CurrentTrainingDayId.Value = 0;
+                SetNextTrainingDate();
                 return;
             }
 
@@ -112,6 +119,17 @@ namespace Assets.Codebase.Models.Progress.Data
                 IsOnTestingStage.Value = true;
                 CurrentTrainingDayId.Value = 0;
             }
+
+            // Set next training time based on day info
+            SetNextTrainingDate();
+        }
+
+
+        // Internal ....................................................
+        private void SetNextTrainingDate()
+        {
+            var currentTime = TimeProvider.GetServerTime();
+            NextTrainingDate.Value = new SerializableDateTime(currentTime.AddHours(CurrentTrainingPlan.Value.TrainingDays[CurrentTrainingDayId.Value].RestingTime));
         }
     }
 }

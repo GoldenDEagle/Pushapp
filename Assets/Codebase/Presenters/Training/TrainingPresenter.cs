@@ -110,6 +110,7 @@ namespace Assets.Codebase.Presenters.Training
         }
 
 
+        // Internal ....................................................
         private void ShowStepInfo()
         {
             CurrentPushupCountText.Value = _currentStepValue.ToString();

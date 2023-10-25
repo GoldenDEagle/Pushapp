@@ -5,5 +5,6 @@ namespace Assets.Codebase.Presenters.TrainingResults
     public interface ITrainingResultsPresenter : IPresenter
     {
         public void GoNextClicked();
+        public void RepeatClicked();
     }
 }
