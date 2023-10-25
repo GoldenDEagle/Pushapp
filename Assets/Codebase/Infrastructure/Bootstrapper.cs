@@ -29,7 +29,7 @@ namespace Assets.Codebase.Infrastructure
 
         private void StartGame()
         {
-            var progressModel = ServiceLocator.Container.Single<IProgressService>().ProgressModel.ReactiveProgress;
+            var progressModel = ServiceLocator.Container.Single<IProgressService>().ProgressModel.SessionProgress;
             var gameplayModel = ServiceLocator.Container.Single<IGameplayService>().GameplayModel;
 
             if (progressModel.IsTrainingPlanSelected.Value)

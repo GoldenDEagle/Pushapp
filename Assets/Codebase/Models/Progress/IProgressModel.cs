@@ -11,7 +11,7 @@ namespace Assets.Codebase.Models.Progress
         /// <summary>
         /// Contains all progress data and notifies presenters.
         /// </summary>
-        public ReactiveProgress ReactiveProgress { get; }
+        public SessionProgress SessionProgress { get; }
 
         /// <summary>
         /// Creates a save.

@@ -1,5 +1,7 @@
-﻿using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+﻿using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using System;
+using System.Collections.Generic;
 
 namespace Assets.Codebase.Models.Progress.Data
 {
@@ -15,8 +17,11 @@ namespace Assets.Codebase.Models.Progress.Data
         public bool IsTrainingPlanSelected;
         public TrainingPlan CurrentTrainingPlan;
         public TrainingDay CurrentTrainingDay;
+        public int TotalPushups;
 
-        public void SetValues(ReactiveProgress progress)
+        public List<TrainingResult> AllResults;
+
+        public void SetValues(SessionProgress progress)
         {
             // Fill all properties
             SampleValue = progress.SampleValue.Value;
@@ -24,6 +29,8 @@ namespace Assets.Codebase.Models.Progress.Data
             IsTrainingPlanSelected = progress.IsTrainingPlanSelected.Value;
             CurrentTrainingDay = progress.CurrentTrainingDay.Value;
             CurrentTrainingPlan = progress.CurrentTrainingPlan.Value;
+            TotalPushups = progress.TotalPushups.Value;
+            AllResults = progress.AllResults;
         }
     }
 }

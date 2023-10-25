@@ -1,11 +1,13 @@
-﻿using Assets.Codebase.Data.WarmUp;
+﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Cysharp.Threading.Tasks;
+using GamePush;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using UniRx;
@@ -45,7 +47,7 @@ namespace Assets.Codebase.Presenters.Training
         public override void CreateView()
         {
             _stepNumber = 0;
-            _description = ProgressModel.ReactiveProgress.CurrentTrainingDay.Value;
+            _description = ProgressModel.SessionProgress.CurrentTrainingDay.Value;
             _currentStepValue = _description.Pushups[0];
             _currentTrainingResults.Clear();
 
@@ -68,8 +70,8 @@ namespace Assets.Codebase.Presenters.Training
 
             if (_stepNumber > _description.Pushups.Count)
             {
-                // Save training result
-                _stepNumber = 0;
+                // Save training result if last step
+                SaveResults();
                 GameplayModel.ActivateView(ViewId.TrainingResultView);
                 return;
             }
@@ -172,6 +174,17 @@ namespace Assets.Codebase.Presenters.Training
 
             OnHideRestingWidget?.OnNext(Unit.Default);
             ShowStepInfo();
+        }
+
+        private void SaveResults()
+        {
+            var totalPushups = _currentTrainingResults.Sum();
+            ProgressModel.SessionProgress.AddPushups(totalPushups);
+
+            TrainingResult trainingResult = new TrainingResult(_currentTrainingResults, totalPushups, TimeProvider.GetServerTime());
+            ProgressModel.SessionProgress.AddTrainingResult(trainingResult);
+
+            ProgressModel.SaveProgress();
         }
     }
 }

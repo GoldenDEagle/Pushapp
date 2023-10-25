@@ -38,9 +38,9 @@ namespace Assets.Codebase.Presenters.PlanPreview
 
         public void SelectPlan()
         {
-            ProgressModel.ReactiveProgress.IsTrainingPlanSelected.Value = true;
-            ProgressModel.ReactiveProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
-            ProgressModel.ReactiveProgress.CurrentTrainingDay.Value = GameplayModel.PreviewedPlan.Value.TrainingDays[0];
+            ProgressModel.SessionProgress.IsTrainingPlanSelected.Value = true;
+            ProgressModel.SessionProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
+            ProgressModel.SessionProgress.CurrentTrainingDay.Value = GameplayModel.PreviewedPlan.Value.TrainingDays[0];
             GameplayModel.PreviewedPlan.Value = null;
             GameplayModel.ActivateView(ViewId.MainView);
         }

@@ -1,6 +1,7 @@
 ﻿using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Progress.Data;
 using Assets.Codebase.Utils.Extensions;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace Assets.Codebase.Models.Progress
@@ -12,9 +13,11 @@ namespace Assets.Codebase.Models.Progress
     {
         private const string ProgressKey = "Progress";
 
-        public ReactiveProgress ReactiveProgress { get; private set; }
+        public SessionProgress SessionProgress { get; private set; }
 
         private PersistantProgress _persistantProgress;
+
+        private JsonSerializer _serializer;
 
         public LocalProgressModel()
         {
@@ -32,7 +35,7 @@ namespace Assets.Codebase.Models.Progress
 
         protected void CreateNewProgress()
         {
-            ReactiveProgress = new ReactiveProgress();
+            SessionProgress = new SessionProgress();
         }
 
         public void SaveProgress()
@@ -43,7 +46,7 @@ namespace Assets.Codebase.Models.Progress
                 _persistantProgress = new PersistantProgress();
             }
 
-            _persistantProgress.SetValues(ReactiveProgress);
+            _persistantProgress.SetValues(SessionProgress);
             PlayerPrefs.SetString(ProgressKey, _persistantProgress.ToJson());
         }
 
@@ -62,7 +65,7 @@ namespace Assets.Codebase.Models.Progress
         private void GetProgressFromPrefs()
         {
             var progress = PlayerPrefs.GetString(ProgressKey).ToDeserealized<PersistantProgress>();
-            ReactiveProgress = new ReactiveProgress(progress);
+            SessionProgress = new SessionProgress(progress);
         }
     }
 }

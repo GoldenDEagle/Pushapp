@@ -54,7 +54,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
         public void BackToMenu()
         {
             // Better hide button
-            if (!ProgressModel.ReactiveProgress.IsTrainingPlanSelected.Value) return;
+            if (!ProgressModel.SessionProgress.IsTrainingPlanSelected.Value) return;
 
             GameplayModel.ActivateView(ViewId.MainView);
         }

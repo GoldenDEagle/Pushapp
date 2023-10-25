@@ -42,7 +42,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
 
         public void SetSoundVolume(float value)
         {
-            _progress.ReactiveProgress.SoundVolume.Value = value;
+            _progress.SessionProgress.SoundVolume.Value = value;
         }
 
         public void SetSFXVolume(float value)
