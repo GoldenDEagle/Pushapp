@@ -11,7 +11,6 @@ namespace Assets.Codebase.Presenters.TrainingResults
     public class TrainingResultsPresenter : BasePresenter, ITrainingResultsPresenter
     {
         public ReactiveProperty<string> ResultsString { get; private set; }
-        public ReactiveProperty<string> TestResultString { get; private set; }
 
         private TrainingResult _lastTrainingResult;
 
@@ -41,6 +40,16 @@ namespace Assets.Codebase.Presenters.TrainingResults
         public void RepeatClicked()
         {
             GameplayModel.ActivateView(ViewId.TrainingView);
+        }
+
+        public void StretchingToggleClicked(bool toggleState)
+        {
+            ProgressModel.SessionProgress.IsStretchingEnabled.Value = toggleState;
+        }
+
+        public bool IsStretchingEnabled()
+        {
+            return ProgressModel.SessionProgress.IsStretchingEnabled.Value;
         }
 
         // Internal ...................................................
