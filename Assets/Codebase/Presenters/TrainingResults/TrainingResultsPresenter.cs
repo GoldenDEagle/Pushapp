@@ -84,7 +84,7 @@ namespace Assets.Codebase.Presenters.TrainingResults
 
         private bool CheckTestCompletion()
         {
-            if (_lastTrainingResult.TotalPushups >= ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestThreshold)
+            if (_lastTrainingResult.TotalPushups >= ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestDay.GetTotalPushupCount())
             {
                 return true;
             }

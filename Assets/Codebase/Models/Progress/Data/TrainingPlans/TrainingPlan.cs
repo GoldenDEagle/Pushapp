@@ -9,10 +9,10 @@ namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
     {
         [SerializeField] private int _level;
         [SerializeField] private List<TrainingDay> _trainingDays;
-        [SerializeField] private int _testTreshold;
+        [SerializeField] private TrainingDay _testDay;
 
         public int Level => _level;
         public List<TrainingDay> TrainingDays => _trainingDays;
-        public int TestThreshold => _testTreshold;
+        public TrainingDay TestDay => _testDay;
     }
 }

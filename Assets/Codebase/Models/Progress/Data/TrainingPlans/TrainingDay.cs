@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
@@ -12,9 +13,18 @@ namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
         [Tooltip("Hours to rest before next training")]
         [SerializeField] private int _restingTime;
 
-        
         public List<int> Pushups => _pushups;
         
         public int RestingTime => _restingTime;
+
+
+        /// <summary>
+        /// Gets the sum of pushups
+        /// </summary>
+        /// <returns></returns>
+        public int GetTotalPushupCount()
+        {
+            return _pushups.Sum();
+        }
     }
 }

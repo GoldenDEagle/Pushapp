@@ -4,7 +4,6 @@ using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Cysharp.Threading.Tasks;
-using GamePush;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +27,7 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
 
 
-        private TrainingDay _description;
+        private TrainingDay _trainingDescription;
         private int _stepNumber;
         private int _currentStepValue;
         private float _secondsToRest = 60f;
@@ -47,9 +46,19 @@ namespace Assets.Codebase.Presenters.Training
         public override void CreateView()
         {
             _stepNumber = 0;
-            _description = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value];
-            _currentStepValue = _description.Pushups[0];
             _currentTrainingResults.Clear();
+
+            // If test
+            if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
+            {
+                _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestDay;
+            }
+            // If regular day
+            else
+            {
+                _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value];
+            }
+            _currentStepValue = _trainingDescription.Pushups[0];
 
             base.CreateView();
 
@@ -68,7 +77,7 @@ namespace Assets.Codebase.Presenters.Training
             _currentTrainingResults.Add(_currentStepValue);
             _stepNumber++;
 
-            if (_stepNumber > _description.Pushups.Count)
+            if (_stepNumber > _trainingDescription.Pushups.Count)
             {
                 // Save training result if last step
                 SaveResults();
@@ -129,7 +138,7 @@ namespace Assets.Codebase.Presenters.Training
                 resultIndex++;
             }
             // plan
-            while (resultIndex < _description.Pushups.Count)
+            while (resultIndex < _trainingDescription.Pushups.Count)
             {
                 _resultsString.Append(_currentTrainingResults[resultIndex]).Append(" ");
                 resultIndex++;

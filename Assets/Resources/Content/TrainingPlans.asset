@@ -13,11 +13,15 @@ MonoBehaviour:
   m_Name: TrainingPlans
   m_EditorClassIdentifier: 
   _trainingPlans:
-  - Level: 1
-    TrainingDays:
-    - Pushups: 010000000200000002000000
-      RestingTime: 24
-  - Level: 2
-    TrainingDays:
-    - Pushups: 020000000300000002000000
-      RestingTime: 48
+  - _level: 0
+    _trainingDays:
+    - _pushups: 
+      _restingTime: 0
+    _testDay:
+      _pushups: 00000000
+      _restingTime: 0
+  - _level: 0
+    _trainingDays: []
+    _testDay:
+      _pushups: 
+      _restingTime: 0
