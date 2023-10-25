@@ -48,5 +48,11 @@ namespace Assets.Codebase.Models.Gameplay
         /// </summary>
         /// <returns></returns>
         public WarmupDescription GetWarmupDescription();
+        /// <summary>
+        /// Gets training plan for next level
+        /// </summary>
+        /// <param name="currentLevelId"></param>
+        /// <returns></returns>
+        public TrainingPlan GetNextLevelTrainingPlan(int currentLevelId);
     }
 }

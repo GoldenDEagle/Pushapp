@@ -31,7 +31,11 @@ namespace Assets.Codebase.Presenters.TrainingResults
 
         public void GoNextClicked()
         {
-            throw new NotImplementedException();
+            ProgressModel.SessionProgress.PassTrainingDay();
+
+            // Go to stretching if needed
+
+            GameplayModel.ActivateView(ViewId.MainView);
         }
     }
 }

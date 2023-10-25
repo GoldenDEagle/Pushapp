@@ -6,7 +6,9 @@ using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Gameplay.Data;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Views.Base;
+using System.Linq;
 using UniRx;
+using UnityEngine;
 
 namespace Assets.Codebase.Models.Gameplay
 {
@@ -81,6 +83,17 @@ namespace Assets.Codebase.Models.Gameplay
                 default:
                     return null;
             }
+        }
+
+        public TrainingPlan GetNextLevelTrainingPlan(int currentLevelId)
+        {
+            if (currentLevelId >= _trainingPlansDescriptions.TrainingPlans.Count)
+            {
+                Debug.Log("You reached max level!");
+                return _trainingPlansDescriptions.TrainingPlans.FirstOrDefault(x => x.Level == currentLevelId);
+            }
+
+            return _trainingPlansDescriptions.TrainingPlans.FirstOrDefault(x => x.Level == currentLevelId + 1);
         }
     }
 }

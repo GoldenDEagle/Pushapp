@@ -47,7 +47,7 @@ namespace Assets.Codebase.Presenters.Training
         public override void CreateView()
         {
             _stepNumber = 0;
-            _description = ProgressModel.SessionProgress.CurrentTrainingDay.Value;
+            _description = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value];
             _currentStepValue = _description.Pushups[0];
             _currentTrainingResults.Clear();
 

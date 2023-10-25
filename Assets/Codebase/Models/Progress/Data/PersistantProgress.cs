@@ -16,8 +16,9 @@ namespace Assets.Codebase.Models.Progress.Data
         public float SoundVolume;
         public bool IsTrainingPlanSelected;
         public TrainingPlan CurrentTrainingPlan;
-        public TrainingDay CurrentTrainingDay;
+        public int CurrentTrainingDayId;
         public int TotalPushups;
+        public bool IsOnTestingStage;
 
         public List<TrainingResult> AllResults;
 
@@ -27,9 +28,10 @@ namespace Assets.Codebase.Models.Progress.Data
             SampleValue = progress.SampleValue.Value;
             SoundVolume = progress.SoundVolume.Value;
             IsTrainingPlanSelected = progress.IsTrainingPlanSelected.Value;
-            CurrentTrainingDay = progress.CurrentTrainingDay.Value;
+            CurrentTrainingDayId = progress.CurrentTrainingDayId.Value;
             CurrentTrainingPlan = progress.CurrentTrainingPlan.Value;
             TotalPushups = progress.TotalPushups.Value;
+            IsOnTestingStage = progress.IsOnTestingStage.Value;
             AllResults = progress.AllResults;
         }
     }
