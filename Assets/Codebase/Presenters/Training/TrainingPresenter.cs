@@ -72,7 +72,7 @@ namespace Assets.Codebase.Presenters.Training
             {
                 // Save training result if last step
                 SaveResults();
-                GameplayModel.ActivateView(ViewId.TrainingResultView);
+                ShowResults();
                 return;
             }
 

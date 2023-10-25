@@ -8,8 +8,13 @@ namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
     public class TrainingDay
     {
         [Tooltip("Pushups count per session")]
-        public List<int> Pushups;
+        [SerializeField] private List<int> _pushups;
         [Tooltip("Hours to rest before next training")]
-        public int RestingTime;
+        [SerializeField] private int _restingTime;
+
+        
+        public List<int> Pushups => _pushups;
+        
+        public int RestingTime => _restingTime;
     }
 }
