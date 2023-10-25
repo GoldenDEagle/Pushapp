@@ -1,11 +1,9 @@
-﻿using Assets.Codebase.Infrastructure.ServicesManagment.UI;
-using Assets.Codebase.Infrastructure.ServicesManagment;
-using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+﻿using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.PlanPreview;
 using UniRx;
-using Assets.Codebase.Models.Progress;
 
 namespace Assets.Codebase.Presenters.PlanPreview
 {

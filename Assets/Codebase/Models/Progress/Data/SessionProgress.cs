@@ -13,19 +13,24 @@ namespace Assets.Codebase.Models.Progress.Data
     /// </summary>
     public class SessionProgress
     {
-        // All the properties that need to be saved...
+        // All the properties that need to be saved.................
 
+        // to be deleted
         public ReactiveProperty<int> SampleValue;
-        public ReactiveProperty<float> SoundVolume;
+
+        // Trainings
         public ReactiveProperty<bool> IsTrainingPlanSelected;
         public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
         public ReactiveProperty<int> CurrentTrainingDayId;
         public ReactiveProperty<int> TotalPushups;
         public ReactiveProperty<bool> IsOnTestingStage;
-
         public List<TrainingResult> AllResults;
 
-        // ...
+        // Settings
+        public ReactiveProperty<float> SoundVolume;
+        public ReactiveProperty<bool> IsStretchingEnabled;
+
+        // .........................................................
 
         /// <summary>
         /// Creates new progress with default values.
@@ -39,6 +44,7 @@ namespace Assets.Codebase.Models.Progress.Data
             CurrentTrainingDayId = new ReactiveProperty<int>();
             TotalPushups = new ReactiveProperty<int>(0);
             IsOnTestingStage = new ReactiveProperty<bool>(false);
+            IsStretchingEnabled = new ReactiveProperty<bool>(true);
 
             AllResults = new List<TrainingResult>();
         }
@@ -56,6 +62,7 @@ namespace Assets.Codebase.Models.Progress.Data
             CurrentTrainingDayId = new ReactiveProperty<int>(progress.CurrentTrainingDayId);
             TotalPushups = new ReactiveProperty<int>(progress.TotalPushups);
             IsOnTestingStage = new ReactiveProperty<bool>(progress.IsOnTestingStage);
+            IsStretchingEnabled = new ReactiveProperty<bool>(progress.IsStretchingEnabled);
 
             AllResults = progress.AllResults;
         }

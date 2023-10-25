@@ -11,16 +11,24 @@ namespace Assets.Codebase.Models.Progress.Data
     [Serializable]
     public class PersistantProgress
     {
-        // All the same properties as ReactiveProgress, but Serializable
+        // All the same properties as ReactiveProgress, but Serializable.........
+
+        // to be deleted
         public int SampleValue;
-        public float SoundVolume;
+
+        // Trainings
         public bool IsTrainingPlanSelected;
         public TrainingPlan CurrentTrainingPlan;
         public int CurrentTrainingDayId;
         public int TotalPushups;
         public bool IsOnTestingStage;
-
         public List<TrainingResult> AllResults;
+
+        // Settings
+        public float SoundVolume;
+        public bool IsStretchingEnabled;
+
+        // ........................................................................
 
         public void SetValues(SessionProgress progress)
         {
@@ -33,6 +41,7 @@ namespace Assets.Codebase.Models.Progress.Data
             TotalPushups = progress.TotalPushups.Value;
             IsOnTestingStage = progress.IsOnTestingStage.Value;
             AllResults = progress.AllResults;
+            IsStretchingEnabled = progress.IsStretchingEnabled.Value;
         }
     }
 }

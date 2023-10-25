@@ -183,8 +183,6 @@ namespace Assets.Codebase.Presenters.Training
 
             TrainingResult trainingResult = new TrainingResult(_currentTrainingResults, totalPushups, TimeProvider.GetServerTime());
             ProgressModel.SessionProgress.AddTrainingResult(trainingResult);
-
-            ProgressModel.SaveProgress();
         }
     }
 }
