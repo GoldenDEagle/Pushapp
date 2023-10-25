@@ -11,6 +11,10 @@ namespace Assets.Codebase.Data.Trainings
         private SerializableDateTime _date;
         private int _totalPushups;
 
+        public List<int> PushupAttempts => _pushupAttempts;
+        public SerializableDateTime Date => _date;
+        public int TotalPushups => _totalPushups;
+
         public TrainingResult(List<int> attempts, int totalPushups, DateTime date)
         {
             _pushupAttempts = attempts;
