@@ -12,5 +12,8 @@ namespace Assets.Codebase.Presenters.MainMenu
         public void StartTraining();
         public void ChangePlan();
         public void ShowAchievements();
+
+        public void GoToStatistics();
+        public void GoToSettings();
     }
 }

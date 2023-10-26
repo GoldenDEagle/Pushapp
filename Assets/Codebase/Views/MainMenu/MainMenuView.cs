@@ -2,6 +2,7 @@
 using Assets.Codebase.Presenters.MainMenu;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
+using Assets.Codebase.Views.Common;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Assets.Codebase.Views.MainMenu
 {
     public class MainMenuView : BaseView
     {
+        [SerializeField] private BottomPanel _bottomPanel;
         [Header("Buttons")]
         [SerializeField] private Button _startTrainingButton;
         [SerializeField] private Button _showAchievementsButton;
@@ -31,6 +33,9 @@ namespace Assets.Codebase.Views.MainMenu
 
         protected override void SubscribeToUserInput()
         {
+            _bottomPanel.SettingsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToSettings()).AddTo(CompositeDisposable);
+            _bottomPanel.StatisticsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToStatistics()).AddTo(CompositeDisposable);
+
             _startTrainingButton.OnClickAsObservable().Subscribe(_ => _presenter.StartTraining()).AddTo(CompositeDisposable);
             _showAchievementsButton.OnClickAsObservable().Subscribe(_ => _presenter.ShowAchievements()).AddTo(CompositeDisposable);
             _changePlanButton.OnClickAsObservable().Subscribe(_ => _presenter.ChangePlan()).AddTo(CompositeDisposable);

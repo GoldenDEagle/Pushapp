@@ -46,5 +46,15 @@ namespace Assets.Codebase.Presenters.MainMenu
             GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
             GameplayModel.ActivateView(ViewId.TrainingView);
         }
+
+        public void GoToStatistics()
+        {
+            GameplayModel.ActivateView(ViewId.StatsView);
+        }
+
+        public void GoToSettings()
+        {
+            GameplayModel.ActivateView(ViewId.SettingsView);
+        }
     }
 }

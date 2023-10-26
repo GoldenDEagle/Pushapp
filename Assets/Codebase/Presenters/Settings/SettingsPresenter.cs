@@ -9,5 +9,15 @@ namespace Assets.Codebase.Presenters.Settings
         {
             ViewId = ViewId.SettingsView;
         }
+
+        public void GoToMain()
+        {
+            GameplayModel.ActivateView(ViewId.MainView);
+        }
+
+        public void GoToStatistics()
+        {
+            GameplayModel.ActivateView(ViewId.StatsView);
+        }
     }
 }

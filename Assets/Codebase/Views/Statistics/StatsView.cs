@@ -1,12 +1,16 @@
 ﻿using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Statistics;
 using Assets.Codebase.Views.Base;
-using System;
+using Assets.Codebase.Views.Common;
+using UniRx;
+using UnityEngine;
 
 namespace Assets.Codebase.Views.Statistics
 {
     public class StatsView : BaseView
     {
+        [SerializeField] private BottomPanel _bottomPanel;
+
         private IStatsPresenter _presenter;
 
         public override void Init(IPresenter presenter)
@@ -18,7 +22,8 @@ namespace Assets.Codebase.Views.Statistics
 
         protected override void SubscribeToUserInput()
         {
-            throw new NotImplementedException();
+            _bottomPanel.MainMenuButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToMain()).AddTo(CompositeDisposable);
+            _bottomPanel.SettingsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToSettings()).AddTo(CompositeDisposable);
         }
     }
 }
