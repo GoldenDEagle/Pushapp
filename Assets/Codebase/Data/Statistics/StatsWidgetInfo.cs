@@ -14,9 +14,8 @@
         public string TrainingsCount => _trainingsCount;
         public string CaloriesCount => _caloriesCount;
 
-        public StatsWidgetInfo(string header, string totalPushaps, string record, string trainingsCount, string caloriesCount)
+        public StatsWidgetInfo(string totalPushaps, string record, string trainingsCount, string caloriesCount)
         {
-            _headerTitle = header;
             _totalPushupCount = totalPushaps;
             _recordPerTrainingCount = record;
             _trainingsCount = trainingsCount;

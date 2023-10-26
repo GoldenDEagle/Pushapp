@@ -9,7 +9,6 @@ namespace Assets.Codebase.Views.Statistics
         [Header("Select period")]
         [SerializeField] private StatsPeriod _period;
         [Header("Info fields")]
-        [SerializeField] private TMP_Text _headerTitle;
         [SerializeField] private TMP_Text _totalCountText;
         [SerializeField] private TMP_Text _recordPerTrainingCount;
         [SerializeField] private TMP_Text _trainingsCount;
@@ -19,7 +18,6 @@ namespace Assets.Codebase.Views.Statistics
 
         public void SetData(StatsWidgetInfo data)
         {
-            _headerTitle.text = data.Header;
             _totalCountText.text = data.TotalPushups;
             _recordPerTrainingCount.text = data.RecordPerTraining;
             _trainingsCount.text = data.TrainingsCount;

@@ -1,7 +1,12 @@
-﻿using Assets.Codebase.Models.Base;
+﻿using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Progress.Data;
 using Assets.Codebase.Utils.Extensions;
+using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Views.Statistics;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Codebase.Models.Progress
@@ -66,6 +71,40 @@ namespace Assets.Codebase.Models.Progress
         {
             var progress = PlayerPrefs.GetString(ProgressKey).ToDeserealized<PersistantProgress>();
             SessionProgress = new SessionProgress(progress);
+        }
+
+
+        public List<TrainingResult> GetTrainingResultsForPeriod(StatsPeriod period)
+        {
+            var currentTime = TimeProvider.GetServerTime();
+            DateTime startingTime = DateTime.MinValue;
+
+            switch (period)
+            {
+                case StatsPeriod.Total:
+                    startingTime = DateTime.MinValue;
+                    break;
+                case StatsPeriod.Week:
+                    startingTime = currentTime.Subtract(TimeSpan.FromDays(7));
+                    break;
+                case StatsPeriod.Month:
+                    startingTime = currentTime.Subtract(TimeSpan.FromDays(30));
+                    break;
+                default:
+                    break;
+            }
+
+            List<TrainingResult> results = new List<TrainingResult>();
+
+            foreach (var training in SessionProgress.AllResults)
+            {
+                if (training.Date.DateTime > startingTime)
+                {
+                    results.Add(training);
+                }
+            }
+
+            return results;
         }
     }
 }

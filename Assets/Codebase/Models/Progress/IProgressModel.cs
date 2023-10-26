@@ -1,5 +1,8 @@
-﻿using Assets.Codebase.Models.Base;
+﻿using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Progress.Data;
+using Assets.Codebase.Views.Statistics;
+using System.Collections.Generic;
 
 namespace Assets.Codebase.Models.Progress
 {
@@ -22,5 +25,12 @@ namespace Assets.Codebase.Models.Progress
         /// Loads data from saving place.
         /// </summary>
         public void LoadProgress();
+
+        /// <summary>
+        /// Gets all results for a given period
+        /// </summary>
+        /// <param name="period"></param>
+        /// <returns></returns>
+        public List<TrainingResult> GetTrainingResultsForPeriod(StatsPeriod period);
     }
 }
