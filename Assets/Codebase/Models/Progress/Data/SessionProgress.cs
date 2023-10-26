@@ -31,6 +31,7 @@ namespace Assets.Codebase.Models.Progress.Data
         // Settings
         public ReactiveProperty<float> SoundVolume;
         public ReactiveProperty<bool> IsStretchingEnabled;
+        public ReactiveProperty<bool> IsWarmupEnabled;
 
         // .........................................................
 
@@ -47,6 +48,7 @@ namespace Assets.Codebase.Models.Progress.Data
             TotalPushups = new ReactiveProperty<int>(0);
             IsOnTestingStage = new ReactiveProperty<bool>(false);
             IsStretchingEnabled = new ReactiveProperty<bool>(true);
+            IsWarmupEnabled = new ReactiveProperty<bool>(true);
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
 
             AllResults = new List<TrainingResult>();
@@ -66,6 +68,7 @@ namespace Assets.Codebase.Models.Progress.Data
             TotalPushups = new ReactiveProperty<int>(progress.TotalPushups);
             IsOnTestingStage = new ReactiveProperty<bool>(progress.IsOnTestingStage);
             IsStretchingEnabled = new ReactiveProperty<bool>(progress.IsStretchingEnabled);
+            IsWarmupEnabled = new ReactiveProperty<bool>(progress.IsWarmupEnabled);
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(progress.NextTrainingDate);
 
             AllResults = progress.AllResults;

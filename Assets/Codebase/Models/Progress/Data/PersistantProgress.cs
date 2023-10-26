@@ -29,6 +29,7 @@ namespace Assets.Codebase.Models.Progress.Data
         // Settings
         public float SoundVolume;
         public bool IsStretchingEnabled;
+        public bool IsWarmupEnabled;
 
         // ........................................................................
 
@@ -44,6 +45,7 @@ namespace Assets.Codebase.Models.Progress.Data
             IsOnTestingStage = progress.IsOnTestingStage.Value;
             AllResults = progress.AllResults;
             IsStretchingEnabled = progress.IsStretchingEnabled.Value;
+            IsWarmupEnabled = progress.IsWarmupEnabled.Value;
             NextTrainingDate = progress.NextTrainingDate.Value;
         }
     }
