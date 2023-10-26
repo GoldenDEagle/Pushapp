@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using Assets.Codebase.Data.Statistics;
+using TMPro;
 using UnityEngine;
 
 namespace Assets.Codebase.Views.Statistics
@@ -16,13 +17,13 @@ namespace Assets.Codebase.Views.Statistics
 
         public StatsPeriod Period => _period;
 
-        public void SetData(string header, string totalPushaps, string record, string trainingsCount, string caloriesCount)
+        public void SetData(StatsWidgetInfo data)
         {
-            _headerTitle.text = header;
-            _totalCountText.text = totalPushaps;
-            _recordPerTrainingCount.text = record;
-            _trainingsCount.text = trainingsCount;
-            _caloriesCount.text = caloriesCount;
+            _headerTitle.text = data.Header;
+            _totalCountText.text = data.TotalPushups;
+            _recordPerTrainingCount.text = data.RecordPerTraining;
+            _trainingsCount.text = data.TrainingsCount;
+            _caloriesCount.text = data.CaloriesCount;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Assets.Codebase.Presenter.Base;
+﻿using Assets.Codebase.Data.Statistics;
+using Assets.Codebase.Presenter.Base;
+using Assets.Codebase.Views.Statistics;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.Statistics
@@ -10,5 +12,6 @@ namespace Assets.Codebase.Presenters.Statistics
 
         public void GoToMain();
         public void GoToSettings();
+        public StatsWidgetInfo GetStatsForPeriod(StatsPeriod period);
     }
 }
