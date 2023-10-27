@@ -22,6 +22,8 @@ namespace Assets.Codebase.Views.Settings
         [SerializeField] private Toggle _stretchingToggle;
         [SerializeField] private Toggle _autoStretchingSwitchToggle;
         [SerializeField] private InputField _stretchingTimeInput;
+        [Header("Delete")]
+        [SerializeField] private Button _deleteDataButton;
 
         private ISettingsPresenter _presenter;
 
@@ -44,6 +46,7 @@ namespace Assets.Codebase.Views.Settings
             _stretchingToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetStretchingStatus(value)).AddTo(CompositeDisposable);
             _autoWarmupSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoWarmupSwitch(value)).AddTo(CompositeDisposable);
             _autoStretchingSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoStretchingSwitch(value)).AddTo(CompositeDisposable);
+            _deleteDataButton.OnClickAsObservable().Subscribe(_ => _presenter.DeleteAllTrainingData()).AddTo(CompositeDisposable);
         }
 
 

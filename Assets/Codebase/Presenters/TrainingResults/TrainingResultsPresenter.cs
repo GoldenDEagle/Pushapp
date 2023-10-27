@@ -3,7 +3,6 @@ using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
-using System;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.TrainingResults

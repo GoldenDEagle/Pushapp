@@ -45,5 +45,14 @@ namespace Assets.Codebase.Presenters.Settings
         {
             ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value = isEnabled;
         }
+
+        public void DeleteAllTrainingData()
+        {
+            // Show warning
+
+            // If accepted -> delete
+            ProgressModel.SessionProgress.ClearResults();
+        }
+
     }
 }

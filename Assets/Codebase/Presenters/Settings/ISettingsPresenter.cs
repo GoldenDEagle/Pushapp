@@ -12,5 +12,6 @@ namespace Assets.Codebase.Presenters.Settings
         public void SetAutoWarmupSwitch(bool isEnabled);
         public void SetStretchingStatus(bool isEnabled);
         public void SetAutoStretchingSwitch(bool isEnabled);
+        public void DeleteAllTrainingData();
     }
 }
