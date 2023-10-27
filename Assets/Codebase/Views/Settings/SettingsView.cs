@@ -17,7 +17,11 @@ namespace Assets.Codebase.Views.Settings
         [SerializeField] private Slider _volumeSlider;
         [Header("Warmup and stretching")]
         [SerializeField] private Toggle _warmupToggle;
+        [SerializeField] private Toggle _autoWarmupSwitchToggle;
+        [SerializeField] private InputField _warmupTimeInput;
         [SerializeField] private Toggle _stretchingToggle;
+        [SerializeField] private Toggle _autoStretchingSwitchToggle;
+        [SerializeField] private InputField _stretchingTimeInput;
 
         private ISettingsPresenter _presenter;
 
@@ -38,6 +42,8 @@ namespace Assets.Codebase.Views.Settings
             _volumeSlider.OnValueChangedAsObservable().Subscribe(value => _presenter.SetSoundVolume(value)).AddTo(CompositeDisposable);
             _warmupToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetWarmupStatus(value)).AddTo(CompositeDisposable);
             _stretchingToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetStretchingStatus(value)).AddTo(CompositeDisposable);
+            _autoWarmupSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoWarmupSwitch(value)).AddTo(CompositeDisposable);
+            _autoStretchingSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoStretchingSwitch(value)).AddTo(CompositeDisposable);
         }
 
 

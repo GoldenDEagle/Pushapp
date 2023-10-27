@@ -35,5 +35,15 @@ namespace Assets.Codebase.Presenters.Settings
         {
             ProgressModel.SessionProgress.IsWarmupEnabled.Value = isEnabled;
         }
+
+        public void SetAutoStretchingSwitch(bool isEnabled)
+        {
+            ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value = isEnabled;
+        }
+
+        public void SetAutoWarmupSwitch(bool isEnabled)
+        {
+            ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value = isEnabled;
+        }
     }
 }

@@ -9,6 +9,8 @@ namespace Assets.Codebase.Presenters.Settings
 
         public void SetSoundVolume(float value);
         public void SetWarmupStatus(bool isEnabled);
+        public void SetAutoWarmupSwitch(bool isEnabled);
         public void SetStretchingStatus(bool isEnabled);
+        public void SetAutoStretchingSwitch(bool isEnabled);
     }
 }
