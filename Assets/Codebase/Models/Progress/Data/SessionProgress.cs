@@ -24,6 +24,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
         public ReactiveProperty<int> CurrentTrainingDayId;
         public ReactiveProperty<int> TotalPushups;
+        public ReactiveProperty<int> NextGlobalTarget;
         public ReactiveProperty<bool> IsOnTestingStage;
         public ReactiveProperty<SerializableDateTime> NextTrainingDate;
         public List<TrainingResult> AllResults;
@@ -32,6 +33,10 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProperty<float> SoundVolume;
         public ReactiveProperty<bool> IsStretchingEnabled;
         public ReactiveProperty<bool> IsWarmupEnabled;
+        public ReactiveProperty<bool> AutoWarmupSwitchEnabled;
+        public ReactiveProperty<bool> AutoStretchingSwitchEnabled;
+        public ReactiveProperty<float> WarmupExerciseTime;
+        public ReactiveProperty<float> StretchingExerciseTime;
 
         // .........................................................
 
@@ -50,6 +55,11 @@ namespace Assets.Codebase.Models.Progress.Data
             IsStretchingEnabled = new ReactiveProperty<bool>(true);
             IsWarmupEnabled = new ReactiveProperty<bool>(true);
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
+            AutoWarmupSwitchEnabled = new ReactiveProperty<bool>(true);
+            AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(true);
+            NextGlobalTarget = new ReactiveProperty<int>(100);
+            WarmupExerciseTime = new ReactiveProperty<float>(30f);
+            StretchingExerciseTime = new ReactiveProperty<float>(30f);
 
             AllResults = new List<TrainingResult>();
         }
@@ -70,6 +80,10 @@ namespace Assets.Codebase.Models.Progress.Data
             IsStretchingEnabled = new ReactiveProperty<bool>(progress.IsStretchingEnabled);
             IsWarmupEnabled = new ReactiveProperty<bool>(progress.IsWarmupEnabled);
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(progress.NextTrainingDate);
+            AutoWarmupSwitchEnabled = new ReactiveProperty<bool>(progress.AutoWarmupSwitchEnabled);
+            AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(progress.AutoStretchingSwitchEnabled);
+            WarmupExerciseTime = new ReactiveProperty<float>(progress.WarmupExerciseTime);
+            StretchingExerciseTime = new ReactiveProperty<float>(progress.StretchingExerciseTime);
 
             AllResults = progress.AllResults;
         }
@@ -87,7 +101,14 @@ namespace Assets.Codebase.Models.Progress.Data
 
             TotalPushups.Value += pushups;
 
-            // Achievements check
+            if (TotalPushups.Value >= NextGlobalTarget.Value)
+            {
+                // Add description for targets
+
+                NextGlobalTarget.Value += 100;
+
+                // + Unlock achievement
+            }
         }
 
         /// <summary>
@@ -97,6 +118,20 @@ namespace Assets.Codebase.Models.Progress.Data
         public void AddTrainingResult(TrainingResult result)
         {
             AllResults.Add(result);
+        }
+
+        /// <summary>
+        /// Cleares all results
+        /// </summary>
+        public void ClearResults()
+        {
+            AllResults.Clear();
+            TotalPushups.Value = 0;
+            CurrentTrainingPlan.Value = null;
+            IsTrainingPlanSelected.Value = false;
+            CurrentTrainingDayId.Value = 0;
+            IsOnTestingStage.Value = false;
+            NextGlobalTarget.Value = 100;
         }
 
         /// <summary>

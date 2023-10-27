@@ -3,6 +3,7 @@ using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Utils.CustomTypes;
 using System;
 using System.Collections.Generic;
+using UniRx;
 
 namespace Assets.Codebase.Models.Progress.Data
 {
@@ -22,6 +23,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public TrainingPlan CurrentTrainingPlan;
         public int CurrentTrainingDayId;
         public int TotalPushups;
+        public int NextGlobalTarget;
         public bool IsOnTestingStage;
         public SerializableDateTime NextTrainingDate;
         public List<TrainingResult> AllResults;
@@ -30,6 +32,10 @@ namespace Assets.Codebase.Models.Progress.Data
         public float SoundVolume;
         public bool IsStretchingEnabled;
         public bool IsWarmupEnabled;
+        public bool AutoWarmupSwitchEnabled;
+        public bool AutoStretchingSwitchEnabled;
+        public float WarmupExerciseTime;
+        public float StretchingExerciseTime;
 
         // ........................................................................
 
@@ -47,6 +53,11 @@ namespace Assets.Codebase.Models.Progress.Data
             IsStretchingEnabled = progress.IsStretchingEnabled.Value;
             IsWarmupEnabled = progress.IsWarmupEnabled.Value;
             NextTrainingDate = progress.NextTrainingDate.Value;
+            AutoStretchingSwitchEnabled = progress.AutoStretchingSwitchEnabled.Value;
+            AutoWarmupSwitchEnabled = progress.AutoWarmupSwitchEnabled.Value;
+            NextGlobalTarget = progress.NextGlobalTarget.Value;
+            WarmupExerciseTime = progress.WarmupExerciseTime.Value;
+            StretchingExerciseTime = progress.StretchingExerciseTime.Value;
         }
     }
 }
