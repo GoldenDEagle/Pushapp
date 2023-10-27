@@ -43,8 +43,15 @@ namespace Assets.Codebase.Presenters.MainMenu
 
         public void StartTraining()
         {
-            GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
-            GameplayModel.ActivateView(ViewId.TrainingView);
+            if (ProgressModel.SessionProgress.IsWarmupEnabled.Value)
+            {
+                GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
+                GameplayModel.ActivateView(ViewId.WarmupView);
+            }
+            else
+            {
+                GameplayModel.ActivateView(ViewId.TrainingView);
+            }
         }
 
         public void GoToStatistics()

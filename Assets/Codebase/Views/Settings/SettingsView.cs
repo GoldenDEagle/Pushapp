@@ -57,6 +57,8 @@ namespace Assets.Codebase.Views.Settings
             _volumeSlider.value = progress.SoundVolume.Value;
             _warmupToggle.isOn = progress.IsWarmupEnabled.Value;
             _stretchingToggle.isOn = progress.IsStretchingEnabled.Value;
+            _autoWarmupSwitchToggle.isOn = progress.AutoWarmupSwitchEnabled.Value;
+            _autoStretchingSwitchToggle.isOn = progress.AutoStretchingSwitchEnabled.Value;
         }
     }
 }

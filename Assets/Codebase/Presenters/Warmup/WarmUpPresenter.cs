@@ -13,11 +13,13 @@ namespace Assets.Codebase.Presenters.Warmup
         public Subject<WarmupStep> OnNewWarmupStep { get; private set; }
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
+        public ReactiveProperty<bool> IsTimerEnabled { get; private set; }
 
 
         private WarmupDescription _description;
         private int _stepNumber;
         private float _secondsToPrepare = 5f;
+        private float _exerciseTime;
 
         public WarmUpPresenter()
         {
@@ -26,12 +28,23 @@ namespace Assets.Codebase.Presenters.Warmup
             OnNewWarmupStep = new Subject<WarmupStep>();
             TimerText = new ReactiveProperty<string>(string.Empty);
             TimerSliderValue = new ReactiveProperty<float>(1);
+            IsTimerEnabled = new ReactiveProperty<bool>();
         }
 
         public override void CreateView()
         {
             _stepNumber = 0;
             _description = GameplayModel.GetWarmupDescription();
+            if (GameplayModel.CurrentWarmupMode.Value == WarmupMode.Warmup)
+            {
+                _exerciseTime = ProgressModel.SessionProgress.WarmupExerciseTime.Value;
+                IsTimerEnabled.Value = ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value;
+            }
+            else
+            {
+                _exerciseTime = ProgressModel.SessionProgress.StretchingExerciseTime.Value;
+                IsTimerEnabled.Value = ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value;
+            }
 
             base.CreateView();
 
@@ -81,7 +94,13 @@ namespace Assets.Codebase.Presenters.Warmup
         private void LaunchStep()
         {
             OnNewWarmupStep?.OnNext(_description.Steps[_stepNumber]);
-            ExerciseCycle().Forget();
+
+            // Launch timers if enabled in settings
+            if ((GameplayModel.CurrentWarmupMode.Value == WarmupMode.Warmup && ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value)
+            || (GameplayModel.CurrentWarmupMode.Value == WarmupMode.Stretching && ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value))
+            {
+                ExerciseCycle().Forget();
+            }
         }
 
         private async UniTaskVoid ExerciseCycle()
@@ -99,11 +118,13 @@ namespace Assets.Codebase.Presenters.Warmup
             }
 
             // Exercise
-            timer = _description.Steps[_stepNumber].StepDurationSeconds;
+            //timer = _description.Steps[_stepNumber].StepDurationSeconds;
+            timer = _exerciseTime;
             while (timer >= 0)
             {
                 TimerText.Value = TimeConverter.TimeInMinutes(timer);
-                TimerSliderValue.Value = timer / _description.Steps[_stepNumber].StepDurationSeconds;
+                //TimerSliderValue.Value = timer / _description.Steps[_stepNumber].StepDurationSeconds;
+                TimerSliderValue.Value = timer / _exerciseTime;
                 timer--;
                 await UniTask.Delay(TimeSpan.FromSeconds(1));
             }
