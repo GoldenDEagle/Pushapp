@@ -26,13 +26,18 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
 
-
+        // General
         private TrainingDay _trainingDescription;
         private int _stepNumber;
         private int _currentStepValue;
-        private float _secondsToRest = 60f;
         private List<int> _currentTrainingResults;
         private StringBuilder _resultsString;
+
+        // Resting
+        private float _defaultTimeToRest = 60f;
+        private float _currentTimeToRest;
+        private float _timeRegulatingStep = 30f;
+        private float _restingTimer;
         private CancellationTokenSource _restingCancellationToken;
 
         public TrainingPresenter()
@@ -86,6 +91,7 @@ namespace Assets.Codebase.Presenters.Training
             }
 
             OnShowRestingWidget?.OnNext(Unit.Default);
+            _currentTimeToRest = _defaultTimeToRest;
             StartResting().Forget();
         }
 
@@ -173,12 +179,12 @@ namespace Assets.Codebase.Presenters.Training
         {
             TimerSliderValue.Value = 1f;
 
-            var timer = _secondsToRest;
-            while (timer >= 0)
+            _restingTimer = _currentTimeToRest;
+            while (_restingTimer >= 0)
             {
-                TimerText.Value = TimeConverter.TimeInMinutes(timer);
-                TimerSliderValue.Value = timer / _secondsToRest;
-                timer--;
+                TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
+                TimerSliderValue.Value = _restingTimer / _currentTimeToRest;
+                _restingTimer--;
                 await UniTask.Delay(TimeSpan.FromSeconds(1), false, PlayerLoopTiming.Update, cancellationToken);
             }
 
@@ -193,6 +199,23 @@ namespace Assets.Codebase.Presenters.Training
 
             TrainingResult trainingResult = new TrainingResult(_currentTrainingResults, totalPushups, TimeProvider.GetServerTime());
             ProgressModel.SessionProgress.AddTrainingResult(trainingResult);
+        }
+
+        public void IncreaseRestingTime()
+        {
+            _currentTimeToRest += _timeRegulatingStep;
+            _restingTimer += _timeRegulatingStep;
+        }
+
+        public void DecreaseRestingTime()
+        {
+            _restingTimer -= _timeRegulatingStep;
+            if (_restingTimer < 0)
+            {
+                CancelResting();
+                return;
+            }
+            _currentTimeToRest -= _timeRegulatingStep;
         }
     }
 }

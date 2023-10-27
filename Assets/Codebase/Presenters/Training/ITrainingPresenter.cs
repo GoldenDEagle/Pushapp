@@ -23,5 +23,7 @@ namespace Assets.Codebase.Presenters.Training
         public void ShowResults();
         public void ReduceStepValue();
         public void IncreaseStepValue();
+        public void IncreaseRestingTime();
+        public void DecreaseRestingTime();
     }
 }
