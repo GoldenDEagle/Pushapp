@@ -13,10 +13,21 @@ namespace Assets.Codebase.Presenters.Statistics
     public class StatsPresenter : BasePresenter, IStatsPresenter
     {
         public ReactiveProperty<string> CurrentLevelString { get; private set; }
+        public ReactiveProperty<string> TotalPushupsString { get; private set; }
 
         public StatsPresenter()
         {
             ViewId = ViewId.StatsView;
+
+            CurrentLevelString = new ReactiveProperty<string>();
+        }
+
+        public override void CreateView()
+        {
+            base.CreateView();
+
+            CurrentLevelString.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+            TotalPushupsString.Value = NumberConverter.Convert(ProgressModel.SessionProgress.TotalPushups.Value);
         }
 
         public void GoToMain()
