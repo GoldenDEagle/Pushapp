@@ -2,6 +2,7 @@
 {
     public interface IAchievementsService : IService
     {
+        public void ShowAchievementsList();
         public void UnlockAchievement(string tag);
         public void UnlockPushupsAchievement(int achievementId);
 

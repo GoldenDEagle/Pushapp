@@ -10,7 +10,7 @@ namespace Assets.Codebase.Utils.Extensions
         /// </summary>
         /// <param name="results"></param>
         /// <returns></returns>
-        public static string ToResultsString(this List<int> results)
+        public static string ToPushupsListString(this List<int> results)
         {
             StringBuilder sb = new StringBuilder();
 

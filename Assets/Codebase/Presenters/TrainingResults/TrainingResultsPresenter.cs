@@ -26,7 +26,7 @@ namespace Assets.Codebase.Presenters.TrainingResults
 
             base.CreateView();
 
-            ResultsString.Value = _lastTrainingResult.PushupAttempts.ToResultsString();
+            ResultsString.Value = _lastTrainingResult.PushupAttempts.ToPushupsListString();
         }
 
         public void GoNextClicked()

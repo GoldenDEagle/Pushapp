@@ -19,6 +19,11 @@ namespace Assets.Codebase.Data.Achievements
             GP_Achievements.Fetch();
         }
 
+        public void ShowAchievementsList()
+        {
+            GP_Achievements.Open();
+        }
+
         public void UnlockAchievement(string tag)
         {
             if (GP_Achievements.Has(tag))

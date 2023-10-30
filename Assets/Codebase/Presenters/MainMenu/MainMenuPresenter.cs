@@ -2,16 +2,30 @@
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Data.WarmUp;
 using UniRx;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
+using Assets.Codebase.Utils.Helpers;
+using Unity.VisualScripting;
+using Assets.Codebase.Utils.Values;
+using Assets.Codebase.Utils.Extensions;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 
 namespace Assets.Codebase.Presenters.MainMenu
 {
     public class MainMenuPresenter : BasePresenter, IMainMenuPresenter
     {
+        private const string TestTrainingNameKey = "trainingName_Test";
+        private const string DayTrainingNameKey = "trainingName_Day";
+
         public ReactiveProperty<string> TotalTrainingsText { get; private set; }
-
         public ReactiveProperty<string> CurrentLevelText { get; private set; }
-
-        public ReactiveProperty<string> NextTrainingDate { get; private set; }
+        public ReactiveProperty<string> TotalPushupsText { get; private set; }
+        public ReactiveProperty<string> NextPushupsTargetText { get; private set; }
+        public ReactiveProperty<float> PushupsSliderValue { get; private set; }
+        public ReactiveProperty<string> NextTrainingDateText { get; private set; }
+        public ReactiveProperty<string> NextTrainingLevelText { get; private set; }
+        public ReactiveProperty<string> NextTrainingNameText { get; private set; }
+        public ReactiveProperty<string> NextTrainingPushupListText { get; private set; }
 
         public MainMenuPresenter()
         {
@@ -19,7 +33,19 @@ namespace Assets.Codebase.Presenters.MainMenu
 
             TotalTrainingsText = new ReactiveProperty<string>();
             CurrentLevelText = new ReactiveProperty<string>();
-            NextTrainingDate = new ReactiveProperty<string>();
+            TotalPushupsText = new ReactiveProperty<string>();
+            NextPushupsTargetText = new ReactiveProperty<string>();
+            PushupsSliderValue = new ReactiveProperty<float>();
+            NextTrainingDateText = new ReactiveProperty<string>();
+            NextTrainingLevelText = new ReactiveProperty<string>();
+            NextTrainingNameText = new ReactiveProperty<string>();
+            NextTrainingPushupListText = new ReactiveProperty<string>();
+        }
+
+        public override void CreateView()
+        {
+            base.CreateView();
+            ConfigureView();
         }
 
         protected override void SubscribeToModelChanges()
@@ -38,7 +64,7 @@ namespace Assets.Codebase.Presenters.MainMenu
 
         public void ShowAchievements()
         {
-            GameplayModel.ActivateView(ViewId.AchievementsView);
+            ServiceLocator.Container.Single<IAchievementsService>().ShowAchievementsList();
         }
 
         public void StartTraining()
@@ -62,6 +88,32 @@ namespace Assets.Codebase.Presenters.MainMenu
         public void GoToSettings()
         {
             GameplayModel.ActivateView(ViewId.SettingsView);
+        }
+
+        
+        private void ConfigureView()
+        {
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+            var currentPushups = ProgressModel.SessionProgress.TotalPushups.Value;
+            var pushupsTarget = Constants.PushupTargets[ProgressModel.SessionProgress.NextPushupTargetId.Value];
+
+            TotalTrainingsText.Value = NumberConverter.Convert(ProgressModel.SessionProgress.AllResults.Count);
+            CurrentLevelText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+            TotalPushupsText.Value = NumberConverter.Convert(currentPushups);
+            NextPushupsTargetText.Value = NumberConverter.Convert(pushupsTarget);
+            PushupsSliderValue.Value = currentPushups / pushupsTarget;
+            NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToString();
+            NextTrainingLevelText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+            NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value].Pushups.ToPushupsListString();
+
+            if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
+            {
+                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(TestTrainingNameKey);
+            }
+            else
+            {
+                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(DayTrainingNameKey) + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using Assets.Codebase.Presenters.MainMenu;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -20,6 +21,14 @@ namespace Assets.Codebase.Views.MainMenu
         [Header("Info elements")]
         [SerializeField] private TMP_Text _totalTrainingsText;
         [SerializeField] private TMP_Text _currentLevelText;
+        [SerializeField] private TMP_Text _totalPushupsText;
+        [SerializeField] private TMP_Text _nextPushupsTargetText;
+        [SerializeField] private Slider _pushupsProgressSlider;
+        [Header("Next training info")]
+        [SerializeField] private TMP_Text _nextTrainingDate;
+        [SerializeField] private TMP_Text _nextTrainingLevel;
+        [SerializeField] private TMP_Text _nextTrainingName;
+        [SerializeField] private TMP_Text _nextTrainingPushupsList;
 
 
         private IMainMenuPresenter _presenter;
@@ -49,7 +58,14 @@ namespace Assets.Codebase.Views.MainMenu
 
             _presenter.TotalTrainingsText.SubscribeToTMPText(_totalTrainingsText).AddTo(CompositeDisposable);
             _presenter.CurrentLevelText.SubscribeToTMPText(_currentLevelText).AddTo(CompositeDisposable);
-
+            _presenter.TotalPushupsText.SubscribeToTMPText(_totalPushupsText).AddTo(CompositeDisposable);
+            _presenter.NextPushupsTargetText.SubscribeToTMPText(_nextPushupsTargetText).AddTo(CompositeDisposable);
+            _presenter.PushupsSliderValue.Subscribe(value => _pushupsProgressSlider.value = value).AddTo(CompositeDisposable);
+            _presenter.NextTrainingDateText.SubscribeToTMPText(_nextTrainingDate).AddTo(CompositeDisposable);
+            _presenter.NextTrainingLevelText.SubscribeToTMPText(_nextTrainingLevel).AddTo(CompositeDisposable);
+            _presenter.NextTrainingNameText.SubscribeToTMPText(_nextTrainingName).AddTo(CompositeDisposable);
+            _presenter.NextTrainingPushupListText.SubscribeToTMPText(_nextTrainingPushupsList).AddTo(CompositeDisposable);
+            
             // ... till here
         }
     }
