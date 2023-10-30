@@ -19,7 +19,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
             _assetProvider = assetProvider;
         }
 
-        public GraphNode CreateCircleOnGraph()
+        public GraphNode CreateNodeOnGraph()
         {
             var element = _assetProvider.Instantiate(GraphCirclePath).GetComponent<GraphNode>();
             return element;

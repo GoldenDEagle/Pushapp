@@ -9,6 +9,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
     {
         public TrainingPlanButton CreateTrainingPlanButton(TrainingPlan plan);
         public TrainingDayWidget CreateTrainingDayWidget(TrainingDay trainingDay);
-        public GraphNode CreateCircleOnGraph();
+        public GraphNode CreateNodeOnGraph();
     }
 }

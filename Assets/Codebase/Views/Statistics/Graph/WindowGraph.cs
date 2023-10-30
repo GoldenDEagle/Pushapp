@@ -1,10 +1,12 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
+using Assets.Codebase.Utils.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Views.Statistics.Graph
 {
@@ -35,15 +37,17 @@ namespace Assets.Codebase.Views.Statistics.Graph
             ShowGraph(testResults);
         }
 
-        private void CreateCircle(Vector2 anchoredPosition)
+        private GraphNode CreateNode(Vector2 anchoredPosition)
         {
-            var circle = _uiFactory.CreateCircleOnGraph();
-            RectTransform circleRect = circle.GetComponent<RectTransform>();
-            circleRect.SetParent(_graphContainer, false);
-            circleRect.anchoredPosition = anchoredPosition;
-            circleRect.sizeDelta = new Vector2(11, 11);
-            circleRect.anchorMin = new Vector2(0, 0);
-            circleRect.anchorMax = new Vector2(0, 0);
+            var node = _uiFactory.CreateNodeOnGraph();
+            RectTransform nodeRect = node.RectTransform;
+            nodeRect.SetParent(_graphContainer, false);
+            nodeRect.anchoredPosition = anchoredPosition;
+            nodeRect.sizeDelta = new Vector2(11, 11);
+            nodeRect.anchorMin = new Vector2(0, 0);
+            nodeRect.anchorMax = new Vector2(0, 0);
+
+            return node;
         }
 
         public void ShowGraph(List<TrainingResult> results)
@@ -51,12 +55,36 @@ namespace Assets.Codebase.Views.Statistics.Graph
             float graphHeight = _graphContainer.sizeDelta.y;
             float yMaximum = results.Max(x => x.TotalPushups);
             float xStep = 50f;
+
+            GraphNode previousNode = null;
             for (int i = 0; i < results.Count; i++)
             {
                 float xPosition = xStep + i * xStep;
                 float yPosition = (results[i].TotalPushups / yMaximum) * graphHeight;
-                CreateCircle(new Vector2(xPosition, yPosition));
+                var newNode = CreateNode(new Vector2(xPosition, yPosition));
+
+                if (previousNode != null)
+                {
+                    CreateNodeConnection(previousNode.RectTransform.anchoredPosition, newNode.RectTransform.anchoredPosition);
+                }
+
+                previousNode = newNode;
             }
+        }
+
+        private void CreateNodeConnection(Vector2 nodePositionA, Vector2 nodePositionB)
+        {
+            GameObject dotConnection = new GameObject("dotConnection", typeof(Image));
+            dotConnection.transform.SetParent(_graphContainer, false);
+            dotConnection.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+            RectTransform connectionRect = dotConnection.GetComponent<RectTransform>();
+            Vector2 dir = (nodePositionB - nodePositionA).normalized;
+            float distance = Vector2.Distance(nodePositionA, nodePositionB);
+            connectionRect.anchorMin = new Vector2(0, 0);
+            connectionRect.anchorMax = new Vector2(0, 0);
+            connectionRect.sizeDelta = new Vector2(distance, 3f);
+            connectionRect.anchoredPosition = nodePositionA + dir * distance * 0.5f;
+            connectionRect.localEulerAngles = new Vector3(0, 0, GeometryHelpers.GetAngleFromVectorFloat(dir));
         }
     }
 }
