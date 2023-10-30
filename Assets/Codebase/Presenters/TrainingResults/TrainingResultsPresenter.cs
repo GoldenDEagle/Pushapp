@@ -1,5 +1,7 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Data.WarmUp;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Ads;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
@@ -32,6 +34,8 @@ namespace Assets.Codebase.Presenters.TrainingResults
         public void GoNextClicked()
         {
             ProgressUpdate();
+
+            ShowAd();
 
             GoToNextView();
         }
@@ -97,6 +101,15 @@ namespace Assets.Codebase.Presenters.TrainingResults
                 return true;
             }
             return false;
+        }
+
+        private void ShowAd()
+        {
+            var adService = ServiceLocator.Container.Single<IAdsService>();
+            if (adService.CheckIfFullscreenIsAvailable())
+            {
+                adService.ShowFullscreen();
+            }
         }
     }
 }
