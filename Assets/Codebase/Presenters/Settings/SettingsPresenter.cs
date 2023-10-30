@@ -72,6 +72,12 @@ namespace Assets.Codebase.Presenters.Settings
                 cleanedInput = cleanedInput.Substring(0, 2) + ":" + cleanedInput.Substring(2);
             }
 
+            // If the input is shorter than 5 characters, pad with leading zeros.
+            while (cleanedInput.Length < 5)
+            {
+                cleanedInput = "0" + cleanedInput;
+            }
+
             // Update the InputField text with the cleaned and formatted input.
             inputField.text = cleanedInput;
         }
