@@ -2,8 +2,10 @@
 using Assets.Codebase.Infrastructure.ServicesManagment.Progress;
 using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Settings;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
+using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,6 +49,8 @@ namespace Assets.Codebase.Views.Settings
             _autoWarmupSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoWarmupSwitch(value)).AddTo(CompositeDisposable);
             _autoStretchingSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoStretchingSwitch(value)).AddTo(CompositeDisposable);
             _deleteDataButton.OnClickAsObservable().Subscribe(_ => _presenter.DeleteAllTrainingData()).AddTo(CompositeDisposable);
+            _warmupTimeInput.OnEndEditAsObservable().Subscribe(value => _presenter.ValidateTimeInput(value, _warmupTimeInput)).AddTo(CompositeDisposable);
+            _stretchingTimeInput.OnEndEditAsObservable().Subscribe(value => _presenter.ValidateTimeInput(value, _stretchingTimeInput)).AddTo(CompositeDisposable);
         }
 
 
@@ -62,6 +66,8 @@ namespace Assets.Codebase.Views.Settings
             _stretchingToggle.isOn = progress.IsStretchingEnabled.Value;
             _autoWarmupSwitchToggle.isOn = progress.AutoWarmupSwitchEnabled.Value;
             _autoStretchingSwitchToggle.isOn = progress.AutoStretchingSwitchEnabled.Value;
+            _warmupTimeInput.text = TimeConverter.TimeInMinutes(progress.WarmupExerciseTime.Value);
+            _stretchingTimeInput.text = TimeConverter.TimeInMinutes(progress.StretchingExerciseTime.Value);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Assets.Codebase.Presenter.Base;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Presenters.Settings
 {
@@ -13,5 +14,6 @@ namespace Assets.Codebase.Presenters.Settings
         public void SetStretchingStatus(bool isEnabled);
         public void SetAutoStretchingSwitch(bool isEnabled);
         public void DeleteAllTrainingData();
+        public void ValidateTimeInput(string inputText, InputField inputField);
     }
 }
