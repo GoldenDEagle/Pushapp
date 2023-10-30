@@ -23,7 +23,9 @@ namespace Assets.Codebase.Models.Progress.Data
         public TrainingPlan CurrentTrainingPlan;
         public int CurrentTrainingDayId;
         public int TotalPushups;
-        public int NextGlobalTarget;
+        public int NextPushupTargetId;
+        public int NextCaloriesTargetId;
+        public int NextTrainingCountTargetId;
         public bool IsOnTestingStage;
         public SerializableDateTime NextTrainingDate;
         public List<TrainingResult> AllResults;
@@ -55,7 +57,9 @@ namespace Assets.Codebase.Models.Progress.Data
             NextTrainingDate = progress.NextTrainingDate.Value;
             AutoStretchingSwitchEnabled = progress.AutoStretchingSwitchEnabled.Value;
             AutoWarmupSwitchEnabled = progress.AutoWarmupSwitchEnabled.Value;
-            NextGlobalTarget = progress.NextGlobalTarget.Value;
+            NextPushupTargetId = progress.NextPushupTargetId.Value;
+            NextTrainingCountTargetId = progress.NextTrainingCountTargetId.Value;
+            NextCaloriesTargetId = progress.NextCaloriesTargetId.Value;
             WarmupExerciseTime = progress.WarmupExerciseTime.Value;
             StretchingExerciseTime = progress.StretchingExerciseTime.Value;
         }

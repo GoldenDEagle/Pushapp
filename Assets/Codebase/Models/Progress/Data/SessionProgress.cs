@@ -1,9 +1,11 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
 using Assets.Codebase.Infrastructure.ServicesManagment.Gameplay;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Utils.CustomTypes;
 using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Utils.Values;
 using System.Collections.Generic;
 using UniRx;
 
@@ -24,7 +26,9 @@ namespace Assets.Codebase.Models.Progress.Data
         public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
         public ReactiveProperty<int> CurrentTrainingDayId;
         public ReactiveProperty<int> TotalPushups;
-        public ReactiveProperty<int> NextGlobalTarget;
+        public ReactiveProperty<int> NextPushupTargetId;
+        public ReactiveProperty<int> NextCaloriesTargetId;
+        public ReactiveProperty<int> NextTrainingCountTargetId;
         public ReactiveProperty<bool> IsOnTestingStage;
         public ReactiveProperty<SerializableDateTime> NextTrainingDate;
         public List<TrainingResult> AllResults;
@@ -57,7 +61,9 @@ namespace Assets.Codebase.Models.Progress.Data
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
             AutoWarmupSwitchEnabled = new ReactiveProperty<bool>(true);
             AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(true);
-            NextGlobalTarget = new ReactiveProperty<int>(100);
+            NextPushupTargetId = new ReactiveProperty<int>(0);
+            NextCaloriesTargetId = new ReactiveProperty<int>(0);
+            NextTrainingCountTargetId = new ReactiveProperty<int>(0);
             WarmupExerciseTime = new ReactiveProperty<float>(30f);
             StretchingExerciseTime = new ReactiveProperty<float>(30f);
 
@@ -84,6 +90,9 @@ namespace Assets.Codebase.Models.Progress.Data
             AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(progress.AutoStretchingSwitchEnabled);
             WarmupExerciseTime = new ReactiveProperty<float>(progress.WarmupExerciseTime);
             StretchingExerciseTime = new ReactiveProperty<float>(progress.StretchingExerciseTime);
+            NextPushupTargetId = new ReactiveProperty<int>(progress.NextPushupTargetId);
+            NextCaloriesTargetId = new ReactiveProperty<int>(progress.NextCaloriesTargetId);
+            NextTrainingCountTargetId = new ReactiveProperty<int>(progress.NextTrainingCountTargetId);
 
             AllResults = progress.AllResults;
         }
@@ -101,14 +110,8 @@ namespace Assets.Codebase.Models.Progress.Data
 
             TotalPushups.Value += pushups;
 
-            if (TotalPushups.Value >= NextGlobalTarget.Value)
-            {
-                // Add description for targets
-
-                NextGlobalTarget.Value += 100;
-
-                // + Unlock achievement
-            }
+            CheckPushupTargets();
+            CheckCaloriesTargets();
         }
 
         /// <summary>
@@ -118,6 +121,7 @@ namespace Assets.Codebase.Models.Progress.Data
         public void AddTrainingResult(TrainingResult result)
         {
             AllResults.Add(result);
+            CheckTrainingCountTargets();
         }
 
         /// <summary>
@@ -131,7 +135,7 @@ namespace Assets.Codebase.Models.Progress.Data
             IsTrainingPlanSelected.Value = false;
             CurrentTrainingDayId.Value = 0;
             IsOnTestingStage.Value = false;
-            NextGlobalTarget.Value = 100;
+            NextPushupTargetId.Value = 100;
         }
 
         /// <summary>
@@ -168,6 +172,41 @@ namespace Assets.Codebase.Models.Progress.Data
         {
             var currentTime = TimeProvider.GetServerTime();
             NextTrainingDate.Value = new SerializableDateTime(currentTime.AddHours(CurrentTrainingPlan.Value.TrainingDays[CurrentTrainingDayId.Value].RestingTime));
+        }
+        private void CheckPushupTargets()
+        {
+            if (NextPushupTargetId.Value >= Constants.PushupTargets.Count) { return; }
+
+            if (TotalPushups.Value >= Constants.PushupTargets[NextPushupTargetId.Value])
+            {
+                ServiceLocator.Container.Single<IAchievementsService>().UnlockPushupsAchievement(NextPushupTargetId.Value);
+
+                NextPushupTargetId.Value += 1;
+            }
+        }
+        private void CheckCaloriesTargets()
+        {
+            if (NextCaloriesTargetId.Value >= Constants.CaloriesTargets.Count) { return; }
+
+            var calories = TotalPushups.Value * Constants.CaloriesPerPushup;
+
+            if (calories >= Constants.CaloriesTargets[NextCaloriesTargetId.Value])
+            {
+                ServiceLocator.Container.Single<IAchievementsService>().UnlockCaloriesAchievement(NextCaloriesTargetId.Value);
+
+                NextCaloriesTargetId.Value += 1;
+            }
+        }
+        private void CheckTrainingCountTargets()
+        {
+            if (NextTrainingCountTargetId.Value >= Constants.TrainingCountTargets.Count) { return; }
+
+            if (AllResults.Count >= Constants.TrainingCountTargets[NextTrainingCountTargetId.Value])
+            {
+                ServiceLocator.Container.Single<IAchievementsService>().UnlockTrainingCountAchievement(NextTrainingCountTargetId.Value);
+
+                NextTrainingCountTargetId.Value += 1;
+            }
         }
     }
 }
