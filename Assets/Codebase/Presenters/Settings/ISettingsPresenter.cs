@@ -15,5 +15,7 @@ namespace Assets.Codebase.Presenters.Settings
         public void SetAutoStretchingSwitch(bool isEnabled);
         public void DeleteAllTrainingData();
         public void ValidateTimeInput(string inputText, InputField inputField);
+        public void SetWarmupExerciseTime(string formattedTime);
+        public void SetStretchingExerciseTime(string formattedTime);
     }
 }

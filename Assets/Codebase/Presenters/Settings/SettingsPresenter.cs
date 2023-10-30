@@ -1,4 +1,5 @@
 ﻿using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using UnityEngine.UI;
 
@@ -45,6 +46,16 @@ namespace Assets.Codebase.Presenters.Settings
         public void SetAutoWarmupSwitch(bool isEnabled)
         {
             ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value = isEnabled;
+        }
+
+        public void SetWarmupExerciseTime(string formattedTime)
+        {
+            ProgressModel.SessionProgress.WarmupExerciseTime.Value = TimeConverter.ParseStringToFloatTime(formattedTime);
+        }
+
+        public void SetStretchingExerciseTime(string formattedTime)
+        {
+            ProgressModel.SessionProgress.StretchingExerciseTime.Value = TimeConverter.ParseStringToFloatTime(formattedTime);
         }
 
         public void DeleteAllTrainingData()

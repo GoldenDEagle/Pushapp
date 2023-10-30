@@ -49,8 +49,8 @@ namespace Assets.Codebase.Views.Settings
             _autoWarmupSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoWarmupSwitch(value)).AddTo(CompositeDisposable);
             _autoStretchingSwitchToggle.OnValueChangedAsObservable().Subscribe(value => _presenter.SetAutoStretchingSwitch(value)).AddTo(CompositeDisposable);
             _deleteDataButton.OnClickAsObservable().Subscribe(_ => _presenter.DeleteAllTrainingData()).AddTo(CompositeDisposable);
-            _warmupTimeInput.OnEndEditAsObservable().Subscribe(value => _presenter.ValidateTimeInput(value, _warmupTimeInput)).AddTo(CompositeDisposable);
-            _stretchingTimeInput.OnEndEditAsObservable().Subscribe(value => _presenter.ValidateTimeInput(value, _stretchingTimeInput)).AddTo(CompositeDisposable);
+            _warmupTimeInput.OnEndEditAsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _warmupTimeInput); _presenter.SetWarmupExerciseTime(_warmupTimeInput.text); }).AddTo(CompositeDisposable);
+            _stretchingTimeInput.OnEndEditAsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _stretchingTimeInput); _presenter.SetStretchingExerciseTime(_stretchingTimeInput.text); }).AddTo(CompositeDisposable);
         }
 
 
