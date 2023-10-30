@@ -19,13 +19,15 @@ namespace Assets.Codebase.Presenters.PlanSelection
         public PlanSelectionPresenter()
         {
             ViewId = ViewId.PlanSelectionView;
-            _trainingPlans = GameplayModel.TrainingPlansDescriptions.TrainingPlans;
+
             OnPlanButtonAdded = new Subject<TrainingPlanButton>();
         }
 
         public override void CreateView()
         {
             base.CreateView();
+
+            _trainingPlans = GameplayModel.TrainingPlansDescriptions.TrainingPlans;
 
             SummonPlanButtons();
         }

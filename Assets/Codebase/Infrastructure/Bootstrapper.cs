@@ -21,7 +21,7 @@ namespace Assets.Codebase.Infrastructure
             GameStructure structure = new GameStructure(_uiRoot, _launchParams);
 
             // Start the game
-            ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId.ExampleView);
+            //ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId.ExampleView);
 
             // Need views to test
             //StartGame();

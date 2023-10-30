@@ -6,11 +6,20 @@ using Assets.Codebase.Infrastructure.ServicesManagment.Gameplay;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.PresenterManagement;
 using Assets.Codebase.Infrastructure.ServicesManagment.Progress;
+using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation;
 using Assets.Codebase.Models.Gameplay;
 using Assets.Codebase.Models.Progress;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Presenters.Example;
+using Assets.Codebase.Presenters.MainMenu;
+using Assets.Codebase.Presenters.PlanPreview;
+using Assets.Codebase.Presenters.PlanSelection;
+using Assets.Codebase.Presenters.Settings;
+using Assets.Codebase.Presenters.Statistics;
+using Assets.Codebase.Presenters.Training;
+using Assets.Codebase.Presenters.TrainingResults;
+using Assets.Codebase.Presenters.Warmup;
 using GamePush;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,8 +77,18 @@ namespace Assets.Codebase.Infrastructure.Initialization
         private void CreatePresenters()
         {
             // Create presenter for each view
-            _presenters = new List<BasePresenter>();
-            _presenters.Add(new ExamplePresenter());
+            _presenters = new List<BasePresenter>
+            {
+                new ExamplePresenter(),
+                new MainMenuPresenter(),
+                new PlanSelectionPresenter(),
+                new PlanPreviewPresenter(),
+                new WarmUpPresenter(),
+                new TrainingPresenter(),
+                new TrainingResultsPresenter(),
+                new StatsPresenter(),
+                new SettingsPresenter()
+            };
 
             foreach (var presenter in _presenters)
             {
@@ -93,6 +112,7 @@ namespace Assets.Codebase.Infrastructure.Initialization
             services.RegisterSingle<ILocalizationService>(new GoogleSheetLocalizationService());
             services.RegisterSingle<IPresentersService>(new PresentersService(_presenters));
             services.RegisterSingle<IProgressService>(new ProgressService(_progressModel));
+            services.RegisterSingle<IUiFactory>(new UiFactory(services.Single<IAssetProvider>()));
         }
 
 

@@ -2,6 +2,7 @@
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Views.PlanPreview;
 using Assets.Codebase.Views.PlanSelection;
+using Assets.Codebase.Views.Statistics.Graph;
 
 namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
 {
@@ -9,8 +10,20 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
     {
         private const string TrainingPlanButtonPath = "UIelements/TrainingPlanButton";
         private const string TrainingDayWidgetPath = "UIelements/TrainingDayWidget";
+        private const string GraphCirclePath = "UIelements/CircleOnGraph";
 
         private IAssetProvider _assetProvider;
+
+        public UiFactory(IAssetProvider assetProvider)
+        {
+            _assetProvider = assetProvider;
+        }
+
+        public GraphNode CreateCircleOnGraph()
+        {
+            var element = _assetProvider.Instantiate(GraphCirclePath).GetComponent<GraphNode>();
+            return element;
+        }
 
         public TrainingDayWidget CreateTrainingDayWidget(TrainingDay trainingDay)
         {
