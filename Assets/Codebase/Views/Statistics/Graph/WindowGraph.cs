@@ -24,8 +24,8 @@ namespace Assets.Codebase.Views.Statistics.Graph
         private void Start()
         {
             DateTime today = DateTime.Now;
-            DateTime tomorrow = DateTime.Now.AddDays(1);
-            DateTime dayAfterTomorrow = DateTime.Now.AddDays(2);
+            DateTime tomorrow = DateTime.Now.AddDays(2);
+            DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
 
             List<TrainingResult> testResults = new List<TrainingResult>()
             {
@@ -69,6 +69,11 @@ namespace Assets.Codebase.Views.Statistics.Graph
                 }
 
                 previousNode = newNode;
+
+                var label = _uiFactory.CreateGraphTextLabel();
+                label.RectTransform.SetParent(_graphContainer);
+                label.RectTransform.anchoredPosition = new Vector2(xPosition, -30f);
+                label.SetText(results[i].Date.DateTime.ToShortDateString());
             }
         }
 
