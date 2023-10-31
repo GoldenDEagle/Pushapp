@@ -112,7 +112,7 @@ namespace Assets.Codebase.Infrastructure.Initialization
             services.RegisterSingle<ILocalizationService>(new GoogleSheetLocalizationService());
             services.RegisterSingle<IPresentersService>(new PresentersService(_presenters));
             services.RegisterSingle<IProgressService>(new ProgressService(_progressModel));
-            services.RegisterSingle<IUiFactory>(new UiFactory(services.Single<IAssetProvider>()));
+            services.RegisterSingle<IUiFactory>(new UiFactory(_uiRoot, services.Single<IAssetProvider>()));
         }
 
 

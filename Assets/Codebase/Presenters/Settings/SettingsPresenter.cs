@@ -1,12 +1,20 @@
-﻿using Assets.Codebase.Presenters.Base;
+﻿using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
+using Assets.Codebase.Infrastructure.ServicesManagment.UI;
+using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
+using Assets.Codebase.Views.Common;
+using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine.UI;
 
 namespace Assets.Codebase.Presenters.Settings
 {
     public class SettingsPresenter : BasePresenter, ISettingsPresenter
     {
+        private const string DeleteProgressWarningKey = "Вы собираетесь удалить весь прогресс. Вы уверены?";
+
         public SettingsPresenter()
         {
             ViewId = ViewId.SettingsView;
@@ -61,9 +69,12 @@ namespace Assets.Codebase.Presenters.Settings
         public void DeleteAllTrainingData()
         {
             // Show warning
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+            var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
+            warningWindow.SetWarningText(localizationService.LocalizeTextByKey(DeleteProgressWarningKey));
+            warningWindow.OnWindowClosed.Subscribe(value => OnDeleteProgressWarningClosed(value)).AddTo(CompositeDisposable);
 
             // If accepted -> delete
-            ProgressModel.SessionProgress.ClearResults();
         }
 
         public void ValidateTimeInput(string inputText, InputField inputField)
@@ -93,5 +104,13 @@ namespace Assets.Codebase.Presenters.Settings
             inputField.text = cleanedInput;
         }
 
+
+        private void OnDeleteProgressWarningClosed(bool wasAccepted)
+        {
+            if (wasAccepted)
+            {
+                ProgressModel.SessionProgress.ClearResults();
+            }
+        }
     }
 }

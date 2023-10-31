@@ -1,8 +1,11 @@
 ﻿using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using Assets.Codebase.Views.Common;
 using Assets.Codebase.Views.PlanPreview;
 using Assets.Codebase.Views.PlanSelection;
 using Assets.Codebase.Views.Statistics.Graph;
+using Cysharp.Threading.Tasks.Triggers;
+using UnityEngine;
 
 namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
 {
@@ -11,12 +14,16 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         private const string TrainingPlanButtonPath = "UIelements/TrainingPlanButton";
         private const string TrainingDayWidgetPath = "UIelements/TrainingDayWidget";
         private const string GraphCirclePath = "UIelements/CircleOnGraph";
+        private const string WarningWindowPath = "UIelements/WarningWindow";
 
         private IAssetProvider _assetProvider;
 
-        public UiFactory(IAssetProvider assetProvider)
+        private RectTransform _uiRoot;
+
+        public UiFactory(RectTransform uiRoot, IAssetProvider assetProvider)
         {
             _assetProvider = assetProvider;
+            _uiRoot = uiRoot;
         }
 
         public GraphNode CreateNodeOnGraph()
@@ -36,6 +43,13 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         {
             var element = _assetProvider.Instantiate(TrainingPlanButtonPath).GetComponent<TrainingPlanButton>();
             element.Init(plan);
+            return element;
+        }
+
+        public WarningWindow CreateWarningWindow()
+        {
+            var element = _assetProvider.Instantiate(WarningWindowPath).GetComponent<WarningWindow>();
+            element.transform.SetParent(_uiRoot, false);
             return element;
         }
     }
