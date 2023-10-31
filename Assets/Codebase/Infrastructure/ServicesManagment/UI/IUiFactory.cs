@@ -12,5 +12,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         public TrainingDayWidget CreateTrainingDayWidget(TrainingDay trainingDay);
         public GraphNode CreateNodeOnGraph();
         public WarningWindow CreateWarningWindow();
+        public GraphTextLabel CreateGraphTextLabel();
     }
 }

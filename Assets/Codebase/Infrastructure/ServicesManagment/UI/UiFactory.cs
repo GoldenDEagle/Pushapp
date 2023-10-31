@@ -15,6 +15,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         private const string TrainingDayWidgetPath = "UIelements/TrainingDayWidget";
         private const string GraphCirclePath = "UIelements/CircleOnGraph";
         private const string WarningWindowPath = "UIelements/WarningWindow";
+        private const string GraphTextLabelPath = "UIelements/GraphTextLabel";
 
         private IAssetProvider _assetProvider;
 
@@ -50,6 +51,12 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         {
             var element = _assetProvider.Instantiate(WarningWindowPath).GetComponent<WarningWindow>();
             element.transform.SetParent(_uiRoot, false);
+            return element;
+        }
+
+        public GraphTextLabel CreateGraphTextLabel()
+        {
+            var element = _assetProvider.Instantiate(GraphTextLabelPath).GetComponent<GraphTextLabel>();
             return element;
         }
     }
