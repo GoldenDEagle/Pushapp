@@ -1,4 +1,5 @@
 ﻿using Assets.Codebase.Data.Statistics;
+using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
@@ -14,12 +15,23 @@ namespace Assets.Codebase.Presenters.Statistics
     {
         public ReactiveProperty<string> CurrentLevelString { get; private set; }
         public ReactiveProperty<string> TotalPushupsString { get; private set; }
+        public Subject<PeriodWithTrainingResults> OnShowGraph { get; private set; }
+
+        private DateTime _graphStartingDate;
+        private DateTime _graphEndingDate;
+        private TimeSpan _graphSwitchStep;
+        private int _graphStepInDays = 14;
 
         public StatsPresenter()
         {
             ViewId = ViewId.StatsView;
 
+            _graphSwitchStep = TimeSpan.FromDays(_graphStepInDays);
             CurrentLevelString = new ReactiveProperty<string>();
+            TotalPushupsString = new ReactiveProperty<string>();
+            OnShowGraph = new Subject<PeriodWithTrainingResults>();
+            _graphEndingDate = DateTime.Now;
+            _graphStartingDate = DateTime.Now.Subtract(_graphSwitchStep);
         }
 
         public override void CreateView()
@@ -28,6 +40,7 @@ namespace Assets.Codebase.Presenters.Statistics
 
             CurrentLevelString.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
             TotalPushupsString.Value = NumberConverter.Convert(ProgressModel.SessionProgress.TotalPushups.Value);
+            UpdateGraph();
         }
 
         public void GoToMain()
@@ -52,6 +65,27 @@ namespace Assets.Codebase.Presenters.Statistics
             string caloriesString = NumberConverter.Convert(totalPushups * Constants.CaloriesPerPushup);
 
             return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString);
+        }
+
+        public void GoToNextResultsSegment()
+        {
+            _graphStartingDate.AddDays(_graphStepInDays);
+            _graphEndingDate.AddDays(_graphStepInDays);
+            UpdateGraph();
+        }
+
+        public void GoToPreviousResultsSegment()
+        {
+            _graphStartingDate.Subtract(_graphSwitchStep);
+            _graphEndingDate.Subtract(_graphSwitchStep);
+            UpdateGraph();
+        }
+
+
+        private void UpdateGraph()
+        {
+            var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+            OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
         }
     }
 }

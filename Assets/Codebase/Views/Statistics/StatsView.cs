@@ -1,16 +1,22 @@
-﻿using Assets.Codebase.Presenter.Base;
+﻿using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Statistics;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
+using Assets.Codebase.Views.Statistics.Graph;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Views.Statistics
 {
     public class StatsView : BaseView
     {
         [SerializeField] private BottomPanel _bottomPanel;
+        [SerializeField] private WindowGraph _statsGraph;
+        [SerializeField] private Button _nextGraphButton;
+        [SerializeField] private Button _previousGraphButton;
         [SerializeField] private List<StatsWidget> _statsWidgets;
 
         private IStatsPresenter _presenter;
@@ -28,6 +34,14 @@ namespace Assets.Codebase.Views.Statistics
         {
             _bottomPanel.MainMenuButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToMain()).AddTo(CompositeDisposable);
             _bottomPanel.SettingsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToSettings()).AddTo(CompositeDisposable);
+            _nextGraphButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToNextResultsSegment()).AddTo(CompositeDisposable);
+            _previousGraphButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToPreviousResultsSegment()).AddTo(CompositeDisposable);
+        }
+
+        protected override void SubscribeToPresenterEvents()
+        {
+            base.SubscribeToPresenterEvents();
+            _presenter.OnShowGraph.Subscribe(value => ShowStatsGraph(value)).AddTo(CompositeDisposable);
         }
 
 
@@ -40,6 +54,14 @@ namespace Assets.Codebase.Views.Statistics
             {
                 widget.SetData(_presenter.GetStatsForPeriod(widget.Period));
             }
+        }
+        /// <summary>
+        /// Show stats graph
+        /// </summary>
+        /// <param name="resultsPeriod"></param>
+        private void ShowStatsGraph(PeriodWithTrainingResults resultsPeriod)
+        {
+            _statsGraph.ShowGraph(resultsPeriod);
         }
     }
 }

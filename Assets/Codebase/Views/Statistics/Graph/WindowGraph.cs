@@ -2,8 +2,6 @@
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Utils.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,21 +19,21 @@ namespace Assets.Codebase.Views.Statistics.Graph
             _uiFactory = ServiceLocator.Container.Single<IUiFactory>();
         }
 
-        private void Start()
-        {
-            DateTime today = DateTime.Now;
-            DateTime tomorrow = DateTime.Now.AddDays(2);
-            DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
+        //private void Start()
+        //{
+        //    DateTime today = DateTime.Now;
+        //    DateTime tomorrow = DateTime.Now.AddDays(2);
+        //    DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
 
-            List<TrainingResult> testResults = new List<TrainingResult>()
-            {
-                new TrainingResult(new List<int>() {2, 3, 2 }, 7, today),
-                new TrainingResult(new List<int>() { 5, 7, 4 }, 16, tomorrow),
-                new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayAfterTomorrow)
-            };
+        //    List<TrainingResult> testResults = new List<TrainingResult>()
+        //    {
+        //        new TrainingResult(new List<int>() {2, 3, 2 }, 7, today),
+        //        new TrainingResult(new List<int>() { 5, 7, 4 }, 16, tomorrow),
+        //        new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayAfterTomorrow)
+        //    };
 
-            ShowGraph(testResults);
-        }
+        //    ShowGraph(new PeriodWithTrainingResults(testResults));
+        //}
 
         private GraphNode CreateNode(Vector2 anchoredPosition)
         {
@@ -50,8 +48,9 @@ namespace Assets.Codebase.Views.Statistics.Graph
             return node;
         }
 
-        public void ShowGraph(List<TrainingResult> results)
+        public void ShowGraph(PeriodWithTrainingResults resultsForPeriod)
         {
+            var results = resultsForPeriod.List;
             float graphHeight = _graphContainer.sizeDelta.y;
             float yMaximum = results.Max(x => x.TotalPushups);
             float xStep = 50f;
