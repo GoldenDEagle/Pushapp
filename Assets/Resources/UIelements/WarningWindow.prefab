@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 7311465089783386577}
   - component: {fileID: 1493453414079832565}
   m_Layer: 5
-  m_Name: Delete progress window
+  m_Name: WarningWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -2691,7 +2691,7 @@ GameObject:
   - component: {fileID: 5884345742777092359}
   - component: {fileID: 5769035529439791340}
   m_Layer: 5
-  m_Name: Approaches page
+  m_Name: TrainingView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

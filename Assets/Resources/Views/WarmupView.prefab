@@ -3500,7 +3500,7 @@ GameObject:
   - component: {fileID: 3730341964566463400}
   - component: {fileID: 6136521669567664945}
   m_Layer: 5
-  m_Name: 'Relax Page '
+  m_Name: WarmupView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

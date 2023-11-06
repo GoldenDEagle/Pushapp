@@ -19,7 +19,15 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
         private RectTransform _uiRoot;
 
         // Paths to all view prefabs
-        private const string ExampleViewPathPath = "Views/ExampleView";
+        private const string ExampleViewPath = "Views/ExampleView";
+        private const string LevelSelectionViewPath = "Views/LevelSelectionView";
+        private const string LevelPreviewViewPath = "Views/?????";
+        private const string MainViewPath = "Views/MainView";
+        private const string WarmupViewPath = "Views/WarmupView";
+        private const string TrainingViewPath = "Views/TrainingView";
+        private const string ResultsViewPath = "Views/ResultsView";
+        private const string StatsViewPath = "Views/StatsView";
+        private const string SettingsViewPath = "Views/SettingsView";
 
         private IAssetProvider _assets;
 
@@ -48,7 +56,31 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
                     new System.ArgumentException(nameof(viewId));
                     break;
                 case ViewId.ExampleView:
-                    path = ExampleViewPathPath;
+                    path = ExampleViewPath;
+                    break;
+                case ViewId.PlanSelectionView:
+                    path = LevelSelectionViewPath;
+                    break;
+                case ViewId.PlanPreviewView:
+                    path = LevelPreviewViewPath;
+                    break;
+                case ViewId.MainView:
+                    path = MainViewPath;
+                    break;
+                case ViewId.TrainingView:
+                    path = TrainingViewPath;
+                    break;
+                case ViewId.StatsView:
+                    path = StatsViewPath;
+                    break;
+                case ViewId.SettingsView:
+                    path = SettingsViewPath;
+                    break;
+                case ViewId.WarmupView:
+                    path = WarmupViewPath;
+                    break;
+                case ViewId.TrainingResultView:
+                    path = ResultsViewPath;
                     break;
                 default:
                     throw new System.ArgumentException(nameof(viewId));
