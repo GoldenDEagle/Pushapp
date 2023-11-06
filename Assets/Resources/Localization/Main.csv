@@ -1,1 +1,10 @@
 Key,English,Russian
+mainView_header,100 Push-Ups,100 Отжиманий
+achievements_button,Achievements,Награды:
+nextTraining_text,Next Training:,Следующая тренировка
+trainings_withCount,Trainings:,Тренировки:
+status_withName,Status:,Статус:
+level_withNumber,Level:,Уровень:
+total_count,Total:,Всего:
+target_count,Target:,Цель:
+changePlan_button,Change,Изменить
