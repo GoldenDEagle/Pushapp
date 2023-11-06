@@ -10,6 +10,7 @@ namespace Assets.Codebase.Views.PlanSelection
     public class PlanSelectionView : BaseView
     {
         [SerializeField] private Button _backButton;
+        [SerializeField] private LayoutGroup _levelButtonsLayout;
 
         private IPlanSelectionPresenter _presenter;
 
@@ -39,7 +40,7 @@ namespace Assets.Codebase.Views.PlanSelection
         private void AddPlanButton(TrainingPlanButton planButton)
         {
             // parent under layout group
-            planButton.transform.SetParent(transform, false);
+            planButton.transform.SetParent(_levelButtonsLayout.transform, false);
             planButton.OnPlanSelected.Subscribe(plan => _presenter.ViewPlan(plan)).AddTo(CompositeDisposable);
         }
     }

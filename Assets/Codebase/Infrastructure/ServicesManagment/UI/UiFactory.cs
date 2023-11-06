@@ -11,7 +11,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
 {
     public class UiFactory : IUiFactory
     {
-        private const string TrainingPlanButtonPath = "UIelements/TrainingPlanButton";
+        private const string TrainingPlanButtonPath = "UIelements/TrainingLevelButton";
         private const string TrainingDayWidgetPath = "UIelements/TrainingDayWidget";
         private const string GraphCirclePath = "UIelements/CircleOnGraph";
         private const string WarningWindowPath = "UIelements/WarningWindow";

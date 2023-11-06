@@ -24,7 +24,7 @@ namespace Assets.Codebase.Infrastructure
             //ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId.ExampleView);
 
             // Need views to test
-            //StartGame();
+            StartGame();
         }
 
         private void StartGame()

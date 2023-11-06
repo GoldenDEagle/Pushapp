@@ -52,7 +52,7 @@ namespace Assets.Codebase.Models.Progress.Data
             SampleValue = new ReactiveProperty<int>(0);
             SoundVolume = new ReactiveProperty<float>(0.5f);
             IsTrainingPlanSelected = new ReactiveProperty<bool>(false);
-            CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>();
+            CurrentTrainingPlan = new ReactiveProperty<TrainingPlan>(new TrainingPlan(0));
             CurrentTrainingDayId = new ReactiveProperty<int>();
             TotalPushups = new ReactiveProperty<int>(0);
             IsOnTestingStage = new ReactiveProperty<bool>(false);

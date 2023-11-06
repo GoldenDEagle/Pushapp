@@ -14,5 +14,12 @@ namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
         public int Level => _level;
         public List<TrainingDay> TrainingDays => _trainingDays;
         public TrainingDay TestDay => _testDay;
+
+        public TrainingPlan(int level)
+        {
+            _level = level;
+            _trainingDays = new List<TrainingDay>();
+            _testDay = new TrainingDay();
+        }
     }
 }
