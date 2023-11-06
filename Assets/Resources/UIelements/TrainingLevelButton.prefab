@@ -560,6 +560,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectButton: {fileID: 1740668195592603990}
+  _levelId: {fileID: 7759969978086916993}
+  _levelRequirement: {fileID: 7982551640908346686}
 --- !u!1 &8118928784050954556
 GameObject:
   m_ObjectHideFlags: 0

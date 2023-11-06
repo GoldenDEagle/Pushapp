@@ -8,12 +8,14 @@ namespace Assets.Codebase.Models.Progress.Data.TrainingPlans
     public class TrainingPlan
     {
         [SerializeField] private int _level;
+        [SerializeField] private string _levelRequirement;
         [SerializeField] private List<TrainingDay> _trainingDays;
         [SerializeField] private TrainingDay _testDay;
 
         public int Level => _level;
         public List<TrainingDay> TrainingDays => _trainingDays;
         public TrainingDay TestDay => _testDay;
+        public string LevelRequirement => _levelRequirement;
 
         public TrainingPlan(int level)
         {

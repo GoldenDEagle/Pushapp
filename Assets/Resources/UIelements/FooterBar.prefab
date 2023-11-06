@@ -731,6 +731,7 @@ GameObject:
   - component: {fileID: 1039021131175667635}
   - component: {fileID: 5236229483671902379}
   - component: {fileID: 6074962697980103526}
+  - component: {fileID: 544388806527228239}
   m_Layer: 5
   m_Name: FooterBar
   m_TagString: Untagged
@@ -745,7 +746,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5557351902022558715}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -859,6 +860,21 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &544388806527228239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557351902022558715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc708054321d4d24eaa51707470be240, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainMenuButton: {fileID: 1152947658387034373}
+  _statisticsButton: {fileID: 6034467470348900788}
+  _settingsButton: {fileID: 3937397252107509414}
 --- !u!1 &5725085705773538547
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63817d93022759543b57e795c78efe11, type: 3}
   m_Name: LocalizationSettings
   m_EditorClassIdentifier: 
-  TableId: 
-  Sheets: []
+  TableId: 1UQGGyJy52CFKXFwIYGmM_aCyBKq4QxZtud7MBQBu3wg
+  Sheets:
+  - Name: Base
+    Id: 0
+    TextAsset: {fileID: 4900000, guid: 379ec4b44807dd64abc0c0f631ed7bff, type: 3}
+  - Name: Main
+    Id: 291030746
+    TextAsset: {fileID: 4900000, guid: 4e44a5ca749d6ca4583ca767f865419a, type: 3}
+  - Name: LevelSelection
+    Id: 1474145556
+    TextAsset: {fileID: 4900000, guid: 179c5b8b32a4f9e49b537826668fde99, type: 3}
   SaveFolder: {fileID: 102900000, guid: 506cefe02294a814bb32de64cede1267, type: 3}

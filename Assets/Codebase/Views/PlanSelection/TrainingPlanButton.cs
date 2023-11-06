@@ -1,4 +1,8 @@
-﻿using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+﻿using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
+using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using Assets.Codebase.Utils.Values;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,6 +15,8 @@ namespace Assets.Codebase.Views.PlanSelection
     public class TrainingPlanButton : MonoBehaviour
     {
         [SerializeField] private Button _selectButton;
+        [SerializeField] private TMP_Text _levelId;
+        [SerializeField] private TMP_Text _levelRequirement;
 
         private TrainingPlan _plan;
 
@@ -28,7 +34,11 @@ namespace Assets.Codebase.Views.PlanSelection
 
         public void Init(TrainingPlan plan)
         {
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+
             _plan = plan;
+            _levelId.text = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + plan.Level.ToString();
+            _levelRequirement.text = localizationService.LocalizeTextByKey(plan.LevelRequirement);
         }
 
         private void SelectPlan()

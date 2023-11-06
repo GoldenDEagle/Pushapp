@@ -13,15 +13,27 @@ MonoBehaviour:
   m_Name: TrainingPlans
   m_EditorClassIdentifier: 
   _trainingPlans:
-  - _level: 0
+  - _level: 1
+    _levelRequirement: requirement_1
     _trainingDays:
-    - _pushups: 
-      _restingTime: 0
+    - _pushups: 01000000020000000100000002000000
+      _restingTime: 48
+    - _pushups: 01000000020000000100000002000000
+      _restingTime: 48
+    - _pushups: 01000000020000000100000002000000
+      _restingTime: 48
     _testDay:
-      _pushups: 00000000
-      _restingTime: 0
-  - _level: 0
-    _trainingDays: []
+      _pushups: 02000000
+      _restingTime: 48
+  - _level: 2
+    _levelRequirement: requirement_2
+    _trainingDays:
+    - _pushups: 02000000030000000300000004000000
+      _restingTime: 48
+    - _pushups: 03000000030000000400000005000000
+      _restingTime: 48
+    - _pushups: 04000000050000000400000005000000
+      _restingTime: 48
     _testDay:
-      _pushups: 
-      _restingTime: 0
+      _pushups: 05000000
+      _restingTime: 48

@@ -1,22 +1,18 @@
-﻿using Assets.Codebase.Presenters.Base;
-using Assets.Codebase.Views.Base;
-using Assets.Codebase.Data.WarmUp;
-using UniRx;
+﻿using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
-using Assets.Codebase.Utils.Helpers;
-using Unity.VisualScripting;
-using Assets.Codebase.Utils.Values;
-using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
+using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.Extensions;
+using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Utils.Values;
+using Assets.Codebase.Views.Base;
+using UniRx;
 
 namespace Assets.Codebase.Presenters.MainMenu
 {
     public class MainMenuPresenter : BasePresenter, IMainMenuPresenter
     {
-        private const string TestTrainingNameKey = "trainingName_Test";
-        private const string DayTrainingNameKey = "trainingName_Day";
-
         public ReactiveProperty<string> TotalTrainingsText { get; private set; }
         public ReactiveProperty<string> CurrentLevelText { get; private set; }
         public ReactiveProperty<string> TotalPushupsText { get; private set; }
@@ -102,17 +98,17 @@ namespace Assets.Codebase.Presenters.MainMenu
             TotalPushupsText.Value = NumberConverter.Convert(currentPushups);
             NextPushupsTargetText.Value = NumberConverter.Convert(pushupsTarget);
             PushupsSliderValue.Value = currentPushups / pushupsTarget;
-            NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToString();
-            NextTrainingLevelText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
-            NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value].Pushups.ToPushupsListString();
+            NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
+            NextTrainingLevelText.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+            NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1].Pushups.ToPushupsListString();
 
             if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
             {
-                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(TestTrainingNameKey);
+                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
             }
             else
             {
-                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(DayTrainingNameKey) + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
+                NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + " " + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
             }
         }
     }
