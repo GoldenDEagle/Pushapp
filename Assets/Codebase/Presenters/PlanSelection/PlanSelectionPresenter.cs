@@ -12,6 +12,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
 {
     public class PlanSelectionPresenter : BasePresenter, IPlanSelectionPresenter
     {
+        public ReactiveProperty<bool> IsBackButtonActive { get; private set; }
         public Subject<TrainingPlanButton> OnPlanButtonAdded { get; private set; }
 
         private List<TrainingPlan> _trainingPlans;
@@ -21,6 +22,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
             ViewId = ViewId.PlanSelectionView;
 
             OnPlanButtonAdded = new Subject<TrainingPlanButton>();
+            IsBackButtonActive = new ReactiveProperty<bool>(false);
         }
 
         public override void CreateView()
@@ -30,6 +32,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
             _trainingPlans = GameplayModel.TrainingPlansDescriptions.TrainingPlans;
 
             SummonPlanButtons();
+            IsBackButtonActive.Value = ProgressModel.SessionProgress.IsTrainingPlanSelected.Value;
         }
 
         private void SummonPlanButtons()

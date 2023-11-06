@@ -30,6 +30,7 @@ namespace Assets.Codebase.Views.PlanSelection
         {
             base.SubscribeToPresenterEvents();
             _presenter.OnPlanButtonAdded.Subscribe(_ => AddPlanButton(_)).AddTo(CompositeDisposable);
+            _presenter.IsBackButtonActive.Subscribe(value => SetBackButtonState(value)).AddTo(CompositeDisposable);
         }
 
 
@@ -42,6 +43,10 @@ namespace Assets.Codebase.Views.PlanSelection
             // parent under layout group
             planButton.transform.SetParent(_levelButtonsLayout.transform, false);
             planButton.OnPlanSelected.Subscribe(plan => _presenter.ViewPlan(plan)).AddTo(CompositeDisposable);
+        }
+        private void SetBackButtonState(bool isEnabled)
+        {
+            _backButton.gameObject.SetActive(isEnabled);
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Assets.Codebase.Presenters.PlanSelection
 {
     public interface IPlanSelectionPresenter : IPresenter
     {
+        public ReactiveProperty<bool> IsBackButtonActive { get; }
         public Subject<TrainingPlanButton> OnPlanButtonAdded { get; }
 
         public void ViewPlan(TrainingPlan plan);
