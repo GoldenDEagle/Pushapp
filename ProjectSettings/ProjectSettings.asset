@@ -413,13 +413,23 @@ PlayerSettings:
   openGLRequireES31AEP: 0
   openGLRequireES32: 0
   m_TemplateCustomTags:
+    CHANGE_BAR_COLOR: 
+    CONFIGURE_SHADOWS: 
+    CONNECT_WEB_AUDIO_PLUGIN_FILES: 
+    ENABLE_CONSOLE: 
     METRIKA_COUNTER_ID: 
     OVERLAY_BACKGROUND_COLOR: 
     PROGRESS_BAR_BACKGROUND_COLOR: 
     PROGRESS_BAR_BORDER_COLOR: 
     PROGRESS_BAR_FILL_COLOR: 
     PROJECT_ID: 
-    SHOW_PRELOADER_AD: 
+    SET_ASPECT_RATIO_ON_DESKTOP: 9/16
+    SET_ASPECT_RATIO_ON_MOBILE: 9/16
+    SET_WINDOW_HEIGHT_ON_DESKTOP: 2000
+    SET_WINDOW_HEIGHT_ON_MOBILE: 500
+    SET_WINDOW_WIDTH_ON_DESKTOP: 2000
+    SET_WINDOW_WIDTH_ON_MOBILE: 1
+    SHOW_PRELOADER_AD: true
     TOKEN: 
   mobileMTRendering:
     Android: 1
@@ -676,7 +686,7 @@ PlayerSettings:
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
-  webGLTemplate: PROJECT:GamePush
+  webGLTemplate: PROJECT:ATP_GP1.1.0
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 0

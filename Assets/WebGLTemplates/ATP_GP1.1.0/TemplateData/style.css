@@ -6,27 +6,28 @@ html {
     box-sizing: inherit;
 }
 
-html, body {
-    height: 100%;
-}
-
 canvas {
     display: block;
 }
 
-body {
-    margin: 0;
-}
-
 #unity-container {
+    position: fixed;
     width: 100%;
     height: 100%;
 }
 
 #unity-canvas {
+    position: fixed;
     width: 100%;
     height: 100%;
     background: #151515;
+
+    #if CONFIGURE_SHADOWS && CONFIGURE_SHADOWS !== "-" && CONFIGURE_SHADOWS !== " "
+    /* Добавляем тени по бокам */
+    -webkit-box-shadow: {{{ CONFIGURE_SHADOWS }}}
+    -moz-box-shadow: {{{ CONFIGURE_SHADOWS }}}
+    box-shadow: {{{ CONFIGURE_SHADOWS }}}
+    #endif
 }
 
 #loading-cover {
