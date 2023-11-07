@@ -29,6 +29,8 @@ namespace Assets.Codebase.Presenters.Base
         // Fire this to close view.
         public event Action OnCloseView;
 
+        private bool _isViewActive = false;
+
         /// <summary>
         /// Creates binding to models.
         /// </summary>
@@ -53,6 +55,9 @@ namespace Assets.Codebase.Presenters.Base
 
         public void CloseView()
         {
+            if (!_isViewActive) return;
+
+            _isViewActive = false;
             OnCloseView?.Invoke();
         }
 
@@ -70,6 +75,7 @@ namespace Assets.Codebase.Presenters.Base
         /// </summary>
         public virtual void CreateView()
         {
+            _isViewActive = true;
             var view = ServiceLocator.Container.Single<IViewCreatorService>().CreateView(ViewId);
             view.Init(this);
         }
