@@ -17,7 +17,7 @@ namespace Assets.Codebase.Models.Gameplay
         /// <summary>
         /// Currently active view
         /// </summary>
-        public ReactiveProperty<ViewId> ActiveView { get; }
+        public ReactiveProperty<ViewId> ActiveViewId { get; }
         /// <summary>
         /// Plan opened in preview mode
         /// </summary>
@@ -34,6 +34,10 @@ namespace Assets.Codebase.Models.Gameplay
         /// Descriptions of training plans (loaded from asset base)
         /// </summary>
         public TrainingPlansDescriptions TrainingPlansDescriptions { get; }
+        /// <summary>
+        /// Called when target view is closed
+        /// </summary>
+        public Subject<ViewId> OnViewClosed { get; }
 
 
         public void ChangeGameState(GameState state);

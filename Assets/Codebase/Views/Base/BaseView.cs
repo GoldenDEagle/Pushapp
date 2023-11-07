@@ -31,7 +31,6 @@ namespace Assets.Codebase.Views.Base
         protected virtual void OnDisable() 
         {
             CompositeDisposable.Dispose();
-            Presenter.OnCloseView -= CloseView;
         }
 
         /// <summary>
@@ -45,7 +44,7 @@ namespace Assets.Codebase.Views.Base
         protected virtual void SubscribeToPresenterEvents()
         {
             // List all common presenter functions here:
-            Presenter.OnCloseView += CloseView;
+            Presenter.OnCloseView.Subscribe(_ => CloseView()).AddTo(CompositeDisposable);
         }
 
         /// <summary>

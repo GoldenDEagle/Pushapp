@@ -20,18 +20,20 @@ namespace Assets.Codebase.Models.Gameplay
 
         // Internal
         private ReactiveProperty<GameState> _state;
-        private ReactiveProperty<ViewId> _activeView;
+        private ReactiveProperty<ViewId> _activeViewId;
         private ReactiveProperty<TrainingPlan> _previewedPlan;
         private ReactiveProperty<bool> _stretchingEnabled;
         private ReactiveProperty<WarmupMode> _warmupMode;
+        private Subject<ViewId> _onViewClosed;
 
 
         // Public properties
         public ReactiveProperty<GameState> State => _state;
-        public ReactiveProperty<ViewId> ActiveView => _activeView;
+        public ReactiveProperty<ViewId> ActiveViewId => _activeViewId;
         public ReactiveProperty<TrainingPlan> PreviewedPlan => _previewedPlan;
         public ReactiveProperty<bool> StretchingEnabled => _stretchingEnabled;
         public ReactiveProperty<WarmupMode> CurrentWarmupMode => _warmupMode;
+        public Subject<ViewId> OnViewClosed => _onViewClosed;
 
 
         // From asset base
@@ -44,10 +46,11 @@ namespace Assets.Codebase.Models.Gameplay
         public GameplayModel()
         {
             _state = new ReactiveProperty<GameState>(GameState.None);
-            _activeView = new ReactiveProperty<ViewId>(ViewId.None);
+            _activeViewId = new ReactiveProperty<ViewId>(ViewId.None);
             _previewedPlan = new ReactiveProperty<TrainingPlan>();
             _stretchingEnabled = new ReactiveProperty<bool>(true);
             _warmupMode = new ReactiveProperty<WarmupMode>(WarmupMode.Warmup);
+            _onViewClosed = new Subject<ViewId>();
         }
 
         /// <summary>
@@ -68,9 +71,11 @@ namespace Assets.Codebase.Models.Gameplay
 
         public void ActivateView(ViewId viewId)
         {
-            if (ActiveView.Value == viewId) { return; }
+            if (ActiveViewId.Value == viewId) { return; }
 
-            ActiveView.Value = viewId;
+            _onViewClosed.OnNext(ActiveViewId.Value);
+
+            ActiveViewId.Value = viewId;
         }
 
         public WarmupDescription GetWarmupDescription()

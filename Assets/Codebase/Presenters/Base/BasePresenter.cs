@@ -27,7 +27,7 @@ namespace Assets.Codebase.Presenters.Base
 
 
         // Fire this to close view.
-        public event Action OnCloseView;
+        public Subject<Unit> OnCloseView { get; private set; }
 
         private bool _isViewActive = false;
 
@@ -41,6 +41,8 @@ namespace Assets.Codebase.Presenters.Base
             ProgressModel = progressModel;
             GameplayModel = gameplayModel;
 
+            OnCloseView = new Subject<Unit>();
+
             SubscribeToModelChanges();
         }
 
@@ -49,8 +51,8 @@ namespace Assets.Codebase.Presenters.Base
         /// </summary>
         protected virtual void SubscribeToModelChanges()
         {
-            GameplayModel.ActiveView.Where(activeView => activeView == ViewId).Subscribe(_ => CreateView()).AddTo(CompositeDisposable);
-            GameplayModel.ActiveView.Where(activeView => activeView != ViewId).Subscribe(_ => CloseView()).AddTo(CompositeDisposable);
+            GameplayModel.ActiveViewId.Where(activeView => activeView == ViewId).Subscribe(_ => CreateView()).AddTo(CompositeDisposable);
+            GameplayModel.OnViewClosed.Where(activeView => activeView == ViewId).Subscribe(_ => CloseView()).AddTo(CompositeDisposable);
         }
 
         public void CloseView()
@@ -58,7 +60,7 @@ namespace Assets.Codebase.Presenters.Base
             if (!_isViewActive) return;
 
             _isViewActive = false;
-            OnCloseView?.Invoke();
+            OnCloseView.OnNext(Unit.Default);
         }
 
         /// <summary>

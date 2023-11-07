@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 
 namespace Assets.Codebase.Presenter.Base
 {
@@ -7,7 +8,7 @@ namespace Assets.Codebase.Presenter.Base
     /// </summary>
     public interface IPresenter
     {
-        public event Action OnCloseView;
+        public Subject<Unit> OnCloseView { get; }
 
         public void CloseView();
     }
