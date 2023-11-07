@@ -61,6 +61,8 @@ namespace Assets.Codebase.Views.Statistics
         /// <param name="resultsPeriod"></param>
         private void ShowStatsGraph(PeriodWithTrainingResults resultsPeriod)
         {
+            if (_statsGraph == null) return;
+
             _statsGraph.ShowGraph(resultsPeriod);
         }
     }

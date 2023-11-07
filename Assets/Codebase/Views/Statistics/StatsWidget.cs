@@ -13,6 +13,8 @@ namespace Assets.Codebase.Views.Statistics
         [SerializeField] private TMP_Text _recordPerTrainingCount;
         [SerializeField] private TMP_Text _trainingsCount;
         [SerializeField] private TMP_Text _caloriesCount;
+        [SerializeField] private TMP_Text _maxLevel;
+        [SerializeField] private TMP_Text _totalTime;
 
         public StatsPeriod Period => _period;
 

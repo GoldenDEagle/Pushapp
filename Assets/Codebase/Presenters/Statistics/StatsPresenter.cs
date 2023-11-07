@@ -60,9 +60,18 @@ namespace Assets.Codebase.Presenters.Statistics
             int totalPushups = resultList.Sum(x => x.TotalPushups);
 
             string totalPushupsString = NumberConverter.Convert(totalPushups);
-            string recordString = NumberConverter.Convert(resultList.Max(x => x.TotalPushups));
             string trainingsCountString = NumberConverter.Convert(resultList.Count);
             string caloriesString = NumberConverter.Convert(totalPushups * Constants.CaloriesPerPushup);
+
+            string recordString;
+            if (!resultList.Any())
+            {
+                recordString = 0.ToString();
+            }
+            else
+            {
+                recordString = NumberConverter.Convert(resultList.Max(x => x.TotalPushups));
+            }
 
             return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString);
         }
