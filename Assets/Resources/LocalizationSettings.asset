@@ -23,4 +23,10 @@ MonoBehaviour:
   - Name: LevelSelection
     Id: 1474145556
     TextAsset: {fileID: 4900000, guid: 179c5b8b32a4f9e49b537826668fde99, type: 3}
+  - Name: Warmups
+    Id: 458144089
+    TextAsset: {fileID: 4900000, guid: d9f0927541352f44db837d37c4aa0660, type: 3}
+  - Name: Training
+    Id: 951643928
+    TextAsset: {fileID: 4900000, guid: bfcea2d593af19749a9c444aaa53af57, type: 3}
   SaveFolder: {fileID: 102900000, guid: 506cefe02294a814bb32de64cede1267, type: 3}

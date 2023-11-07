@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _steps:
   - _stepId: 0
-    _stepDescription: Leg stretch
+    _stepDescription: stretching_0
     _stepGraphic: {fileID: 0}
     _stepDurationSeconds: 30
   - _stepId: 1
-    _stepDescription: Arm stretch
+    _stepDescription: stretching_1
     _stepGraphic: {fileID: 0}
     _stepDurationSeconds: 30

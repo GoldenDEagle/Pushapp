@@ -47,6 +47,7 @@ namespace Assets.Codebase.Models.Gameplay
             _activeView = new ReactiveProperty<ViewId>(ViewId.None);
             _previewedPlan = new ReactiveProperty<TrainingPlan>();
             _stretchingEnabled = new ReactiveProperty<bool>(true);
+            _warmupMode = new ReactiveProperty<WarmupMode>(WarmupMode.Warmup);
         }
 
         /// <summary>

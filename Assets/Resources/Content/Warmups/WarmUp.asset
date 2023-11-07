@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _steps:
   - _stepId: 0
-    _stepDescription: Head spin
+    _stepDescription: warmup_0
     _stepGraphic: {fileID: 0}
     _stepDurationSeconds: 30
   - _stepId: 1
-    _stepDescription: Arm circle
+    _stepDescription: warmup_1
+    _stepGraphic: {fileID: 0}
+    _stepDurationSeconds: 30
+  - _stepId: 2
+    _stepDescription: warmup_2
     _stepGraphic: {fileID: 0}
     _stepDurationSeconds: 30

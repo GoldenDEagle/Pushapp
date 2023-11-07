@@ -6,6 +6,15 @@ namespace Assets.Codebase.Presenters.Warmup
 {
     public interface IWarmUpPresenter : IPresenter
     {
+        public ReactiveProperty<bool> IsBackButtonActive { get; }
+        /// <summary>
+        /// Description of exercise
+        /// </summary>
+        public ReactiveProperty<string> StepDescriptionString { get; }
+        /// <summary>
+        /// Step number in format "1/10"
+        /// </summary>
+        public ReactiveProperty<string> StepNumberString { get; }
         /// <summary>
         /// Fired when step is changed
         /// </summary>

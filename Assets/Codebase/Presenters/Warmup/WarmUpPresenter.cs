@@ -1,4 +1,6 @@
 ﻿using Assets.Codebase.Data.WarmUp;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
@@ -10,6 +12,9 @@ namespace Assets.Codebase.Presenters.Warmup
 {
     public class WarmUpPresenter : BasePresenter, IWarmUpPresenter
     {
+        public ReactiveProperty<bool> IsBackButtonActive { get; private set; }
+        public ReactiveProperty<string> StepDescriptionString { get; private set; }
+        public ReactiveProperty<string> StepNumberString { get; private set; }
         public Subject<WarmupStep> OnNewWarmupStep { get; private set; }
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
@@ -29,6 +34,9 @@ namespace Assets.Codebase.Presenters.Warmup
             TimerText = new ReactiveProperty<string>(string.Empty);
             TimerSliderValue = new ReactiveProperty<float>(1);
             IsTimerEnabled = new ReactiveProperty<bool>();
+            IsBackButtonActive = new ReactiveProperty<bool>(false);
+            StepDescriptionString = new ReactiveProperty<string>(string.Empty);
+            StepNumberString = new ReactiveProperty<string>(string.Empty);
         }
 
         public override void CreateView()
@@ -39,11 +47,13 @@ namespace Assets.Codebase.Presenters.Warmup
             {
                 _exerciseTime = ProgressModel.SessionProgress.WarmupExerciseTime.Value;
                 IsTimerEnabled.Value = ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value;
+                IsBackButtonActive.Value = true;
             }
             else
             {
                 _exerciseTime = ProgressModel.SessionProgress.StretchingExerciseTime.Value;
                 IsTimerEnabled.Value = ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value;
+                IsBackButtonActive.Value = false;
             }
 
             base.CreateView();
@@ -93,7 +103,7 @@ namespace Assets.Codebase.Presenters.Warmup
 
         private void LaunchStep()
         {
-            OnNewWarmupStep?.OnNext(_description.Steps[_stepNumber]);
+            SetStepInfo();
 
             // Launch timers if enabled in settings
             if ((GameplayModel.CurrentWarmupMode.Value == WarmupMode.Warmup && ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value)
@@ -130,6 +140,13 @@ namespace Assets.Codebase.Presenters.Warmup
             }
 
             GoToNextExcercise();
+        }
+
+        private void SetStepInfo()
+        {
+            var currentStep = _description.Steps[_stepNumber];
+            StepDescriptionString.Value = ServiceLocator.Container.Single<ILocalizationService>().LocalizeTextByKey(currentStep.StepDescription);
+            StepNumberString.Value = (_stepNumber + 1) + " / " + _description.Steps.Count;
         }
     }
 }
