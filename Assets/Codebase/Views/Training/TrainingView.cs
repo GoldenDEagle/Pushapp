@@ -34,6 +34,11 @@ namespace Assets.Codebase.Views.Training
             _nextStepButton.OnClickAsObservable().Subscribe(_ => _presenter.CompleteStep()).AddTo(CompositeDisposable);
             _addPushupButton.OnClickAsObservable().Subscribe(_ => _presenter.IncreaseStepValue()).AddTo(CompositeDisposable);
             _subtractPushupButton.OnClickAsObservable().Subscribe(_ => _presenter.ReduceStepValue()).AddTo(CompositeDisposable);
+
+            // Resting
+            _restingWidget.CancelButton.OnClickAsObservable().Subscribe(_ => _presenter.CancelResting()).AddTo(CompositeDisposable);
+            _restingWidget.IncreaseRestingTimeButton.OnClickAsObservable().Subscribe(_ => _presenter.IncreaseRestingTime()).AddTo(CompositeDisposable);
+            _restingWidget.DecreaseRestingTimeButton.OnClickAsObservable().Subscribe(_ => _presenter.DecreaseRestingTime()).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToPresenterEvents()

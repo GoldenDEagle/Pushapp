@@ -96,6 +96,8 @@ namespace Assets.Codebase.Presenters.Training
                 return;
             }
 
+            _currentStepValue = _trainingDescription.Pushups[_stepNumber];
+
             OnShowRestingWidget?.OnNext(Unit.Default);
             _currentTimeToRest = _defaultTimeToRest;
             StartResting().Forget();
@@ -211,6 +213,7 @@ namespace Assets.Codebase.Presenters.Training
         {
             _currentTimeToRest += _timeRegulatingStep;
             _restingTimer += _timeRegulatingStep;
+            TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
         }
 
         public void DecreaseRestingTime()
@@ -222,6 +225,7 @@ namespace Assets.Codebase.Presenters.Training
                 return;
             }
             _currentTimeToRest -= _timeRegulatingStep;
+            TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
         }
     }
 }
