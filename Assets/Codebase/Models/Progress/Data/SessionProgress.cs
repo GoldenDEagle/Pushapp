@@ -61,7 +61,7 @@ namespace Assets.Codebase.Models.Progress.Data
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
             AutoWarmupSwitchEnabled = new ReactiveProperty<bool>(true);
             AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(true);
-            NextPushupTargetId = new ReactiveProperty<int>(100);
+            NextPushupTargetId = new ReactiveProperty<int>(0);
             NextCaloriesTargetId = new ReactiveProperty<int>(0);
             NextTrainingCountTargetId = new ReactiveProperty<int>(0);
             WarmupExerciseTime = new ReactiveProperty<float>(30f);
@@ -135,7 +135,7 @@ namespace Assets.Codebase.Models.Progress.Data
             IsTrainingPlanSelected.Value = false;
             CurrentTrainingDayId.Value = 0;
             IsOnTestingStage.Value = false;
-            NextPushupTargetId.Value = 100;
+            NextPushupTargetId.Value = 0;
         }
 
         /// <summary>

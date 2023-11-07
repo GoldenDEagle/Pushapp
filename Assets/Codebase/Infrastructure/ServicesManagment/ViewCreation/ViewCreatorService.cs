@@ -88,7 +88,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
 
             // Create and init view
             var view = _assets.Instantiate(path).GetComponent<BaseView>();
-            view.Init(presenter);
             view.transform.SetParent(_uiRoot, false);
             return view;
         }
