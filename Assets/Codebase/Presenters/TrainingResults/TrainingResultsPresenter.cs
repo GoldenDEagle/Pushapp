@@ -40,11 +40,6 @@ namespace Assets.Codebase.Presenters.TrainingResults
             GoToNextView();
         }
 
-        public void RepeatClicked()
-        {
-            GameplayModel.ActivateView(ViewId.TrainingView);
-        }
-
         public void StretchingToggleClicked(bool toggleState)
         {
             ProgressModel.SessionProgress.IsStretchingEnabled.Value = toggleState;

@@ -1,4 +1,6 @@
-﻿using Assets.Codebase.Infrastructure.ServicesManagment;
+﻿using Assets.Codebase.Data.Achievements;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
 using Assets.Codebase.Infrastructure.ServicesManagment.Ads;
 using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
@@ -113,6 +115,7 @@ namespace Assets.Codebase.Infrastructure.Initialization
             services.RegisterSingle<IPresentersService>(new PresentersService(_presenters));
             services.RegisterSingle<IProgressService>(new ProgressService(_progressModel));
             services.RegisterSingle<IUiFactory>(new UiFactory(_uiRoot, services.Single<IAssetProvider>()));
+            services.RegisterSingle<IAchievementsService>(new GPAchievementsService());
         }
 
 

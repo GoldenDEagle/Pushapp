@@ -88,7 +88,7 @@ namespace Assets.Codebase.Presenters.Training
             _currentTrainingResults.Add(_currentStepValue);
             _stepNumber++;
 
-            if (_stepNumber > _trainingDescription.Pushups.Count)
+            if (_stepNumber >= _trainingDescription.Pushups.Count)
             {
                 // Save training result if last step
                 SaveResults();

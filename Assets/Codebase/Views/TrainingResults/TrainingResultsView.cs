@@ -14,7 +14,6 @@ namespace Assets.Codebase.Views.TrainingResults
     public class TrainingResultsView : BaseView
     {
         [SerializeField] private Button _goNextButton;
-        [SerializeField] private Button _repeatButton;
         [SerializeField] private UISwitch _stretchingToogle;
 
         [SerializeField] private TMP_Text _resultsLineText;
@@ -34,7 +33,6 @@ namespace Assets.Codebase.Views.TrainingResults
         protected override void SubscribeToUserInput()
         {
             _goNextButton.OnClickAsObservable().Subscribe(_ => _presenter.GoNextClicked()).AddTo(CompositeDisposable);
-            _repeatButton.OnClickAsObservable().Subscribe(_ => _presenter.RepeatClicked()).AddTo(CompositeDisposable);
             _stretchingToogle.OnSwitched.Subscribe(value => _presenter.StretchingToggleClicked(value)).AddTo(CompositeDisposable);
         }
 
