@@ -2,6 +2,7 @@
 using Assets.Codebase.Presenters.TrainingResults;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
+using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
@@ -14,7 +15,7 @@ namespace Assets.Codebase.Views.TrainingResults
     {
         [SerializeField] private Button _goNextButton;
         [SerializeField] private Button _repeatButton;
-        [SerializeField] private Toggle _stretchingToogle;
+        [SerializeField] private UISwitch _stretchingToogle;
 
         [SerializeField] private TMP_Text _resultsLineText;
 
@@ -27,14 +28,14 @@ namespace Assets.Codebase.Views.TrainingResults
             base.Init(presenter);
 
             // Set default values
-            _stretchingToogle.isOn = _presenter.IsStretchingEnabled();
+            _stretchingToogle.SetInitialState(_presenter.IsStretchingEnabled());
         }
 
         protected override void SubscribeToUserInput()
         {
             _goNextButton.OnClickAsObservable().Subscribe(_ => _presenter.GoNextClicked()).AddTo(CompositeDisposable);
             _repeatButton.OnClickAsObservable().Subscribe(_ => _presenter.RepeatClicked()).AddTo(CompositeDisposable);
-            _stretchingToogle.OnValueChangedAsObservable().Subscribe(value => _presenter.StretchingToggleClicked(value)).AddTo(CompositeDisposable);
+            _stretchingToogle.OnSwitched.Subscribe(value => _presenter.StretchingToggleClicked(value)).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToPresenterEvents()
