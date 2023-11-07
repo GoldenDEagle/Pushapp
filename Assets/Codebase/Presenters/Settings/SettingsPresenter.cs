@@ -6,6 +6,7 @@ using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniRx;
 using UnityEngine.UI;
 
@@ -77,7 +78,7 @@ namespace Assets.Codebase.Presenters.Settings
             // If accepted -> delete
         }
 
-        public void ValidateTimeInput(string inputText, InputField inputField)
+        public void ValidateTimeInput(string inputText, TMP_InputField inputField)
         {
             // Remove non-numeric characters from the input.
             string cleanedInput = string.Join("", System.Text.RegularExpressions.Regex.Split(inputText, "[^0-9]"));

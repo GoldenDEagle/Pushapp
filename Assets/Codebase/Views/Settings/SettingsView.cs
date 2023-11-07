@@ -6,6 +6,7 @@ using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,10 +21,10 @@ namespace Assets.Codebase.Views.Settings
         [Header("Warmup and stretching")]
         [SerializeField] private UISwitch _warmupToggle;
         [SerializeField] private UISwitch _autoWarmupSwitchToggle;
-        [SerializeField] private InputField _warmupTimeInput;
+        [SerializeField] private TMP_InputField _warmupTimeInput;
         [SerializeField] private UISwitch _stretchingToggle;
         [SerializeField] private UISwitch _autoStretchingSwitchToggle;
-        [SerializeField] private InputField _stretchingTimeInput;
+        [SerializeField] private TMP_InputField _stretchingTimeInput;
         [Header("Delete")]
         [SerializeField] private Button _deleteDataButton;
 
@@ -49,8 +50,8 @@ namespace Assets.Codebase.Views.Settings
             _autoWarmupSwitchToggle.OnSwitched.Subscribe(value => _presenter.SetAutoWarmupSwitch(value)).AddTo(CompositeDisposable);
             _autoStretchingSwitchToggle.OnSwitched.Subscribe(value => _presenter.SetAutoStretchingSwitch(value)).AddTo(CompositeDisposable);
             _deleteDataButton.OnClickAsObservable().Subscribe(_ => _presenter.DeleteAllTrainingData()).AddTo(CompositeDisposable);
-            _warmupTimeInput.OnEndEditAsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _warmupTimeInput); _presenter.SetWarmupExerciseTime(_warmupTimeInput.text); }).AddTo(CompositeDisposable);
-            _stretchingTimeInput.OnEndEditAsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _stretchingTimeInput); _presenter.SetStretchingExerciseTime(_stretchingTimeInput.text); }).AddTo(CompositeDisposable);
+            _warmupTimeInput.onEndEdit.AsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _warmupTimeInput); _presenter.SetWarmupExerciseTime(_warmupTimeInput.text); }).AddTo(CompositeDisposable);
+            _stretchingTimeInput.onEndEdit.AsObservable().Subscribe(value => { _presenter.ValidateTimeInput(value, _stretchingTimeInput); _presenter.SetStretchingExerciseTime(_stretchingTimeInput.text); }).AddTo(CompositeDisposable);
         }
 
 
