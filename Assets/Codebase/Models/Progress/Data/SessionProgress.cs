@@ -61,7 +61,7 @@ namespace Assets.Codebase.Models.Progress.Data
             NextTrainingDate = new ReactiveProperty<SerializableDateTime>(new SerializableDateTime(TimeProvider.GetServerTime()));
             AutoWarmupSwitchEnabled = new ReactiveProperty<bool>(true);
             AutoStretchingSwitchEnabled = new ReactiveProperty<bool>(true);
-            NextPushupTargetId = new ReactiveProperty<int>(0);
+            NextPushupTargetId = new ReactiveProperty<int>(100);
             NextCaloriesTargetId = new ReactiveProperty<int>(0);
             NextTrainingCountTargetId = new ReactiveProperty<int>(0);
             WarmupExerciseTime = new ReactiveProperty<float>(30f);

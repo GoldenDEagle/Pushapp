@@ -46,6 +46,12 @@ namespace Assets.Codebase.Presenters.Training
 
             _currentTrainingResults = new List<int>();
             _resultsString = new StringBuilder();
+            OnShowRestingWidget = new Subject<Unit>();
+            OnHideRestingWidget = new Subject<Unit>();
+            CurrentPushupCountText = new ReactiveProperty<string>(string.Empty);
+            TrainingLiveResults = new ReactiveProperty<string>(string.Empty);
+            TimerText = new ReactiveProperty<string>(string.Empty);
+            TimerSliderValue = new ReactiveProperty<float>(0f);
         }
 
         public override void CreateView()
@@ -146,7 +152,7 @@ namespace Assets.Codebase.Presenters.Training
             // plan
             while (resultIndex < _trainingDescription.Pushups.Count)
             {
-                _resultsString.Append(_currentTrainingResults[resultIndex]).Append(" ");
+                _resultsString.Append(_trainingDescription.Pushups[resultIndex]).Append(" ");
                 resultIndex++;
             }
 
