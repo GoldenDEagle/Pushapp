@@ -27,9 +27,11 @@ namespace Assets.Codebase.Presenters.PlanPreview
         private void SummonDayWidgets()
         {
             var uiFactory = ServiceLocator.Container.Single<IUiFactory>();
-            foreach (var day in GameplayModel.PreviewedPlan.Value.TrainingDays)
+
+            for (int i = 0; i < GameplayModel.PreviewedPlan.Value.TrainingDays.Count; i++)
             {
-                var widget = uiFactory.CreateTrainingDayWidget(day);
+                var widget = uiFactory.CreateTrainingDayWidget();
+                widget.Init(GameplayModel.PreviewedPlan.Value.TrainingDays[i], i + 1);
                 OnTrainingDayAdded?.OnNext(widget);
             }
         }

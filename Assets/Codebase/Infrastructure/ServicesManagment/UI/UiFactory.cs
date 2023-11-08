@@ -12,7 +12,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
     public class UiFactory : IUiFactory
     {
         private const string TrainingPlanButtonPath = "UIelements/TrainingLevelButton";
-        private const string TrainingDayWidgetPath = "UIelements/TrainingDayWidget";
+        private const string TrainingDayWidgetPath = "UIelements/DayInfoWidget";
         private const string GraphCirclePath = "UIelements/CircleOnGraph";
         private const string WarningWindowPath = "UIelements/WarningWindow";
         private const string GraphTextLabelPath = "UIelements/GraphTextLabel";
@@ -33,10 +33,9 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
             return element;
         }
 
-        public TrainingDayWidget CreateTrainingDayWidget(TrainingDay trainingDay)
+        public TrainingDayWidget CreateTrainingDayWidget()
         {
             var element = _assetProvider.Instantiate(TrainingDayWidgetPath).GetComponent<TrainingDayWidget>();
-            element.Init(trainingDay);
             return element;
         }
 

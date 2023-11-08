@@ -53,15 +53,15 @@ namespace Assets.Codebase.Presenters.PlanSelection
         public void ViewPlan(TrainingPlan plan)
         {
             // With preview
-            //GameplayModel.PreviewedPlan.Value = plan;
-            //GameplayModel.ActivateView(ViewId.PlanPreviewView);
+            GameplayModel.PreviewedPlan.Value = plan;
+            GameplayModel.ActivateView(ViewId.PlanPreviewView);
 
 
             // Without preview
-            ProgressModel.SessionProgress.IsTrainingPlanSelected.Value = true;
-            ProgressModel.SessionProgress.CurrentTrainingPlan.Value = plan;
-            ProgressModel.SessionProgress.CurrentTrainingDayId.Value = 1;
-            GameplayModel.ActivateView(ViewId.MainView);
+            //ProgressModel.SessionProgress.IsTrainingPlanSelected.Value = true;
+            //ProgressModel.SessionProgress.CurrentTrainingPlan.Value = plan;
+            //ProgressModel.SessionProgress.CurrentTrainingDayId.Value = 1;
+            //GameplayModel.ActivateView(ViewId.MainView);
         }
 
         public void BackToMenu()

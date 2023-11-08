@@ -9,6 +9,7 @@ namespace Assets.Codebase.Views.PlanPreview
 {
     public class PlanPreviewView : BaseView
     {
+        [SerializeField] private RectTransform _widgetsGroup;
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _acceptButton;
 
@@ -30,7 +31,7 @@ namespace Assets.Codebase.Views.PlanPreview
         protected override void SubscribeToPresenterEvents()
         {
             base.SubscribeToPresenterEvents();
-            _presenter.OnTrainingDayAdded.Subscribe(_ => AddDayWidget(_)).AddTo(CompositeDisposable);
+            _presenter.OnTrainingDayAdded.Subscribe(item => AddDayWidget(item)).AddTo(CompositeDisposable);
         }
 
 
@@ -40,7 +41,7 @@ namespace Assets.Codebase.Views.PlanPreview
         /// <param name="planButton"></param>
         private void AddDayWidget(TrainingDayWidget planButton)
         {
-            planButton.transform.SetParent(transform, false);
+            planButton.transform.SetParent(_widgetsGroup, false);
         }
     }
 }

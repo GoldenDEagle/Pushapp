@@ -21,7 +21,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation
         // Paths to all view prefabs
         private const string ExampleViewPath = "Views/ExampleView";
         private const string LevelSelectionViewPath = "Views/LevelSelectionView";
-        private const string LevelPreviewViewPath = "Views/?????";
+        private const string LevelPreviewViewPath = "Views/PlanPreviewView";
         private const string MainViewPath = "Views/MainView";
         private const string WarmupViewPath = "Views/WarmupView";
         private const string TrainingViewPath = "Views/TrainingView";

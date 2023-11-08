@@ -9,7 +9,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
     public interface IUiFactory : IService
     {
         public TrainingPlanButton CreateTrainingPlanButton(TrainingPlan plan);
-        public TrainingDayWidget CreateTrainingDayWidget(TrainingDay trainingDay);
+        public TrainingDayWidget CreateTrainingDayWidget();
         public GraphNode CreateNodeOnGraph();
         public WarningWindow CreateWarningWindow();
         public GraphTextLabel CreateGraphTextLabel();

@@ -60,7 +60,7 @@ namespace Assets.Codebase.Presenters.TrainingResults
 
             LevelString.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
             ResultsString.Value = _lastTrainingResult.PushupAttempts.ToPushupsListString();
-            TotalPushupsString.Value = localizationService.LocalizeTextByKey("total_count") + " " + NumberConverter.Convert(_lastTrainingResult.TotalPushups);
+            TotalPushupsString.Value = localizationService.LocalizeTextByKey(Constants.TotalWithCountKey) + " " + NumberConverter.Convert(_lastTrainingResult.TotalPushups);
             TrainingDurationString.Value = TimeConverter.TimeInMinutes(_lastTrainingResult.TrainingDuration);
             BurntCaloriesString.Value = NumberConverter.Convert(_lastTrainingResult.TotalPushups * Constants.CaloriesPerPushup);
 
