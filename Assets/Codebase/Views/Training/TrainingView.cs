@@ -51,6 +51,7 @@ namespace Assets.Codebase.Views.Training
             _presenter.TrainingLiveResults.SubscribeToTMPText(_resultsLineText).AddTo(CompositeDisposable);
 
             _presenter.TimerText.SubscribeToTMPText(_restingWidget.RestingTimerText).AddTo(CompositeDisposable);
+            _presenter.TimerFillValue.Subscribe(value => _restingWidget.TimerFill.fillAmount = value).AddTo(CompositeDisposable);
         }
 
 

@@ -15,7 +15,7 @@ namespace Assets.Codebase.Presenters.Training
 
         // Resting widget
         public ReactiveProperty<string> TimerText { get; }
-        public ReactiveProperty<float> TimerSliderValue { get; }
+        public ReactiveProperty<float> TimerFillValue { get; }
 
         public void BackToMenu();
         public void CompleteStep();

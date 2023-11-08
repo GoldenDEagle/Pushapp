@@ -24,7 +24,7 @@ namespace Assets.Codebase.Presenters.Training
 
         // Resting widget
         public ReactiveProperty<string> TimerText { get; private set; }
-        public ReactiveProperty<float> TimerSliderValue { get; private set; }
+        public ReactiveProperty<float> TimerFillValue { get; private set; }
 
         // General
         private TrainingDay _trainingDescription;
@@ -34,7 +34,7 @@ namespace Assets.Codebase.Presenters.Training
         private StringBuilder _resultsString;
 
         // Resting
-        private float _defaultTimeToRest = 60f;
+        private float _defaultTimeToRest = 90f;
         private float _currentTimeToRest;
         private float _timeRegulatingStep = 30f;
         private float _restingTimer;
@@ -51,7 +51,7 @@ namespace Assets.Codebase.Presenters.Training
             CurrentPushupCountText = new ReactiveProperty<string>(string.Empty);
             TrainingLiveResults = new ReactiveProperty<string>(string.Empty);
             TimerText = new ReactiveProperty<string>(string.Empty);
-            TimerSliderValue = new ReactiveProperty<float>(0f);
+            TimerFillValue = new ReactiveProperty<float>(0f);
         }
 
         public override void CreateView()
@@ -181,13 +181,13 @@ namespace Assets.Codebase.Presenters.Training
 
         private async UniTask RestingTask(CancellationToken cancellationToken)
         {
-            TimerSliderValue.Value = 1f;
+            TimerFillValue.Value = 1f;
 
             _restingTimer = _currentTimeToRest;
             while (_restingTimer >= 0)
             {
                 TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
-                TimerSliderValue.Value = _restingTimer / _currentTimeToRest;
+                TimerFillValue.Value = (_currentTimeToRest - _restingTimer) / _currentTimeToRest;
                 _restingTimer--;
                 await UniTask.Delay(TimeSpan.FromSeconds(1), false, PlayerLoopTiming.Update, cancellationToken);
             }
@@ -210,6 +210,7 @@ namespace Assets.Codebase.Presenters.Training
             _currentTimeToRest += _timeRegulatingStep;
             _restingTimer += _timeRegulatingStep;
             TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
+            TimerFillValue.Value = (_currentTimeToRest - _restingTimer) / _currentTimeToRest;
         }
 
         public void DecreaseRestingTime()
@@ -222,6 +223,7 @@ namespace Assets.Codebase.Presenters.Training
             }
             _currentTimeToRest -= _timeRegulatingStep;
             TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
+            TimerFillValue.Value = (_currentTimeToRest - _restingTimer) / _currentTimeToRest;
         }
     }
 }
