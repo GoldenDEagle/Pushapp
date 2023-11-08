@@ -63,7 +63,7 @@ namespace Assets.Codebase.Views.Statistics
         {
             if (_statsGraph == null) return;
 
-            _statsGraph.ShowGraph(resultsPeriod);
+            _statsGraph.ShowGraph(resultsPeriod).Forget();
         }
     }
 }

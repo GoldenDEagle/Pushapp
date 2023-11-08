@@ -6,6 +6,7 @@ using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Statistics;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UniRx;
 
@@ -93,8 +94,25 @@ namespace Assets.Codebase.Presenters.Statistics
 
         private void UpdateGraph()
         {
-            var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+            //var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+            var trainingResults = CreateTestResults();
             OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
+        }
+
+        private List<TrainingResult> CreateTestResults()
+        {
+            DateTime today = DateTime.Now;
+            DateTime tomorrow = DateTime.Now.AddDays(2);
+            DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
+
+            List<TrainingResult> testResults = new List<TrainingResult>()
+            {
+                    new TrainingResult(new List<int>() {0, 1, 0 }, 1, today),
+                    new TrainingResult(new List<int>() { 5, 7, 4 }, 16, tomorrow),
+                    new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayAfterTomorrow)
+            };
+
+            return testResults;
         }
     }
 }

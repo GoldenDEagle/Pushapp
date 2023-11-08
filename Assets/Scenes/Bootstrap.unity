@@ -400,6 +400,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GraphWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 1769517948226175754, guid: ad2b0fbe79c62e6479e7f924324e659c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1822445578252725992, guid: ad2b0fbe79c62e6479e7f924324e659c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -462,11 +466,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1822445578252725992, guid: ad2b0fbe79c62e6479e7f924324e659c, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -1029.75
       objectReference: {fileID: 0}
     - target: {fileID: 1822445578252725992, guid: ad2b0fbe79c62e6479e7f924324e659c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 135.75
       objectReference: {fileID: 0}
     - target: {fileID: 1822445578252725992, guid: ad2b0fbe79c62e6479e7f924324e659c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

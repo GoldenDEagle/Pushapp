@@ -2,6 +2,7 @@
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Utils.Helpers;
+using Cysharp.Threading.Tasks;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -48,17 +49,18 @@ namespace Assets.Codebase.Views.Statistics.Graph
             return node;
         }
 
-        public void ShowGraph(PeriodWithTrainingResults resultsForPeriod)
+        public async UniTaskVoid ShowGraph(PeriodWithTrainingResults resultsForPeriod)
         {
+            await UniTask.DelayFrame(2);
             var results = resultsForPeriod.List;
             float graphHeight = _graphContainer.sizeDelta.y;
             float yMaximum = results.Max(x => x.TotalPushups);
-            float xStep = 50f;
+            float xStep = 75f;
 
             GraphNode previousNode = null;
             for (int i = 0; i < results.Count; i++)
             {
-                float xPosition = xStep + i * xStep;
+                float xPosition = 10f + i * xStep;
                 float yPosition = (results[i].TotalPushups / yMaximum) * graphHeight;
                 var newNode = CreateNode(new Vector2(xPosition, yPosition));
 
@@ -71,8 +73,9 @@ namespace Assets.Codebase.Views.Statistics.Graph
 
                 var label = _uiFactory.CreateGraphTextLabel();
                 label.RectTransform.SetParent(_graphContainer);
-                label.RectTransform.anchoredPosition = new Vector2(xPosition, -30f);
-                label.SetText(results[i].Date.DateTime.ToShortDateString());
+                label.RectTransform.anchoredPosition = new Vector2(xPosition, -50f);
+                string labelText = results[i].Date.DateTime.ToShortDateString().Substring(0,5);
+                label.SetText(labelText);
             }
         }
 
@@ -80,7 +83,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
         {
             GameObject dotConnection = new GameObject("dotConnection", typeof(Image));
             dotConnection.transform.SetParent(_graphContainer, false);
-            dotConnection.GetComponent<Image>().color = new Color(1, 1, 1, 0.5f);
+            dotConnection.GetComponent<Image>().color = Color.red;
             RectTransform connectionRect = dotConnection.GetComponent<RectTransform>();
             Vector2 dir = (nodePositionB - nodePositionA).normalized;
             float distance = Vector2.Distance(nodePositionA, nodePositionB);
