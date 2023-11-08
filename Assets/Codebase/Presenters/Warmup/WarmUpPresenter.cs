@@ -6,6 +6,7 @@ using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.Warmup
@@ -25,6 +26,7 @@ namespace Assets.Codebase.Presenters.Warmup
         private int _stepNumber;
         private float _secondsToPrepare = 5f;
         private float _exerciseTime;
+        private CancellationTokenSource _restingCancellationToken;
 
         public WarmUpPresenter()
         {
@@ -82,6 +84,8 @@ namespace Assets.Codebase.Presenters.Warmup
 
         public void SkipWarmup()
         {
+            StopTimer();
+
             switch (GameplayModel.CurrentWarmupMode.Value)
             {
                 case WarmupMode.Warmup:
@@ -109,11 +113,23 @@ namespace Assets.Codebase.Presenters.Warmup
             if ((GameplayModel.CurrentWarmupMode.Value == WarmupMode.Warmup && ProgressModel.SessionProgress.AutoWarmupSwitchEnabled.Value)
             || (GameplayModel.CurrentWarmupMode.Value == WarmupMode.Stretching && ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value))
             {
-                ExerciseCycle().Forget();
+                StopTimer();
+                _restingCancellationToken = new CancellationTokenSource();
+                ExerciseCycle(_restingCancellationToken.Token).Forget();
             }
         }
 
-        private async UniTaskVoid ExerciseCycle()
+        public void StopTimer()
+        {
+            if (_restingCancellationToken != null)
+            {
+                _restingCancellationToken.Cancel();
+                _restingCancellationToken.Dispose();
+                _restingCancellationToken = null;
+            }
+        }
+
+        private async UniTask ExerciseCycle(CancellationToken cancellationToken)
         {
             TimerText.Value = "Приготовьтесь!";
             TimerSliderValue.Value = 1f;
@@ -124,7 +140,7 @@ namespace Assets.Codebase.Presenters.Warmup
             {
                 TimerSliderValue.Value = timer / _secondsToPrepare;
                 timer--;
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await UniTask.Delay(TimeSpan.FromSeconds(1), false, PlayerLoopTiming.Update, cancellationToken);
             }
 
             // Exercise
@@ -136,7 +152,7 @@ namespace Assets.Codebase.Presenters.Warmup
                 //TimerSliderValue.Value = timer / _description.Steps[_stepNumber].StepDurationSeconds;
                 TimerSliderValue.Value = timer / _exerciseTime;
                 timer--;
-                await UniTask.Delay(TimeSpan.FromSeconds(1));
+                await UniTask.Delay(TimeSpan.FromSeconds(1), false, PlayerLoopTiming.Update, cancellationToken);
             }
 
             GoToNextExcercise();

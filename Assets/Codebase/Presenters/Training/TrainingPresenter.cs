@@ -163,11 +163,7 @@ namespace Assets.Codebase.Presenters.Training
 
         private async UniTaskVoid StartResting()
         {
-            if (_restingCancellationToken != null)
-            {
-                _restingCancellationToken.Cancel();
-                _restingCancellationToken.Dispose();
-            }
+            CancelResting();
 
             _restingCancellationToken = new CancellationTokenSource();
 
