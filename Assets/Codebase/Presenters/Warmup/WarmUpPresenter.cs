@@ -65,6 +65,7 @@ namespace Assets.Codebase.Presenters.Warmup
 
         public void BackToMenu()
         {
+            GameplayModel.GetTrainingTime();
             GameplayModel.ActivateView(ViewId.MainView);
         }
 

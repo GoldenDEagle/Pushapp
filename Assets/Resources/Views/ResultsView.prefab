@@ -1428,9 +1428,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1695a3332fcc62c42a0a50df0e9b497b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _goNextButton: {fileID: 7055784060118807889}
-  _stretchingToogle: {fileID: 2722056239011518423}
+  _headerText: {fileID: 2075341165069613377}
+  _levelText: {fileID: 216649880263598109}
+  _dayName: {fileID: 769326276510075667}
   _resultsLineText: {fileID: 1609241491147965952}
+  _trainingDuration: {fileID: 1809432036223829891}
+  _totalPushupsCount: {fileID: 5364147806596474258}
+  _caloriesBurnt: {fileID: 7732055241280017260}
+  _goNextButton: {fileID: 7055784060118807889}
+  _nextTrainingDate: {fileID: 8906893221328925738}
+  _stretchingToogle: {fileID: 2722056239011518423}
 --- !u!1 &2775126722532281678
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1931,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8427555600830490673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1939,10 +1946,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2311985274788494966}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 223.42, y: -82.01}
+  m_SizeDelta: {x: 262.76, y: 60.01}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8063554406738069712
 CanvasRenderer:

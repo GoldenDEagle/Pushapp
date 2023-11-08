@@ -5,6 +5,7 @@ using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Gameplay.Data;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Views.Base;
 using System.Linq;
 using UniRx;
@@ -25,6 +26,7 @@ namespace Assets.Codebase.Models.Gameplay
         private ReactiveProperty<bool> _stretchingEnabled;
         private ReactiveProperty<WarmupMode> _warmupMode;
         private Subject<ViewId> _onViewClosed;
+        private Stopwatch _trainingStopwatch;
 
 
         // Public properties
@@ -51,6 +53,7 @@ namespace Assets.Codebase.Models.Gameplay
             _stretchingEnabled = new ReactiveProperty<bool>(true);
             _warmupMode = new ReactiveProperty<WarmupMode>(WarmupMode.Warmup);
             _onViewClosed = new Subject<ViewId>();
+            _trainingStopwatch = new Stopwatch();
         }
 
         /// <summary>
@@ -100,6 +103,16 @@ namespace Assets.Codebase.Models.Gameplay
             }
 
             return _trainingPlansDescriptions.TrainingPlans.FirstOrDefault(x => x.Level == currentLevelId + 1);
+        }
+
+        public void StartTrainingTimer()
+        {
+            _trainingStopwatch.Start();
+        }
+
+        public float GetTrainingTime()
+        {
+            return _trainingStopwatch.GetElapsedTime(true);
         }
     }
 }

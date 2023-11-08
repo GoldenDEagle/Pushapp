@@ -79,7 +79,7 @@ namespace Assets.Codebase.Presenters.Training
         public void BackToMenu()
         {
             // Show warning
-
+            GameplayModel.GetTrainingTime();
             GameplayModel.ActivateView(ViewId.MainView);
         }
 
@@ -201,7 +201,7 @@ namespace Assets.Codebase.Presenters.Training
             var totalPushups = _currentTrainingResults.Sum();
             ProgressModel.SessionProgress.AddPushups(totalPushups);
 
-            TrainingResult trainingResult = new TrainingResult(_currentTrainingResults, totalPushups, TimeProvider.GetServerTime());
+            TrainingResult trainingResult = new TrainingResult(_currentTrainingResults, totalPushups, TimeProvider.GetServerTime(), GameplayModel.GetTrainingTime());
             ProgressModel.SessionProgress.AddTrainingResult(trainingResult);
         }
 

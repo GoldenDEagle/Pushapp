@@ -65,6 +65,7 @@ namespace Assets.Codebase.Presenters.MainMenu
 
         public void StartTraining()
         {
+            GameplayModel.StartTrainingTimer();
             if (ProgressModel.SessionProgress.IsWarmupEnabled.Value)
             {
                 GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;

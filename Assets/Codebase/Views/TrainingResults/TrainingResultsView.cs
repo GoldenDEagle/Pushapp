@@ -13,10 +13,18 @@ namespace Assets.Codebase.Views.TrainingResults
 {
     public class TrainingResultsView : BaseView
     {
-        [SerializeField] private Button _goNextButton;
-        [SerializeField] private UISwitch _stretchingToogle;
-
+        [Header("Header")]
+        [SerializeField] private TMP_Text _headerText;
+        [SerializeField] private TMP_Text _levelText;
+        [SerializeField] private TMP_Text _dayName;
         [SerializeField] private TMP_Text _resultsLineText;
+        [SerializeField] private TMP_Text _trainingDuration;
+        [SerializeField] private TMP_Text _totalPushupsCount;
+        [SerializeField] private TMP_Text _caloriesBurnt;
+        [Header("Content")]
+        [SerializeField] private Button _goNextButton;
+        [SerializeField] private TMP_Text _nextTrainingDate;
+        [SerializeField] private UISwitch _stretchingToogle;
 
         private ITrainingResultsPresenter _presenter;
 
@@ -40,7 +48,14 @@ namespace Assets.Codebase.Views.TrainingResults
         {
             base.SubscribeToPresenterEvents();
 
+            _presenter.ViewHeaderString.SubscribeToTMPText(_headerText).AddTo(CompositeDisposable);
+            _presenter.LevelString.SubscribeToTMPText(_levelText).AddTo(CompositeDisposable);
+            _presenter.TrainingDayString.SubscribeToTMPText(_dayName).AddTo(CompositeDisposable);
             _presenter.ResultsString.SubscribeToTMPText(_resultsLineText).AddTo(CompositeDisposable);
+            _presenter.TrainingDurationString.SubscribeToTMPText(_trainingDuration).AddTo(CompositeDisposable);
+            _presenter.TotalPushupsString.SubscribeToTMPText(_totalPushupsCount).AddTo(CompositeDisposable);
+            _presenter.BurntCaloriesString.SubscribeToTMPText(_caloriesBurnt).AddTo(CompositeDisposable);
+            _presenter.NextTrainingDateString.SubscribeToTMPText(_nextTrainingDate).AddTo(CompositeDisposable);
         }
     }
 }

@@ -58,5 +58,14 @@ namespace Assets.Codebase.Models.Gameplay
         /// <param name="currentLevelId"></param>
         /// <returns></returns>
         public TrainingPlan GetNextLevelTrainingPlan(int currentLevelId);
+        /// <summary>
+        /// Start counting training time
+        /// </summary>
+        public void StartTrainingTimer();
+        /// <summary>
+        /// Stop counting training time and return value
+        /// </summary>
+        /// <returns></returns>
+        public float GetTrainingTime();
     }
 }

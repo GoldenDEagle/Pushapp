@@ -1,0 +1,4 @@
+Key,English,Russian
+test_passed,Test passed!,Тест пройден!
+test_failed,Test not yet passed.,Тест пока не пройден.
+training_ended,Training successfully ended!,Тренировка завершена!
