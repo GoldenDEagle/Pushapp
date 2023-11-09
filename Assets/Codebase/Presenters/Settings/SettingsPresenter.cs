@@ -70,6 +70,7 @@ namespace Assets.Codebase.Presenters.Settings
         public void DeleteAllTrainingData()
         {
             // Show warning
+
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
             var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
             warningWindow.SetWarningText(localizationService.LocalizeTextByKey(DeleteProgressWarningKey));
@@ -111,6 +112,7 @@ namespace Assets.Codebase.Presenters.Settings
             if (wasAccepted)
             {
                 ProgressModel.SessionProgress.ClearResults();
+                ProgressModel.SaveProgress();
             }
         }
     }

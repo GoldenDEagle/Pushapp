@@ -7,6 +7,7 @@ using Assets.Codebase.Views.Statistics;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Assets.Codebase.Models.Progress
@@ -95,6 +96,8 @@ namespace Assets.Codebase.Models.Progress
             }
 
             List<TrainingResult> results = new List<TrainingResult>();
+
+            if (!SessionProgress.AllResults.Any()) return results;
 
             foreach (var training in SessionProgress.AllResults)
             {

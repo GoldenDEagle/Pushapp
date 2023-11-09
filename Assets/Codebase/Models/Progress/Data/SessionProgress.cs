@@ -131,9 +131,7 @@ namespace Assets.Codebase.Models.Progress.Data
         {
             AllResults.Clear();
             TotalPushups.Value = 0;
-            CurrentTrainingPlan.Value = null;
-            IsTrainingPlanSelected.Value = false;
-            CurrentTrainingDayId.Value = 0;
+            CurrentTrainingDayId.Value = 1;
             IsOnTestingStage.Value = false;
             NextPushupTargetId.Value = 0;
         }

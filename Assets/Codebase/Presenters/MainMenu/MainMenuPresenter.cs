@@ -49,7 +49,7 @@ namespace Assets.Codebase.Presenters.MainMenu
             base.SubscribeToModelChanges();
 
             // foreach info widget
-            ProgressModel.SessionProgress.CurrentTrainingPlan.Subscribe(plan => CurrentLevelText.Value = plan.Level.ToString()).AddTo(CompositeDisposable);
+            ProgressModel.SessionProgress.CurrentTrainingPlan.Subscribe(plan => CurrentLevelText.Value = plan?.Level.ToString()).AddTo(CompositeDisposable);
         }
 
         public void ChangePlan()
