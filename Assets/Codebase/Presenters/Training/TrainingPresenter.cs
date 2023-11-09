@@ -23,6 +23,7 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TrainingLiveResults { get; private set; }
 
         // Resting widget
+        public ReactiveProperty<string> StathamPhrase { get; private set; }
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerFillValue { get; private set; }
 
@@ -52,6 +53,7 @@ namespace Assets.Codebase.Presenters.Training
             TrainingLiveResults = new ReactiveProperty<string>(string.Empty);
             TimerText = new ReactiveProperty<string>(string.Empty);
             TimerFillValue = new ReactiveProperty<float>(0f);
+            StathamPhrase = new ReactiveProperty<string>(string.Empty);
         }
 
         public override void CreateView()
@@ -164,9 +166,9 @@ namespace Assets.Codebase.Presenters.Training
         private async UniTaskVoid StartResting()
         {
             CancelResting();
+            StathamPhrase.Value = GameplayModel.GetRandomStathamPhrase();
 
             _restingCancellationToken = new CancellationTokenSource();
-
             try
             {
                 await RestingTask(_restingCancellationToken.Token);

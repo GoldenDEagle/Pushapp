@@ -6,6 +6,7 @@ namespace Assets.Codebase.Views.Training
 {
     public class RestingWidget : MonoBehaviour
     {
+        [SerializeField] private TMP_Text _stathamPhraseText;
         [SerializeField] private Button _cancelRestingButton;
         [SerializeField] private Button _increaseRestingTimeButton;
         [SerializeField] private Button _decreaseRestingTimeButton;
@@ -17,5 +18,6 @@ namespace Assets.Codebase.Views.Training
         public Button IncreaseRestingTimeButton => _increaseRestingTimeButton;
         public Button DecreaseRestingTimeButton => _decreaseRestingTimeButton;
         public Image TimerFill => _timerFill;
+        public TMP_Text StathamPhraseText => _stathamPhraseText;
     }
 }

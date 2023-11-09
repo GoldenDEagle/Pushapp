@@ -67,5 +67,10 @@ namespace Assets.Codebase.Models.Gameplay
         /// </summary>
         /// <returns></returns>
         public float GetTrainingTime();
+        /// <summary>
+        /// Gets random Statham phrase from container
+        /// </summary>
+        /// <returns></returns>
+        public string GetRandomStathamPhrase();
     }
 }

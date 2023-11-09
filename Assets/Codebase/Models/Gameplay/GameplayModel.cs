@@ -1,7 +1,9 @@
-﻿using Assets.Codebase.Data.Trainings;
+﻿using Assets.Codebase.Data.Phrases;
+using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Models.Base;
 using Assets.Codebase.Models.Gameplay.Data;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
@@ -18,6 +20,8 @@ namespace Assets.Codebase.Models.Gameplay
         private const string TrainingPlansPath = "Content/TrainingPlans";
         private const string WarmupDescriptionPath = "Content/Warmups/WarmUp";
         private const string StretchinDescriptionPath = "Content/Warmups/Stretching";
+        private const string StathamPhrasesPath = "Content/StathamPhrases";
+        
 
         // Internal
         private ReactiveProperty<GameState> _state;
@@ -42,6 +46,7 @@ namespace Assets.Codebase.Models.Gameplay
         private TrainingPlansDescriptions _trainingPlansDescriptions;
         private WarmupDescription _warmupDescription;
         private WarmupDescription _stretchingDescription;
+        private StathamContainer _stathamContainer;
         public TrainingPlansDescriptions TrainingPlansDescriptions => _trainingPlansDescriptions;
 
 
@@ -65,6 +70,7 @@ namespace Assets.Codebase.Models.Gameplay
             _trainingPlansDescriptions =  assetProvider.LoadResource<TrainingPlansDescriptions>(TrainingPlansPath);
             _warmupDescription = assetProvider.LoadResource<WarmupDescription>(WarmupDescriptionPath);
             _stretchingDescription = assetProvider.LoadResource<WarmupDescription>(StretchinDescriptionPath);
+            _stathamContainer = assetProvider.LoadResource<StathamContainer>(StathamPhrasesPath);
         }
 
         public void ChangeGameState(GameState state)
@@ -113,6 +119,14 @@ namespace Assets.Codebase.Models.Gameplay
         public float GetTrainingTime()
         {
             return _trainingStopwatch.GetElapsedTime(true);
+        }
+
+        public string GetRandomStathamPhrase()
+        {
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+            int randomNumber = Random.Range(0, _stathamContainer.Phrases.Count);
+            string phrase = localizationService.LocalizeTextByKey(_stathamContainer.Phrases[randomNumber]);
+            return phrase;
         }
     }
 }

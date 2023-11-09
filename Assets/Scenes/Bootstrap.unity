@@ -247,8 +247,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiRoot: {fileID: 1266598011}
   _launchParams:
-    ManualParamSet: 0
-    Language: 0
+    ManualParamSet: 1
+    Language: 1
     ClearPlayerPrefs: 1
     CheatsEnabled: 0
 --- !u!114 &601118956
