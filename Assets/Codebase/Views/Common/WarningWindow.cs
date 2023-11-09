@@ -35,7 +35,7 @@ namespace Assets.Codebase.Views.Common
             _acceptButton.interactable = false;
             _declineButton.interactable = false;
             OnWindowClosed?.OnNext(true);
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.1f);
         }
 
         private void DeclineButtonClicked()
@@ -43,7 +43,7 @@ namespace Assets.Codebase.Views.Common
             _acceptButton.interactable = false;
             _declineButton.interactable = false;
             OnWindowClosed?.OnNext(false);
-            Destroy(gameObject, 1f);
+            Destroy(gameObject, 0.1f);
         }
     }
 }
