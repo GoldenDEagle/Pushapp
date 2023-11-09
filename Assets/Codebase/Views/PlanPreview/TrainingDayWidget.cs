@@ -6,6 +6,7 @@ using Assets.Codebase.Utils.Values;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Views.PlanPreview
 {
@@ -18,10 +19,11 @@ namespace Assets.Codebase.Views.PlanPreview
         [SerializeField] private TMP_Text _pushupsList;
         [SerializeField] private TMP_Text _restingTime;
         [SerializeField] private TMP_Text _totalPushupsCount;
+        [SerializeField] private Image _backgroundImage;
 
         //private TrainingDay _trainingDay;
 
-        public void Init(TrainingDay trainingDay, int dayId)
+        public void Init(TrainingDay trainingDay, int dayId, Color widgetColor)
         {
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
 
@@ -29,6 +31,7 @@ namespace Assets.Codebase.Views.PlanPreview
             _pushupsList.text = trainingDay.Pushups.ToPushupsListString();
             _restingTime.text = trainingDay.RestingTime.ToString() + localizationService.LocalizeTextByKey("hours_word");
             _totalPushupsCount.text = localizationService.LocalizeTextByKey(Constants.TotalWithCountKey) + trainingDay.Pushups.Sum().ToString();
+            _backgroundImage.color = widgetColor;
         }
     }
 }

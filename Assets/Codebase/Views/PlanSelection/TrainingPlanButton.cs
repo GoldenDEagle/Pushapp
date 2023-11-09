@@ -17,6 +17,7 @@ namespace Assets.Codebase.Views.PlanSelection
         [SerializeField] private Button _selectButton;
         [SerializeField] private TMP_Text _levelId;
         [SerializeField] private TMP_Text _levelRequirement;
+        [SerializeField] private Image _backgroundImage;
 
         private TrainingPlan _plan;
 
@@ -39,6 +40,7 @@ namespace Assets.Codebase.Views.PlanSelection
             _plan = plan;
             _levelId.text = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + plan.Level.ToString();
             _levelRequirement.text = localizationService.LocalizeTextByKey(plan.LevelRequirement);
+            _backgroundImage.color = Constants.LevelColors[plan.DifficultyLevel];
         }
 
         private void SelectPlan()

@@ -1,6 +1,7 @@
 ﻿using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.PlanPreview;
 using UniRx;
@@ -31,7 +32,8 @@ namespace Assets.Codebase.Presenters.PlanPreview
             for (int i = 0; i < GameplayModel.PreviewedPlan.Value.TrainingDays.Count; i++)
             {
                 var widget = uiFactory.CreateTrainingDayWidget();
-                widget.Init(GameplayModel.PreviewedPlan.Value.TrainingDays[i], i + 1);
+                var planInfo = GameplayModel.PreviewedPlan.Value;
+                widget.Init(planInfo.TrainingDays[i], i + 1, Constants.LevelColors[planInfo.DifficultyLevel]);
                 OnTrainingDayAdded?.OnNext(widget);
             }
         }

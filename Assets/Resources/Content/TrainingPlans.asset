@@ -15,6 +15,7 @@ MonoBehaviour:
   _trainingPlans:
   - _level: 1
     _levelRequirement: requirement_1
+    _difficultyLevel: 0
     _trainingDays:
     - _pushups: 01000000020000000100000002000000
       _restingTime: 48
@@ -27,6 +28,7 @@ MonoBehaviour:
       _restingTime: 48
   - _level: 2
     _levelRequirement: requirement_2
+    _difficultyLevel: 3
     _trainingDays:
     - _pushups: 02000000030000000300000004000000
       _restingTime: 48

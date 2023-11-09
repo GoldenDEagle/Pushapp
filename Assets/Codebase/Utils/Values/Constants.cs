@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Assets.Codebase.Data.Trainings;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Codebase.Utils.Values
 {
@@ -15,5 +17,16 @@ namespace Assets.Codebase.Utils.Values
         public static readonly string TestTrainingNameKey = "test_word";
         public static readonly string DayTrainingNameKey = "day_word";
         public static readonly string TotalWithCountKey = "total_count";
+
+
+        // Difficulty level colors
+        public static Dictionary<DifficultyLevel, Color> LevelColors = new Dictionary<DifficultyLevel, Color>()
+        {
+                { DifficultyLevel.Beginner, new Color32(66, 119, 255, 255) },
+                { DifficultyLevel.Easy, new Color32(227, 151, 0, 255) },
+                { DifficultyLevel.Medium, new Color32(221, 95, 2, 255) },
+                { DifficultyLevel.Hard, new Color32(215, 30, 18, 255) },
+                { DifficultyLevel.Nightmare, new Color32(164, 0, 0, 255) },
+        };
     }
 }

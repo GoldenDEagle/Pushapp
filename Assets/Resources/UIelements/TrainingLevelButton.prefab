@@ -432,7 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 966524eead1f82045a19021041109bdd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 99862cba47ba4e14085e40bc9288d823, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -562,6 +562,7 @@ MonoBehaviour:
   _selectButton: {fileID: 1740668195592603990}
   _levelId: {fileID: 7759969978086916993}
   _levelRequirement: {fileID: 7982551640908346686}
+  _backgroundImage: {fileID: 6600328983224848019}
 --- !u!1 &8118928784050954556
 GameObject:
   m_ObjectHideFlags: 0
