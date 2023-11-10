@@ -63,10 +63,12 @@ namespace Assets.Codebase.Presenters.Statistics
             var resultList = ProgressModel.GetTrainingResultsForPeriod(period);
 
             int totalPushups = resultList.Sum(x => x.TotalPushups);
+            float totalTime = resultList.Sum(x => x.TrainingDuration);
 
             string totalPushupsString = NumberConverter.Convert(totalPushups);
             string trainingsCountString = NumberConverter.Convert(resultList.Count);
             string caloriesString = NumberConverter.Convert(totalPushups * Constants.CaloriesPerPushup);
+            string time = TimeConverter.TimeInHours(totalTime);
 
             string recordString;
             if (!resultList.Any())
@@ -78,7 +80,7 @@ namespace Assets.Codebase.Presenters.Statistics
                 recordString = NumberConverter.Convert(resultList.Max(x => x.TotalPushups));
             }
 
-            return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString);
+            return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString, string.Empty, time);
         }
 
         public void GoToNextResultsSegment()

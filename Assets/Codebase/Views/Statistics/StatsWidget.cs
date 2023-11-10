@@ -24,6 +24,8 @@ namespace Assets.Codebase.Views.Statistics
             _recordPerTrainingCount.text = data.RecordPerTraining;
             _trainingsCount.text = data.TrainingsCount;
             _caloriesCount.text = data.CaloriesCount;
+            _maxLevel.text = data.MaxLevel;
+            _totalTime.text = data.Time;
         }
     }
 }
