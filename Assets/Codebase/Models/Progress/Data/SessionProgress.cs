@@ -146,7 +146,7 @@ namespace Assets.Codebase.Models.Progress.Data
             {
                 IsOnTestingStage.Value = false;
                 CurrentTrainingPlan.Value = ServiceLocator.Container.Single<IGameplayService>().GameplayModel.GetNextLevelTrainingPlan(CurrentTrainingPlan.Value.Level);
-                CurrentTrainingDayId.Value = 0;
+                CurrentTrainingDayId.Value = 1;
                 SetNextTrainingDate();
                 return;
             }
@@ -154,10 +154,10 @@ namespace Assets.Codebase.Models.Progress.Data
             CurrentTrainingDayId.Value++;
 
             // Rises test flag if all days cleared
-            if (CurrentTrainingDayId.Value >= CurrentTrainingPlan.Value.TrainingDays.Count)
+            if (CurrentTrainingDayId.Value > CurrentTrainingPlan.Value.TrainingDays.Count)
             {
                 IsOnTestingStage.Value = true;
-                CurrentTrainingDayId.Value = 0;
+                CurrentTrainingDayId.Value = 1;
             }
 
             // Set next training time based on day info
@@ -169,7 +169,7 @@ namespace Assets.Codebase.Models.Progress.Data
         private void SetNextTrainingDate()
         {
             var currentTime = TimeProvider.GetServerTime();
-            NextTrainingDate.Value = new SerializableDateTime(currentTime.AddHours(CurrentTrainingPlan.Value.TrainingDays[CurrentTrainingDayId.Value].RestingTime));
+            NextTrainingDate.Value = new SerializableDateTime(currentTime.AddHours(CurrentTrainingPlan.Value.TrainingDays[CurrentTrainingDayId.Value - 1].RestingTime));
         }
         private void CheckPushupTargets()
         {

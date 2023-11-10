@@ -101,15 +101,16 @@ namespace Assets.Codebase.Presenters.MainMenu
             PushupsSliderValue.Value = currentPushups / pushupsTarget;
             NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
             NextTrainingLevelText.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
-            NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1].Pushups.ToPushupsListString();
 
             if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
             {
                 NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
+                NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestDay.Pushups[0].ToString();
             }
             else
             {
                 NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + " " + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
+                NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1].Pushups.ToPushupsListString();
             }
         }
     }

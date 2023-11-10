@@ -71,19 +71,19 @@ namespace Assets.Codebase.Presenters.Training
             _currentTrainingResults.Clear();
 
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
-            TrainingNameString.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+            TrainingNameString.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
 
             // If test
             if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
             {
                 _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestDay;
-                TrainingNameString.Value += localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
+                TrainingNameString.Value += " " + localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
             }
             // If regular day
             else
             {
-                _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value];
-                TrainingNameString.Value += localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + ProgressModel.SessionProgress.CurrentTrainingDayId.ToString();
+                _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1];
+                TrainingNameString.Value += " " + localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + " " + ProgressModel.SessionProgress.CurrentTrainingDayId.ToString();
             }
             _currentStepValue = _trainingDescription.Pushups[0];
 
