@@ -1,7 +1,9 @@
-﻿using Assets.Codebase.Data.Trainings;
+﻿using Assets.Codebase.Data.Audio;
+using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Ads;
+using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.CustomTypes;
@@ -52,6 +54,7 @@ namespace Assets.Codebase.Presenters.TrainingResults
             base.CreateView();
 
             FillViewWithData();
+            ServiceLocator.Container.Single<IAudioService>().PlaySfxSound(SoundId.TrainingEnd);
         }
 
         private void FillViewWithData()

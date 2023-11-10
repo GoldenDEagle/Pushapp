@@ -1,4 +1,7 @@
-﻿using TMPro;
+﻿using Assets.Codebase.Data.Audio;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +18,8 @@ namespace Assets.Codebase.Views.Common
 
         private void OnEnable()
         {
+            ServiceLocator.Container.Single<IAudioService>().PlaySfxSound(SoundId.Warning);
+
             _acceptButton.onClick.AddListener(AcceptButtonClicked);
             _declineButton.onClick.AddListener(DeclineButtonClicked);
         }

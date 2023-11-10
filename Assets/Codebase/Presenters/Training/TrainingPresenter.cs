@@ -1,4 +1,7 @@
-﻿using Assets.Codebase.Data.Trainings;
+﻿using Assets.Codebase.Data.Audio;
+using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
@@ -184,10 +187,16 @@ namespace Assets.Codebase.Presenters.Training
         private async UniTask RestingTask(CancellationToken cancellationToken)
         {
             TimerFillValue.Value = 1f;
+            var audioService = ServiceLocator.Container.Single<IAudioService>();
 
             _restingTimer = _currentTimeToRest;
             while (_restingTimer >= 0)
             {
+                if (_restingTimer == 3)
+                {
+                    audioService.PlaySfxSound(SoundId.FinalSeconds);
+                }
+
                 TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
                 TimerFillValue.Value = (_currentTimeToRest - _restingTimer) / _currentTimeToRest;
                 _restingTimer--;

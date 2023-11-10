@@ -1,5 +1,7 @@
-﻿using Assets.Codebase.Data.WarmUp;
+﻿using Assets.Codebase.Data.Audio;
+using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
@@ -134,6 +136,7 @@ namespace Assets.Codebase.Presenters.Warmup
         {
             TimerText.Value = "Приготовьтесь!";
             TimerSliderValue.Value = 1f;
+            var audioService = ServiceLocator.Container.Single<IAudioService>();
 
             // Preparation
             var timer = _secondsToPrepare;
@@ -149,6 +152,11 @@ namespace Assets.Codebase.Presenters.Warmup
             timer = _exerciseTime;
             while (timer >= 0)
             {
+                if (timer == 3)
+                {
+                    audioService.PlaySfxSound(SoundId.FinalSeconds);
+                }
+
                 TimerText.Value = TimeConverter.TimeInMinutes(timer);
                 //TimerSliderValue.Value = timer / _description.Steps[_stepNumber].StepDurationSeconds;
                 TimerSliderValue.Value = timer / _exerciseTime;
