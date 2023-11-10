@@ -1,16 +1,17 @@
 ﻿using Assets.Codebase.Utils.CustomTypes;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Codebase.Data.Trainings
 {
     [Serializable]
     public class TrainingResult
     {
-        private List<int> _pushupAttempts;
-        private SerializableDateTime _date;
-        private int _totalPushups;
-        private float _trainingDuration;
+        [SerializeField] private List<int> _pushupAttempts;
+        [SerializeField] private SerializableDateTime _date;
+        [SerializeField] private int _totalPushups;
+        [SerializeField] private float _trainingDuration;
 
         public List<int> PushupAttempts => _pushupAttempts;
         public SerializableDateTime Date => _date;
