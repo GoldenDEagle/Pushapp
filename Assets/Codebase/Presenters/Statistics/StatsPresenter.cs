@@ -31,8 +31,6 @@ namespace Assets.Codebase.Presenters.Statistics
             CurrentLevelString = new ReactiveProperty<string>();
             TotalPushupsString = new ReactiveProperty<string>();
             OnShowGraph = new Subject<PeriodWithTrainingResults>();
-            _graphEndingDate = DateTime.Now;
-            _graphStartingDate = DateTime.Now.Subtract(_graphSwitchStep);
         }
 
         public override void CreateView()
@@ -41,6 +39,8 @@ namespace Assets.Codebase.Presenters.Statistics
 
             CurrentLevelString.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
             TotalPushupsString.Value = NumberConverter.Convert(ProgressModel.SessionProgress.TotalPushups.Value);
+            _graphEndingDate = DateTime.Now;
+            _graphStartingDate = DateTime.Now.Subtract(_graphSwitchStep);
             UpdateGraph();
         }
 
@@ -94,8 +94,10 @@ namespace Assets.Codebase.Presenters.Statistics
 
         private void UpdateGraph()
         {
-            //var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
-            var trainingResults = CreateTestResults();
+            var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+            //var trainingResults = CreateTestResults();
+            if (!trainingResults.Any()) return;
+
             OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
         }
 

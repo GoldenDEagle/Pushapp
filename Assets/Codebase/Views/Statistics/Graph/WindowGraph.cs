@@ -42,7 +42,6 @@ namespace Assets.Codebase.Views.Statistics.Graph
             RectTransform nodeRect = node.RectTransform;
             nodeRect.SetParent(_graphContainer, false);
             nodeRect.anchoredPosition = anchoredPosition;
-            nodeRect.sizeDelta = new Vector2(11, 11);
             nodeRect.anchorMin = new Vector2(0, 0);
             nodeRect.anchorMax = new Vector2(0, 0);
 
