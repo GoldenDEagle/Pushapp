@@ -422,7 +422,7 @@ PlayerSettings:
     PROGRESS_BAR_BACKGROUND_COLOR: 
     PROGRESS_BAR_BORDER_COLOR: 
     PROGRESS_BAR_FILL_COLOR: 
-    PROJECT_ID: 
+    PROJECT_ID: 8776
     SET_ASPECT_RATIO_ON_DESKTOP: 9/16
     SET_ASPECT_RATIO_ON_MOBILE: 9/16
     SET_WINDOW_HEIGHT_ON_DESKTOP: 2000
@@ -430,7 +430,7 @@ PlayerSettings:
     SET_WINDOW_WIDTH_ON_DESKTOP: 2000
     SET_WINDOW_WIDTH_ON_MOBILE: 1
     SHOW_PRELOADER_AD: true
-    TOKEN: 
+    TOKEN: KbiTuDQMOzav3jRtxlQSo24ZgTz5N8gI
   mobileMTRendering:
     Android: 1
     iPhone: 1
@@ -689,11 +689,11 @@ PlayerSettings:
   webGLTemplate: PROJECT:ATP_GP1.1.0
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 0
+  webGLCompressionFormat: 1
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   webGLInitialMemorySize: 32
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
