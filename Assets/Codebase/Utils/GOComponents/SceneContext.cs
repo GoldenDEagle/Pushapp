@@ -18,8 +18,9 @@ namespace Assets.Codebase.Utils.GOComponents
             if (GameStructure.IsGameInitialized) return;
 
             var uiRoot = Instantiate(_uiRootPrefab);
+            var sfxSource = new GameObject("SfxSource", typeof(AudioSource)).GetComponent<AudioSource>();
 
-            GameStructure structure = new GameStructure(uiRoot, _gameLaunchParams);
+            GameStructure structure = new GameStructure(uiRoot, sfxSource, _gameLaunchParams);
         }
 #endif
     }

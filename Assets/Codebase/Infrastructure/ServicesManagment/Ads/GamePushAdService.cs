@@ -1,4 +1,5 @@
-﻿using GamePush;
+﻿using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
+using GamePush;
 using UnityEngine;
 
 namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
@@ -6,6 +7,15 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
     public class GamePushAdService : IAdsService
     {
         private bool _adsEnabled = true;
+        private IAudioService _audioService;
+
+        public GamePushAdService(IAudioService audioService)
+        {
+            _audioService = audioService;
+
+            GP_Game.OnPause += OnAdStarted;
+            GP_Game.OnResume += OnAdEnded;
+        }
 
         public void SetAdsStatus(bool adsEnabled)
         {
@@ -42,6 +52,16 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
             {
                 GP_Ads.ShowRewarded();
             }
+        }
+
+
+        private void OnAdStarted()
+        {
+            _audioService.MuteAll();
+        }
+        private void OnAdEnded()
+        {
+            _audioService.UnmuteAll();
         }
     }
 }

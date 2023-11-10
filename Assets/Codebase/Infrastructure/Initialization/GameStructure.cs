@@ -38,18 +38,20 @@ namespace Assets.Codebase.Infrastructure.Initialization
 
         // Needed from outside
         private RectTransform _uiRoot;
+        private AudioSource _sfxSource;
 
         // Created inside
         private IProgressModel _progressModel;
         private IGameplayModel _gameplayModel;
         private List<BasePresenter> _presenters;
 
-        public GameStructure(RectTransform uiRoot, GameLaunchParams launchParams = null)
+        public GameStructure(RectTransform uiRoot, AudioSource sfxSource = null, GameLaunchParams launchParams = null)
         {
             if (IsGameInitialized) { return; }
             IsGameInitialized = true;
 
             _uiRoot = uiRoot;
+            _sfxSource = sfxSource;
 
             GameLaunchParameters = launchParams ?? new GameLaunchParams();
 
@@ -108,8 +110,8 @@ namespace Assets.Codebase.Infrastructure.Initialization
 
             services.RegisterSingle<IAssetProvider>(new AssetProvider());
             services.RegisterSingle<IViewCreatorService>(new ViewCreatorService(services.Single<IAssetProvider>(), _presenters, _uiRoot));
-            services.RegisterSingle<IAdsService>(new GamePushAdService());
-            services.RegisterSingle<IAudioService>(new AudioService(services.Single<IAssetProvider>(), _progressModel));
+            services.RegisterSingle<IAudioService>(new AudioService(services.Single<IAssetProvider>(), _progressModel, _sfxSource));
+            services.RegisterSingle<IAdsService>(new GamePushAdService(services.Single<IAudioService>()));
             services.RegisterSingle<IGameplayService>(new GameplayService(_gameplayModel));
             services.RegisterSingle<ILocalizationService>(new GoogleSheetLocalizationService());
             services.RegisterSingle<IPresentersService>(new PresentersService(_presenters));

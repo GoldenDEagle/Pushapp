@@ -1,7 +1,9 @@
 ﻿using Assets.Codebase.Data.Audio;
 using Assets.Codebase.Infrastructure.ServicesManagment.Assets;
 using Assets.Codebase.Models.Progress;
+using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
@@ -9,7 +11,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
     /// <summary>
     /// Implementation which loads sounds through asset provider.
     /// </summary>
-    public class AudioService : IAudioService
+    public class AudioService : IAudioService, IDisposable
     {
         private const string AudioPath = "Audio/AudioDataContainer";
 
@@ -19,12 +21,20 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
         // All clips loaded from container
         private Dictionary<SoundId, AudioClip> _clips;
 
-        public AudioService(IAssetProvider assetProvider, IProgressModel progressModel)
+        private AudioSource _sfxSource;
+        private CompositeDisposable _disposables;
+
+        public AudioService(IAssetProvider assetProvider, IProgressModel progressModel, AudioSource sfxSource)
         {
+            _disposables = new CompositeDisposable();
             _assets = assetProvider;
             _progress = progressModel;
+            _sfxSource = sfxSource;
 
             InitData();
+
+            SetSoundVolume(_progress.SessionProgress.SoundVolume.Value);
+            _progress.SessionProgress.SoundVolume.Subscribe(value => SetSoundVolume(value)).AddTo(_disposables);
         }
 
         private void InitData()
@@ -42,14 +52,8 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
 
         public void SetSoundVolume(float value)
         {
-            _progress.SessionProgress.SoundVolume.Value = value;
+            _sfxSource.volume = value;
         }
-
-        public void SetSFXVolume(float value)
-        {
-        }
-
-        // Next logic depends on project specifications.
 
         public void ChangeMusic(SoundId musicId)
         {
@@ -58,17 +62,22 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Audio
 
         public void PlaySfxSound(SoundId soundId)
         {
-            throw new System.NotImplementedException();
+            _sfxSource.PlayOneShot(_clips[soundId]);
         }
 
         public void MuteAll()
         {
-            throw new System.NotImplementedException();
+            AudioListener.pause = true;
         }
 
         public void UnmuteAll()
         {
-            throw new System.NotImplementedException();
+            AudioListener.pause = false;
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
         }
     }
 }
