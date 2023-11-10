@@ -2,7 +2,9 @@
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +15,18 @@ namespace Assets.Codebase.Views.Statistics.Graph
     {
         [SerializeField] private RectTransform _graphContainer;
 
+        private List<GraphNode> _displayedNodes;
+        private List<GraphTextLabel> _displayedLabels;
+        private List<Transform> _displayedConnections;
+
         private IUiFactory _uiFactory;
 
         private void Awake()
         {
             _uiFactory = ServiceLocator.Container.Single<IUiFactory>();
+            _displayedNodes = new List<GraphNode>();
+            _displayedConnections = new List<Transform>();
+            _displayedLabels = new List<GraphTextLabel>();
         }
 
         //private void Start()
@@ -44,12 +53,36 @@ namespace Assets.Codebase.Views.Statistics.Graph
             nodeRect.anchoredPosition = anchoredPosition;
             nodeRect.anchorMin = new Vector2(0, 0);
             nodeRect.anchorMax = new Vector2(0, 0);
+            _displayedNodes.Add(node);
 
             return node;
         }
 
+        public void ClearGraph()
+        {
+            foreach (var node in _displayedNodes)
+            {
+                Destroy(node.gameObject);
+            }
+            _displayedNodes.Clear();
+
+            foreach (var connection in _displayedConnections)
+            {
+                Destroy(connection.gameObject);
+            }
+            _displayedConnections.Clear();
+
+            foreach(var label in _displayedLabels)
+            {
+                Destroy(label.gameObject);
+            }
+            _displayedLabels.Clear();
+        }
+
         public async UniTaskVoid ShowGraph(PeriodWithTrainingResults resultsForPeriod)
         {
+            ClearGraph();
+
             await UniTask.DelayFrame(2);
             var results = resultsForPeriod.List;
             float graphHeight = _graphContainer.sizeDelta.y;
@@ -75,6 +108,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
                 label.RectTransform.anchoredPosition = new Vector2(xPosition, -50f);
                 string labelText = results[i].Date.DateTime.ToShortDateString().Substring(0,5);
                 label.SetText(labelText);
+                _displayedLabels.Add(label);
             }
         }
 
@@ -83,6 +117,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
             GameObject dotConnection = new GameObject("dotConnection", typeof(Image));
             dotConnection.transform.SetParent(_graphContainer, false);
             dotConnection.GetComponent<Image>().color = Color.red;
+            _displayedConnections.Add(dotConnection.transform);
             RectTransform connectionRect = dotConnection.GetComponent<RectTransform>();
             Vector2 dir = (nodePositionB - nodePositionA).normalized;
             float distance = Vector2.Distance(nodePositionA, nodePositionB);

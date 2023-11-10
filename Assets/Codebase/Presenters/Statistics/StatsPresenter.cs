@@ -23,6 +23,8 @@ namespace Assets.Codebase.Presenters.Statistics
         private TimeSpan _graphSwitchStep;
         private int _graphStepInDays = 14;
 
+        private List<TrainingResult> _testingResults;
+
         public StatsPresenter()
         {
             ViewId = ViewId.StatsView;
@@ -31,6 +33,8 @@ namespace Assets.Codebase.Presenters.Statistics
             CurrentLevelString = new ReactiveProperty<string>();
             TotalPushupsString = new ReactiveProperty<string>();
             OnShowGraph = new Subject<PeriodWithTrainingResults>();
+
+            _testingResults = CreateTestResults();
         }
 
         public override void CreateView()
@@ -79,39 +83,48 @@ namespace Assets.Codebase.Presenters.Statistics
 
         public void GoToNextResultsSegment()
         {
-            _graphStartingDate.AddDays(_graphStepInDays);
-            _graphEndingDate.AddDays(_graphStepInDays);
+            _graphStartingDate = _graphStartingDate.AddDays(_graphStepInDays);
+            _graphEndingDate = _graphEndingDate.AddDays(_graphStepInDays);
             UpdateGraph();
         }
 
         public void GoToPreviousResultsSegment()
         {
-            _graphStartingDate.Subtract(_graphSwitchStep);
-            _graphEndingDate.Subtract(_graphSwitchStep);
+            _graphStartingDate = _graphStartingDate.Subtract(_graphSwitchStep);
+            _graphEndingDate = _graphEndingDate.Subtract(_graphSwitchStep);
             UpdateGraph();
         }
 
 
         private void UpdateGraph()
         {
-            var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
-            //var trainingResults = CreateTestResults();
+            // Build
+            //var trainingResults = ProgressModel.SessionProgress.AllResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+            // Testing
+            var trainingResults = _testingResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
+
             if (!trainingResults.Any()) return;
 
             OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
         }
 
+
+        // Creating results for testing
         private List<TrainingResult> CreateTestResults()
         {
+            DateTime dayBeforeYesterday = DateTime.Now.Subtract(TimeSpan.FromDays(2));
+            DateTime yesterday = DateTime.Now.Subtract(TimeSpan.FromDays(1));
             DateTime today = DateTime.Now;
-            DateTime tomorrow = DateTime.Now.AddDays(2);
-            DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
+            DateTime lastMonth1 = DateTime.Now.Subtract(TimeSpan.FromDays(25));
+            DateTime lastMonth2 = DateTime.Now.Subtract(TimeSpan.FromDays(21));
 
             List<TrainingResult> testResults = new List<TrainingResult>()
             {
+                    new TrainingResult(new List<int>() { 5, 10, 10 }, 25, lastMonth1),
+                    new TrainingResult(new List<int>() { 4, 6, 7 }, 17, lastMonth1),
+                    new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayBeforeYesterday),
+                    new TrainingResult(new List<int>() { 5, 7, 4 }, 16, yesterday),
                     new TrainingResult(new List<int>() {0, 1, 0 }, 1, today),
-                    new TrainingResult(new List<int>() { 5, 7, 4 }, 16, tomorrow),
-                    new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayAfterTomorrow)
             };
 
             return testResults;
