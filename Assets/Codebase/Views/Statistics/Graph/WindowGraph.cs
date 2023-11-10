@@ -63,9 +63,11 @@ namespace Assets.Codebase.Views.Statistics.Graph
         public async UniTaskVoid ShowGraph(PeriodWithTrainingResults resultsForPeriod)
         {
             ClearGraph();
+            var results = resultsForPeriod.List;
+
+            if (!results.Any()) return;
 
             await UniTask.DelayFrame(2);
-            var results = resultsForPeriod.List;
             float graphHeight = _graphContainer.sizeDelta.y;
             float yMaximum = results.Max(x => x.TotalPushups);
             float xStep = 75f;

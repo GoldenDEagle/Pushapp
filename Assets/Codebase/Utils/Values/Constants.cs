@@ -17,6 +17,7 @@ namespace Assets.Codebase.Utils.Values
         public static readonly string TestTrainingNameKey = "test_word";
         public static readonly string DayTrainingNameKey = "day_word";
         public static readonly string TotalWithCountKey = "total_count";
+        public static readonly string LevelWithNumberKey = "level_withNumber";
 
 
         // Difficulty level colors

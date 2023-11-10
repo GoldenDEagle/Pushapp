@@ -1,0 +1,12 @@
+Key,English,Russian
+settings_header,Settings,Настройки
+trainingSettings,Training settings,Настройки тренировки
+deleteProgress_button,Delete progress,Удалить прогресс
+sounds,Sounds,Звук
+voice,Voice,Голос
+warmup_enabled,Warm up,Разминка
+autoWarmup,Auto warm up,Авто-разминка
+warmupTime,Warm up timer,Время на разминку
+stretching_enabled,Stretching,Растяжка
+autoStretching,Auto stretching,Авто-растяжка
+stretchingTime,Stretching timer,Время на растяжку

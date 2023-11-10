@@ -2,6 +2,7 @@
 using Assets.Codebase.Presenters.Training;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
+using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -11,11 +12,13 @@ namespace Assets.Codebase.Views.Training
 {
     public class TrainingView : BaseView
     {
+        [SerializeField] private TMP_Text _trainingNameText;
         [SerializeField] private Button _backButton;
         [SerializeField] private Button _nextStepButton;
         [SerializeField] private Button _addPushupButton;
         [SerializeField] private Button _subtractPushupButton;
         [SerializeField] private TMP_Text _resultsLineText;
+        [SerializeField] private TMP_Text _totalPushupsCountText;
         [SerializeField] private TMP_Text _currentStepValue;
         [SerializeField] private RestingWidget _restingWidget;
 
@@ -49,6 +52,8 @@ namespace Assets.Codebase.Views.Training
 
             _presenter.CurrentPushupCountText.SubscribeToTMPText(_currentStepValue).AddTo(CompositeDisposable);
             _presenter.TrainingLiveResults.SubscribeToTMPText(_resultsLineText).AddTo(CompositeDisposable);
+            _presenter.TrainingNameString.SubscribeToTMPText(_trainingNameText).AddTo(CompositeDisposable);
+            _presenter.TotalPushupsString.SubscribeToTMPText(_totalPushupsCountText).AddTo(CompositeDisposable);
 
             _presenter.StathamPhrase.SubscribeToTMPText(_restingWidget.StathamPhraseText).AddTo(CompositeDisposable);
             _presenter.TimerText.SubscribeToTMPText(_restingWidget.RestingTimerText).AddTo(CompositeDisposable);

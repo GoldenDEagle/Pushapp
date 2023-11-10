@@ -1,10 +1,12 @@
 ﻿using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Statistics;
+using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
 using Assets.Codebase.Views.Statistics.Graph;
 using System.Collections.Generic;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +16,10 @@ namespace Assets.Codebase.Views.Statistics
     public class StatsView : BaseView
     {
         [SerializeField] private BottomPanel _bottomPanel;
+        [SerializeField] private TMP_Text _currentLevelText;
+        [SerializeField] private TMP_Text _totalPushupsText;
         [SerializeField] private WindowGraph _statsGraph;
+        [SerializeField] private TMP_Text _graphPeriodText;
         [SerializeField] private Button _nextGraphButton;
         [SerializeField] private Button _previousGraphButton;
         [SerializeField] private List<StatsWidget> _statsWidgets;
@@ -41,6 +46,9 @@ namespace Assets.Codebase.Views.Statistics
         protected override void SubscribeToPresenterEvents()
         {
             base.SubscribeToPresenterEvents();
+            _presenter.GraphPeriodString.SubscribeToTMPText(_graphPeriodText).AddTo(CompositeDisposable);
+            _presenter.CurrentLevelString.SubscribeToTMPText(_currentLevelText).AddTo(CompositeDisposable);
+            _presenter.TotalPushupsString.SubscribeToTMPText(_totalPushupsText).AddTo(CompositeDisposable);
             _presenter.OnShowGraph.Subscribe(value => ShowStatsGraph(value)).AddTo(CompositeDisposable);
         }
 

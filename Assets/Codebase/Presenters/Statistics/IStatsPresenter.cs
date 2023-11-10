@@ -10,6 +10,7 @@ namespace Assets.Codebase.Presenters.Statistics
     {
         public ReactiveProperty<string> CurrentLevelString { get; }
         public ReactiveProperty<string> TotalPushupsString { get; }
+        public ReactiveProperty<string> GraphPeriodString { get; }
         public Subject<PeriodWithTrainingResults> OnShowGraph { get; }
 
         public void GoToMain();

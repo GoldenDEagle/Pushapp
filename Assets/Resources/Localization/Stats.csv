@@ -1,0 +1,12 @@
+Key,English,Russian
+stats_header,Statistics,Статистика
+record_withNumber,Record:,Рекорд:
+maxLevel_withNumber,Max level:,Макс. уровень:
+totalTime_withNumber,Total time:,Общее время:
+calories_withNumber,Calories:,Калории:
+trainings_withNumber,Trainings:,Тренировки:
+trainings_word,Trainings,Тренировки
+graph_yLabel,Number of pushups,Количество отжиманий
+period_total,Total:,Всего:
+period_week,Week:,Неделя:
+period_month,Month:,Месяц:

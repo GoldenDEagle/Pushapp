@@ -5,6 +5,11 @@ day_word,Day,День
 statistics_word,Stats,Статистика
 settings_word,Settings,Настройки
 training_word,Training,Тренировка
-skip_word,Skip,Пропустить
-next_word,Next,Дальше
+skip_word,SKIP,ПРОПУСТИТЬ
+next_word,NEXT,ДАЛЬШЕ
 hours_word,hours,часов
+warning_header,Warning!,Внимание!
+decline_button,CANCEL,ОТМЕНА
+accept_button,YES,ДА
+rest_word,Rest,Отдых
+continue_button,Continue,Продолжить

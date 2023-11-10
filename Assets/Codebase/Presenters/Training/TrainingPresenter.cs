@@ -2,9 +2,11 @@
 using Assets.Codebase.Data.Trainings;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Cysharp.Threading.Tasks;
 using System;
@@ -24,6 +26,8 @@ namespace Assets.Codebase.Presenters.Training
         // General screen
         public ReactiveProperty<string> CurrentPushupCountText { get; private set; }
         public ReactiveProperty<string> TrainingLiveResults { get; private set; }
+        public ReactiveProperty<string> TrainingNameString { get; private set; }
+        public ReactiveProperty<string> TotalPushupsString { get; private set; }
 
         // Resting widget
         public ReactiveProperty<string> StathamPhrase { get; private set; }
@@ -57,6 +61,8 @@ namespace Assets.Codebase.Presenters.Training
             TimerText = new ReactiveProperty<string>(string.Empty);
             TimerFillValue = new ReactiveProperty<float>(0f);
             StathamPhrase = new ReactiveProperty<string>(string.Empty);
+            TrainingNameString = new ReactiveProperty<string>(string.Empty);
+            TotalPushupsString = new ReactiveProperty<string>(string.Empty);
         }
 
         public override void CreateView()
@@ -64,15 +70,20 @@ namespace Assets.Codebase.Presenters.Training
             _stepNumber = 0;
             _currentTrainingResults.Clear();
 
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+            TrainingNameString.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
+
             // If test
             if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
             {
                 _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TestDay;
+                TrainingNameString.Value += localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
             }
             // If regular day
             else
             {
                 _trainingDescription = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value];
+                TrainingNameString.Value += localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + ProgressModel.SessionProgress.CurrentTrainingDayId.ToString();
             }
             _currentStepValue = _trainingDescription.Pushups[0];
 
@@ -143,6 +154,15 @@ namespace Assets.Codebase.Presenters.Training
         {
             CurrentPushupCountText.Value = _currentStepValue.ToString();
             TrainingLiveResults.Value = CreateResultsString();
+
+            if (_currentTrainingResults.Any())
+            {
+                TotalPushupsString.Value = NumberConverter.Convert(_currentTrainingResults.Sum());
+            }
+            else
+            {
+                TotalPushupsString.Value = 0.ToString();    
+            }
         }
 
         private string CreateResultsString()

@@ -23,6 +23,7 @@ namespace Assets.Codebase.Presenters.Warmup
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
         public ReactiveProperty<bool> IsTimerEnabled { get; private set; }
 
+        private const string GetReadyTimerKey = "timer_getReady";
 
         private WarmupDescription _description;
         private int _stepNumber;
@@ -134,7 +135,7 @@ namespace Assets.Codebase.Presenters.Warmup
 
         private async UniTask ExerciseCycle(CancellationToken cancellationToken)
         {
-            TimerText.Value = "Приготовьтесь!";
+            TimerText.Value = ServiceLocator.Container.Single<ILocalizationService>().LocalizeTextByKey(GetReadyTimerKey);
             TimerSliderValue.Value = 1f;
             var audioService = ServiceLocator.Container.Single<IAudioService>();
 

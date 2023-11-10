@@ -29,6 +29,12 @@ MonoBehaviour:
   - Name: Training
     Id: 951643928
     TextAsset: {fileID: 4900000, guid: bfcea2d593af19749a9c444aaa53af57, type: 3}
+  - Name: Settings
+    Id: 791735721
+    TextAsset: {fileID: 4900000, guid: e273b1a3512678a499920973e653757f, type: 3}
+  - Name: Stats
+    Id: 462108204
+    TextAsset: {fileID: 4900000, guid: be38d308153cf104bbdfb4e9c9de7145, type: 3}
   - Name: Results
     Id: 816495982
     TextAsset: {fileID: 4900000, guid: 52891c3a7ad0f5f4da84fe907c6ece06, type: 3}
