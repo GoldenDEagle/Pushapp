@@ -3,6 +3,11 @@
     public enum SoundId
     {
         // List all sounds:
-        None = 0,
+        None,
+        Click,
+        Switch,
+        Warning,
+        FinalSeconds,
+        TrainingEnd,
     }
 }

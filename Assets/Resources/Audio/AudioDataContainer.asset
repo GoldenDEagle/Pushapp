@@ -12,4 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10152805654e050408756e6f612fae2a, type: 3}
   m_Name: AudioDataContainer
   m_EditorClassIdentifier: 
-  _audioClips: []
+  _audioClips:
+  - Id: 1
+    Clip: {fileID: 8300000, guid: 2549f8aa026816e47bad949544399280, type: 3}
+  - Id: 2
+    Clip: {fileID: 8300000, guid: 86ce37c98981aa34fbd2eb661b4e57d9, type: 3}
+  - Id: 3
+    Clip: {fileID: 8300000, guid: 6c3828f59d1b9684185cab56626b31d1, type: 3}
+  - Id: 4
+    Clip: {fileID: 8300000, guid: aa056b8bd3d036e4899aea661d31a91f, type: 3}
+  - Id: 5
+    Clip: {fileID: 8300000, guid: faaf970ea2263974d9b106dc93a2f7d6, type: 3}
