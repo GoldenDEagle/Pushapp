@@ -34,9 +34,9 @@ namespace Assets.Codebase.Views.Settings
         {
             _presenter = presenter as ISettingsPresenter;
 
-            base.Init(presenter);
-
             ConfigureView();
+
+            base.Init(presenter);
         }
 
         protected override void SubscribeToUserInput()
