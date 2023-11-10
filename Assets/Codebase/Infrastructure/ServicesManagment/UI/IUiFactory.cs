@@ -13,5 +13,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         public GraphNode CreateNodeOnGraph();
         public WarningWindow CreateWarningWindow();
         public GraphTextLabel CreateGraphTextLabel();
+        public GraphConnection CreateGraphConnection();
     }
 }

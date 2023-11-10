@@ -7,7 +7,6 @@ using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Assets.Codebase.Views.Statistics.Graph
 {
@@ -17,7 +16,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
 
         private List<GraphNode> _displayedNodes;
         private List<GraphTextLabel> _displayedLabels;
-        private List<Transform> _displayedConnections;
+        private List<GraphConnection> _displayedConnections;
 
         private IUiFactory _uiFactory;
 
@@ -25,25 +24,9 @@ namespace Assets.Codebase.Views.Statistics.Graph
         {
             _uiFactory = ServiceLocator.Container.Single<IUiFactory>();
             _displayedNodes = new List<GraphNode>();
-            _displayedConnections = new List<Transform>();
+            _displayedConnections = new List<GraphConnection>();
             _displayedLabels = new List<GraphTextLabel>();
         }
-
-        //private void Start()
-        //{
-        //    DateTime today = DateTime.Now;
-        //    DateTime tomorrow = DateTime.Now.AddDays(2);
-        //    DateTime dayAfterTomorrow = DateTime.Now.AddDays(5);
-
-        //    List<TrainingResult> testResults = new List<TrainingResult>()
-        //    {
-        //        new TrainingResult(new List<int>() {2, 3, 2 }, 7, today),
-        //        new TrainingResult(new List<int>() { 5, 7, 4 }, 16, tomorrow),
-        //        new TrainingResult(new List<int>() { 10, 20, 10 }, 40, dayAfterTomorrow)
-        //    };
-
-        //    ShowGraph(new PeriodWithTrainingResults(testResults));
-        //}
 
         private GraphNode CreateNode(Vector2 anchoredPosition)
         {
@@ -51,8 +34,6 @@ namespace Assets.Codebase.Views.Statistics.Graph
             RectTransform nodeRect = node.RectTransform;
             nodeRect.SetParent(_graphContainer, false);
             nodeRect.anchoredPosition = anchoredPosition;
-            nodeRect.anchorMin = new Vector2(0, 0);
-            nodeRect.anchorMax = new Vector2(0, 0);
             _displayedNodes.Add(node);
 
             return node;
@@ -114,15 +95,12 @@ namespace Assets.Codebase.Views.Statistics.Graph
 
         private void CreateNodeConnection(Vector2 nodePositionA, Vector2 nodePositionB)
         {
-            GameObject dotConnection = new GameObject("dotConnection", typeof(Image));
+            var dotConnection = _uiFactory.CreateGraphConnection();
             dotConnection.transform.SetParent(_graphContainer, false);
-            dotConnection.GetComponent<Image>().color = Color.red;
-            _displayedConnections.Add(dotConnection.transform);
+            _displayedConnections.Add(dotConnection);
             RectTransform connectionRect = dotConnection.GetComponent<RectTransform>();
             Vector2 dir = (nodePositionB - nodePositionA).normalized;
             float distance = Vector2.Distance(nodePositionA, nodePositionB);
-            connectionRect.anchorMin = new Vector2(0, 0);
-            connectionRect.anchorMax = new Vector2(0, 0);
             connectionRect.sizeDelta = new Vector2(distance, 3f);
             connectionRect.anchoredPosition = nodePositionA + dir * distance * 0.5f;
             connectionRect.localEulerAngles = new Vector3(0, 0, GeometryHelpers.GetAngleFromVectorFloat(dir));

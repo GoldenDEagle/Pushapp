@@ -16,6 +16,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         private const string GraphCirclePath = "UIelements/CircleOnGraph";
         private const string WarningWindowPath = "UIelements/WarningWindow";
         private const string GraphTextLabelPath = "UIelements/GraphTextLabel";
+        private const string GraphConnectionPath = "UIelements/GraphConnection";
 
         private IAssetProvider _assetProvider;
 
@@ -56,6 +57,12 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         public GraphTextLabel CreateGraphTextLabel()
         {
             var element = _assetProvider.Instantiate(GraphTextLabelPath).GetComponent<GraphTextLabel>();
+            return element;
+        }
+
+        public GraphConnection CreateGraphConnection()
+        {
+            var element = _assetProvider.Instantiate(GraphConnectionPath).GetComponent<GraphConnection>();
             return element;
         }
     }
