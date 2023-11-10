@@ -765,6 +765,7 @@ GameObject:
   - component: {fileID: 8408841809784869819}
   - component: {fileID: 3941973135257201222}
   - component: {fileID: 4349596349644874030}
+  - component: {fileID: 5643837198703936129}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -872,7 +873,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8408841809784869819}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5643837198703936129}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4349596349644874030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -893,6 +907,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &5643837198703936129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458888948080216419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &2556060155364481753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,6 +2222,7 @@ GameObject:
   - component: {fileID: 7117171387593633780}
   - component: {fileID: 6327181993482904607}
   - component: {fileID: 5110196276747923286}
+  - component: {fileID: 3899413346867194161}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -2302,7 +2330,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7117171387593633780}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3899413346867194161}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5110196276747923286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2323,6 +2364,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &3899413346867194161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4182146989326061306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &4298704944851956590
 GameObject:
   m_ObjectHideFlags: 0

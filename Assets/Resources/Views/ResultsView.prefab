@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7624596312013433990}
   - component: {fileID: 4088765321595958106}
   - component: {fileID: 8836044103969245381}
-  - component: {fileID: 6701806109057667775}
   - component: {fileID: 471954378592848821}
   m_Layer: 5
   m_Name: Button
@@ -77,50 +76,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6701806109057667775
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 259753256111869462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 8836044103969245381}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &471954378592848821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,6 +648,7 @@ GameObject:
   - component: {fileID: 7055784060118807889}
   - component: {fileID: 5139888554508082273}
   - component: {fileID: 5525536475153438431}
+  - component: {fileID: 8881262021681497729}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -801,7 +757,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1917918260112210513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8881262021681497729}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5139888554508082273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -837,6 +806,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &8881262021681497729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665498818923644310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &1716897318236235202
 GameObject:
   m_ObjectHideFlags: 0
@@ -3307,6 +3289,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Switch
       objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3143726908307170928}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySound
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Assets.Codebase.Utils.GOComponents.PlaySoundComponent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3488040864214956121, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4009993691993140259, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
       propertyPath: m_Pivot.x
       value: 1
@@ -3401,6 +3411,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b101b216d217844db4905fc710b4a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3143726908307170928 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5356938120238101995, guid: 94c45e286360d414bba934fa807ed5b5, type: 3}
+  m_PrefabInstance: {fileID: 7059225431952987035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &6219809895474593720 stripped

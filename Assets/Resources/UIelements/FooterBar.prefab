@@ -86,6 +86,7 @@ GameObject:
   - component: {fileID: 3909226662509571561}
   - component: {fileID: 4504323664972572775}
   - component: {fileID: 1152947658387034373}
+  - component: {fileID: 2381970421089213357}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -164,7 +165,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2381970421089213357}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &2381970421089213357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271519606694837971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &1289917640546142509
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,6 +499,7 @@ GameObject:
   - component: {fileID: 5952350672811377417}
   - component: {fileID: 620236120709454113}
   - component: {fileID: 3937397252107509414}
+  - component: {fileID: 535494195603672157}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -550,7 +578,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 535494195603672157}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &535494195603672157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2911837561964981736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &4249542204613892714
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +616,7 @@ GameObject:
   - component: {fileID: 2069283127238359937}
   - component: {fileID: 1983931703331739534}
   - component: {fileID: 6034467470348900788}
+  - component: {fileID: 7274907815676774659}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -640,7 +695,33 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7274907815676774659}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7274907815676774659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4249542204613892714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &5511150153237827685
 GameObject:
   m_ObjectHideFlags: 0

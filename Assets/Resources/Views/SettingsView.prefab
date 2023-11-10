@@ -4670,6 +4670,7 @@ GameObject:
   - component: {fileID: 2874325266549163546}
   - component: {fileID: 7371231140034990434}
   - component: {fileID: 7057416553746683844}
+  - component: {fileID: 1470032619201954014}
   m_Layer: 5
   m_Name: DeleteButton
   m_TagString: Untagged
@@ -4778,7 +4779,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2874325266549163546}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1470032619201954014}
+        m_TargetAssemblyTypeName: Assets.Codebase.Utils.GOComponents.PlaySoundComponent,
+          Assembly-CSharp
+        m_MethodName: PlaySound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7057416553746683844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4799,6 +4813,19 @@ MonoBehaviour:
   m_FlexibleWidth: -1
   m_FlexibleHeight: -1
   m_LayoutPriority: 1
+--- !u!114 &1470032619201954014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8706870923263361914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef2be55feef9ef44bb8d1ca09a8083e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundId: 1
 --- !u!1 &8916154818411756140
 GameObject:
   m_ObjectHideFlags: 0

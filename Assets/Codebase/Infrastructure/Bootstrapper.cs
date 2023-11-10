@@ -6,6 +6,7 @@ using Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation;
 using Assets.Codebase.Utils.GOComponents;
 using Assets.Codebase.Views.Base;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Codebase.Infrastructure
 {
