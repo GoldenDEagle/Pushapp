@@ -20,6 +20,7 @@ namespace Assets.Codebase.Views.PlanPreview
         [SerializeField] private TMP_Text _restingTime;
         [SerializeField] private TMP_Text _totalPushupsCount;
         [SerializeField] private Image _backgroundImage;
+        [SerializeField] private Image _restImage;
 
         //private TrainingDay _trainingDay;
 
@@ -29,9 +30,10 @@ namespace Assets.Codebase.Views.PlanPreview
 
             _trainingDayId.text = dayId.ToString();
             _pushupsList.text = trainingDay.Pushups.ToPushupsListString();
-            _restingTime.text = trainingDay.RestingTime.ToString() + localizationService.LocalizeTextByKey("hours_word");
+            _restingTime.text = trainingDay.RestingTime.ToString();
             _totalPushupsCount.text = localizationService.LocalizeTextByKey(Constants.TotalWithCountKey) + trainingDay.Pushups.Sum().ToString();
             _backgroundImage.color = widgetColor;
+            _restImage.color = widgetColor;
         }
     }
 }
