@@ -26,10 +26,9 @@ namespace Assets.Codebase.Data.Achievements
 
         public void UnlockAchievement(string tag)
         {
-            if (GP_Achievements.Has(tag))
-            {
-                GP_Achievements.Unlock(tag);
-            }
+            if (GP_Achievements.Has(tag)) return;
+
+            GP_Achievements.Unlock(tag);
         }
 
         public void UnlockPushupsAchievement(int achievementId)

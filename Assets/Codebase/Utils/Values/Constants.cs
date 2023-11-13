@@ -24,6 +24,7 @@ namespace Assets.Codebase.Utils.Values
         public static readonly string EarlyTrainingWarningKey = "warning_earlyTraining";
         public static readonly string ProgramSwitchWarningKey = "warning_programSwitch";
 
+
         // Difficulty level colors
         public static Dictionary<DifficultyLevel, Color> LevelColors = new Dictionary<DifficultyLevel, Color>()
         {
