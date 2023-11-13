@@ -3,6 +3,7 @@ using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Helpers;
+using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
@@ -14,8 +15,6 @@ namespace Assets.Codebase.Presenters.Settings
 {
     public class SettingsPresenter : BasePresenter, ISettingsPresenter
     {
-        private const string DeleteProgressWarningKey = "Вы собираетесь удалить весь прогресс. Вы уверены?";
-
         public SettingsPresenter()
         {
             ViewId = ViewId.SettingsView;
@@ -73,7 +72,7 @@ namespace Assets.Codebase.Presenters.Settings
 
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
             var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
-            warningWindow.SetWarningText(localizationService.LocalizeTextByKey(DeleteProgressWarningKey));
+            warningWindow.SetWarningText(localizationService.LocalizeTextByKey(Constants.DeleteProgressWarningKey));
             warningWindow.OnWindowClosed.Subscribe(value => OnDeleteProgressWarningClosed(value)).AddTo(CompositeDisposable);
 
             // If accepted -> delete

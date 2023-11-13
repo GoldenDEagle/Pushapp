@@ -1,4 +1,5 @@
 ﻿using Assets.Codebase.Infrastructure.ServicesManagment;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Values;
@@ -40,6 +41,28 @@ namespace Assets.Codebase.Presenters.PlanPreview
 
         public void SelectPlan()
         {
+            if (ProgressModel.SessionProgress.IsTrainingPlanSelected.Value)
+            {
+                // Show warning
+                var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+                var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
+                warningWindow.SetWarningText(localizationService.LocalizeTextByKey(Constants.ProgramSwitchWarningKey));
+                warningWindow.OnWindowClosed.Subscribe(value => OnWarningWindowClosed(value)).AddTo(CompositeDisposable);
+            }
+            else
+            {
+                PickAProgram();
+            }
+        }
+
+        public void BackToSelection()
+        {
+            GameplayModel.ActivateView(ViewId.PlanSelectionView);
+        }
+
+
+        private void PickAProgram()
+        {
             ProgressModel.SessionProgress.IsTrainingPlanSelected.Value = true;
             ProgressModel.SessionProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
             ProgressModel.SessionProgress.CurrentTrainingDayId.Value = 1;
@@ -47,9 +70,12 @@ namespace Assets.Codebase.Presenters.PlanPreview
             GameplayModel.ActivateView(ViewId.MainView);
         }
 
-        public void BackToSelection()
+        private void OnWarningWindowClosed(bool wasAccepted)
         {
-            GameplayModel.ActivateView(ViewId.PlanSelectionView);
+            if (wasAccepted)
+            {
+                PickAProgram();
+            }
         }
     }
 }

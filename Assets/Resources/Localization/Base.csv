@@ -14,3 +14,6 @@ accept_button,YES,ДА
 rest_word,Rest,Отдых
 continue_button,Continue,Продолжить
 ok_button,OK,ОК
+warning_deleteProgress,You're going to delete all your training progress. Are you sure?,Вы собираетесь удалить весь прогресс. Вы уверены?
+warning_earlyTraining,It's not yet training time. Are you sure you want to continue?,Время тренировки еще не пришло. Вы точно хотите продолжить?
+warning_programSwitch,"If you switch training program now, you will lose progress on your current level. Are you sure?","Если сменить программу сейчас, прогресс на текущем уровне будет потерян. Все равно продолжить?"
