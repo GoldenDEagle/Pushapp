@@ -1,9 +1,12 @@
 using Assets.Codebase.Infrastructure.Initialization;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Gameplay;
+using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.Progress;
+using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Infrastructure.ServicesManagment.ViewCreation;
 using Assets.Codebase.Utils.GOComponents;
+using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,6 +44,8 @@ namespace Assets.Codebase.Infrastructure
             else
             {
                 gameplayModel.ActivateView(ViewId.PlanSelectionView);
+                var infoWindow = ServiceLocator.Container.Single<IUiFactory>().CreateInfoWindow();
+                infoWindow.SetInfoText(ServiceLocator.Container.Single<ILocalizationService>().LocalizeTextByKey(Constants.WelcomeInfoKey));
             }
         }
     }

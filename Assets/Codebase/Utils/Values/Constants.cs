@@ -13,6 +13,7 @@ namespace Assets.Codebase.Utils.Values
 
 
         // Common localization keys
+        public static readonly string WelcomeInfoKey = "welcome_info";
         public static readonly string LevelWordKey = "level_word";
         public static readonly string TestTrainingNameKey = "test_word";
         public static readonly string DayTrainingNameKey = "day_word";

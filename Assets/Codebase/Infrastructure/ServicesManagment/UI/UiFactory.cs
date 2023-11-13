@@ -17,6 +17,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         private const string WarningWindowPath = "UIelements/WarningWindow";
         private const string GraphTextLabelPath = "UIelements/GraphTextLabel";
         private const string GraphConnectionPath = "UIelements/GraphConnection";
+        private const string InfoWindowPath = "UIelements/InfoWindow";
 
         private IAssetProvider _assetProvider;
 
@@ -50,6 +51,13 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.UI
         public WarningWindow CreateWarningWindow()
         {
             var element = _assetProvider.Instantiate(WarningWindowPath).GetComponent<WarningWindow>();
+            element.transform.SetParent(_uiRoot, false);
+            return element;
+        }
+
+        public InfoWindow CreateInfoWindow()
+        {
+            var element = _assetProvider.Instantiate(InfoWindowPath).GetComponent<InfoWindow>();
             element.transform.SetParent(_uiRoot, false);
             return element;
         }

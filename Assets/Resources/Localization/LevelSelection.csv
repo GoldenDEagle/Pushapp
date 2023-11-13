@@ -1,4 +1,6 @@
 Key,English,Russian
+welcome_header,Welcome!,Добро пожаловать!
+welcome_info,Choose your training level based on your regular push up count.,"Выберите свой уровень, исходя из того, сколько отжиманий вы можете сделать."
 chooseLevel_header,Choose level,Выбери уровень
 trainingProgram_header,Trainings schedule,Программа тренировок
 chooseProgram_button,Accept program,Выбрать программу
