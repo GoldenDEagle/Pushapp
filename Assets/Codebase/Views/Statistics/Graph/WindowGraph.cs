@@ -99,7 +99,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
 
                 var label = _uiFactory.CreateGraphTextLabel();
                 label.RectTransform.SetParent(_graphContainer);
-                label.RectTransform.anchoredPosition = new Vector2(xPosition, -50f);
+                label.RectTransform.anchoredPosition = new Vector2(xPosition - 5f, -50f);
                 string labelText = results[i].Date.DateTime.ToShortDateString().Substring(0,5);
                 label.SetText(labelText);
                 _displayedLabels.Add(label);
