@@ -45,7 +45,7 @@ namespace Assets.Codebase.Views.MainMenu
             _bottomPanel.SettingsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToSettings()).AddTo(CompositeDisposable);
             _bottomPanel.StatisticsButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToStatistics()).AddTo(CompositeDisposable);
 
-            _startTrainingButton.OnClickAsObservable().Subscribe(_ => _presenter.StartTraining()).AddTo(CompositeDisposable);
+            _startTrainingButton.OnClickAsObservable().Subscribe(_ => _presenter.StartButtonClicked()).AddTo(CompositeDisposable);
             _showAchievementsButton.OnClickAsObservable().Subscribe(_ => _presenter.ShowAchievements()).AddTo(CompositeDisposable);
             _changePlanButton.OnClickAsObservable().Subscribe(_ => _presenter.ChangePlan()).AddTo(CompositeDisposable);
         }

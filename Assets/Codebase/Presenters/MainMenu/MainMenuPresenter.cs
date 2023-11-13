@@ -2,11 +2,13 @@
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
+using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
+using System;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.MainMenu
@@ -22,6 +24,8 @@ namespace Assets.Codebase.Presenters.MainMenu
         public ReactiveProperty<string> NextTrainingLevelText { get; private set; }
         public ReactiveProperty<string> NextTrainingNameText { get; private set; }
         public ReactiveProperty<string> NextTrainingPushupListText { get; private set; }
+
+        private IDisposable _warningWindowSubscription;
 
         public MainMenuPresenter()
         {
@@ -63,17 +67,21 @@ namespace Assets.Codebase.Presenters.MainMenu
             ServiceLocator.Container.Single<IAchievementsService>().ShowAchievementsList();
         }
 
-        public void StartTraining()
+        public void StartButtonClicked()
         {
-            GameplayModel.StartTrainingTimer();
-            if (ProgressModel.SessionProgress.IsWarmupEnabled.Value)
+            var currentTime = TimeProvider.GetServerTime();
+
+            if (currentTime.Date < ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date)
             {
-                GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
-                GameplayModel.ActivateView(ViewId.WarmupView);
+                // Show warning
+                var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+                var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
+                warningWindow.SetWarningText(localizationService.LocalizeTextByKey(Constants.EarlyTrainingWarningKey));
+                _warningWindowSubscription = warningWindow.OnWindowClosed.Subscribe(value => OnWarningWindowClosed(value)).AddTo(CompositeDisposable);
             }
             else
             {
-                GameplayModel.ActivateView(ViewId.TrainingView);
+                StartTraining();
             }
         }
 
@@ -88,6 +96,7 @@ namespace Assets.Codebase.Presenters.MainMenu
         }
 
         
+
         private void ConfigureView()
         {
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
@@ -111,6 +120,30 @@ namespace Assets.Codebase.Presenters.MainMenu
             {
                 NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + " " + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
                 NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1].Pushups.ToPushupsListString();
+            }
+        }
+
+        private void StartTraining()
+        {
+            GameplayModel.StartTrainingTimer();
+            if (ProgressModel.SessionProgress.IsWarmupEnabled.Value)
+            {
+                GameplayModel.CurrentWarmupMode.Value = WarmupMode.Warmup;
+                GameplayModel.ActivateView(ViewId.WarmupView);
+            }
+            else
+            {
+                GameplayModel.ActivateView(ViewId.TrainingView);
+            }
+        }
+
+        private void OnWarningWindowClosed(bool wasAccepted)
+        {
+            CompositeDisposable.Remove(_warningWindowSubscription);
+
+            if (wasAccepted)
+            {
+                StartTraining();
             }
         }
     }

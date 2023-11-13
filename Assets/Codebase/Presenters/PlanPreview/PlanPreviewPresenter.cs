@@ -5,6 +5,7 @@ using Assets.Codebase.Presenters.Base;
 using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.PlanPreview;
+using System;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.PlanPreview
@@ -12,6 +13,8 @@ namespace Assets.Codebase.Presenters.PlanPreview
     public class PlanPreviewPresenter : BasePresenter, IPlanPreviewPresenter
     {
         public Subject<TrainingDayWidget> OnTrainingDayAdded { get; private set; }
+
+        private IDisposable _warningWindowSubscription;
 
         public PlanPreviewPresenter()
         {
@@ -47,7 +50,7 @@ namespace Assets.Codebase.Presenters.PlanPreview
                 var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
                 var warningWindow = ServiceLocator.Container.Single<IUiFactory>().CreateWarningWindow();
                 warningWindow.SetWarningText(localizationService.LocalizeTextByKey(Constants.ProgramSwitchWarningKey));
-                warningWindow.OnWindowClosed.Subscribe(value => OnWarningWindowClosed(value)).AddTo(CompositeDisposable);
+                _warningWindowSubscription = warningWindow.OnWindowClosed.Subscribe(value => OnWarningWindowClosed(value)).AddTo(CompositeDisposable);
             }
             else
             {
@@ -72,6 +75,8 @@ namespace Assets.Codebase.Presenters.PlanPreview
 
         private void OnWarningWindowClosed(bool wasAccepted)
         {
+            CompositeDisposable.Remove(_warningWindowSubscription);
+
             if (wasAccepted)
             {
                 PickAProgram();

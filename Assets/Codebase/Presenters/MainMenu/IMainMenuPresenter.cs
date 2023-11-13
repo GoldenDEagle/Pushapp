@@ -17,7 +17,7 @@ namespace Assets.Codebase.Presenters.MainMenu
         public ReactiveProperty<string> NextTrainingNameText { get; }
         public ReactiveProperty<string> NextTrainingPushupListText { get; }
 
-        public void StartTraining();
+        public void StartButtonClicked();
         public void ChangePlan();
         public void ShowAchievements();
 
