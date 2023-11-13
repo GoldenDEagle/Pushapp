@@ -1,11 +1,13 @@
 using Assets.Codebase.Presenter.Base;
-using TMPro;
-using UnityEngine.UI;
+using UniRx;
 
 namespace Assets.Codebase.Presenters.Settings
 {
     public interface ISettingsPresenter : IPresenter
     {
+        public ReactiveProperty<string> WarmupTimeString { get; }
+        public ReactiveProperty<string> StretchingTimeString { get; }
+
         public void GoToMain();
         public void GoToStatistics();
 
@@ -14,9 +16,11 @@ namespace Assets.Codebase.Presenters.Settings
         public void SetAutoWarmupSwitch(bool isEnabled);
         public void SetStretchingStatus(bool isEnabled);
         public void SetAutoStretchingSwitch(bool isEnabled);
-        public void DeleteAllTrainingData();
-        public void ValidateTimeInput(string inputText, TMP_InputField inputField);
-        public void SetWarmupExerciseTime(string formattedTime);
-        public void SetStretchingExerciseTime(string formattedTime);
+        public void DeleteTrainingDataClicked();
+        //public void ValidateTimeInput(string inputText, TMP_InputField inputField);
+        //public void SetWarmupExerciseTime(string formattedTime);
+        //public void SetStretchingExerciseTime(string formattedTime);
+        public void SetWarmupExerciseTime(float timeInSeconds);
+        public void SetStretchingExerciseTime(float timeInSeconds);
     }
 }

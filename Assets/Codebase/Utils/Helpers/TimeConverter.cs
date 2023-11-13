@@ -7,7 +7,11 @@ namespace Assets.Codebase.Utils.Helpers
 {
     public static class TimeConverter
     {
-        // returns time in 00:00
+        /// <summary>
+        /// Returns time in mm:ss
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
         public static string TimeInMinutes(float time)
         {
             int minutes = Mathf.FloorToInt(time / 60f);
@@ -18,6 +22,11 @@ namespace Assets.Codebase.Utils.Helpers
             return formattedTime;
         }
 
+        /// <summary>
+        /// Returns time in hh:mm
+        /// </summary>
+        /// <param name="totalSeconds"></param>
+        /// <returns></returns>
         public static string TimeInHours(double totalSeconds)
         {
             TimeSpan time = TimeSpan.FromSeconds(totalSeconds);
