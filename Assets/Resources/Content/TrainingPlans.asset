@@ -34,7 +34,7 @@ MonoBehaviour:
       _restingTime: 48
   - _level: 2
     _levelRequirement: requirement_2
-    _difficultyLevel: 1
+    _difficultyLevel: 0
     _trainingDays:
     - _pushups: 0500000006000000040000000400000005000000
       _restingTime: 48
@@ -91,7 +91,7 @@ MonoBehaviour:
       _restingTime: 48
   - _level: 5
     _levelRequirement: requirement_5
-    _difficultyLevel: 2
+    _difficultyLevel: 1
     _trainingDays:
     - _pushups: 0c000000110000000d0000000d00000011000000
       _restingTime: 48
@@ -107,4 +107,223 @@ MonoBehaviour:
       _restingTime: 72
     _testDay:
       _pushups: 19000000
+      _restingTime: 48
+  - _level: 6
+    _levelRequirement: requirement_6
+    _difficultyLevel: 1
+    _trainingDays:
+    - _pushups: 1200000016000000120000001200000016000000
+      _restingTime: 48
+    - _pushups: 1300000017000000120000001200000017000000
+      _restingTime: 48
+    - _pushups: 1400000018000000140000001400000019000000
+      _restingTime: 72
+    - _pushups: 160000001900000014000000140000001b000000
+      _restingTime: 48
+    - _pushups: 170000001a00000015000000150000001c000000
+      _restingTime: 48
+    - _pushups: 180000001c00000017000000170000001e000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 1e000000
+      _restingTime: 48
+  - _level: 7
+    _levelRequirement: requirement_7
+    _difficultyLevel: 1
+    _trainingDays:
+    - _pushups: 180000001b00000018000000180000001e000000
+      _restingTime: 48
+    - _pushups: 1a0000001c00000018000000180000001e000000
+      _restingTime: 48
+    - _pushups: 1a0000001c00000019000000190000001e000000
+      _restingTime: 72
+    - _pushups: 1b0000001e0000001a0000001a0000001f000000
+      _restingTime: 48
+    - _pushups: 1b0000001f0000001b0000001b00000020000000
+      _restingTime: 48
+    - _pushups: 1c000000200000001c0000001c00000020000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 23000000
+      _restingTime: 48
+  - _level: 8
+    _levelRequirement: requirement_8
+    _difficultyLevel: 2
+    _trainingDays:
+    - _pushups: 1c000000200000001c0000001c00000020000000
+      _restingTime: 48
+    - _pushups: 1e000000200000001d0000001d00000021000000
+      _restingTime: 48
+    - _pushups: 1f000000210000001d0000001d00000022000000
+      _restingTime: 72
+    - _pushups: 20000000220000001e0000001e00000023000000
+      _restingTime: 48
+    - _pushups: 21000000230000001f0000001f00000023000000
+      _restingTime: 48
+    - _pushups: 2200000024000000200000002000000025000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 28000000
+      _restingTime: 48
+  - _level: 9
+    _levelRequirement: requirement_9
+    _difficultyLevel: 2
+    _trainingDays:
+    - _pushups: 2300000024000000200000002000000025000000
+      _restingTime: 48
+    - _pushups: 2300000025000000210000002100000026000000
+      _restingTime: 48
+    - _pushups: 2400000026000000220000002200000026000000
+      _restingTime: 72
+    - _pushups: 2400000027000000230000002300000027000000
+      _restingTime: 48
+    - _pushups: 2500000028000000240000002400000027000000
+      _restingTime: 48
+    - _pushups: 2600000029000000250000002500000029000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 2d000000
+      _restingTime: 48
+  - _level: 10
+    _levelRequirement: requirement_10
+    _difficultyLevel: 2
+    _trainingDays:
+    - _pushups: 1e000000220000001e0000001e00000028000000
+      _restingTime: 48
+    - _pushups: 1300000013000000170000001700000013000000130000001600000025000000
+      _restingTime: 48
+    - _pushups: 14000000140000001b0000001b0000001500000015000000150000002c000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 32000000
+      _restingTime: 48
+  - _level: 11
+    _levelRequirement: requirement_11
+    _difficultyLevel: 2
+    _trainingDays:
+    - _pushups: 1e0000002700000023000000230000002a000000
+      _restingTime: 48
+    - _pushups: 140000001400000017000000170000001400000014000000120000001200000035000000
+      _restingTime: 48
+    - _pushups: 16000000160000001e0000001e0000001900000019000000120000001200000037000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 37000000
+      _restingTime: 48
+  - _level: 12
+    _levelRequirement: requirement_12
+    _difficultyLevel: 2
+    _trainingDays:
+    - _pushups: 1e0000002c000000280000002800000037000000
+      _restingTime: 48
+    - _pushups: 16000000160000001b0000001b000000180000001700000012000000120000003a000000
+      _restingTime: 48
+    - _pushups: 1a0000001a00000021000000210000001a0000001a00000016000000160000003c000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 3c000000
+      _restingTime: 48
+  - _level: 13
+    _levelRequirement: requirement_13
+    _difficultyLevel: 3
+    _trainingDays:
+    - _pushups: 210000002c0000002a0000002a0000002f000000
+      _restingTime: 48
+    - _pushups: 16000000160000001c0000001c000000180000001800000013000000130000003a000000
+      _restingTime: 48
+    - _pushups: 1a000000190000001e0000001e0000001a0000001b00000017000000160000003a000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 41000000
+      _restingTime: 48
+  - _level: 14
+    _levelRequirement: requirement_14
+    _difficultyLevel: 3
+    _trainingDays:
+    - _pushups: 23000000310000002d0000002d00000037000000
+      _restingTime: 48
+    - _pushups: 16000000160000001e0000001e000000180000001800000012000000120000003b000000
+      _restingTime: 48
+    - _pushups: 1c0000001c00000020000000200000001b0000001b00000017000000170000003c000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 46000000
+      _restingTime: 48
+  - _level: 15
+    _levelRequirement: requirement_15
+    _difficultyLevel: 3
+    _trainingDays:
+    - _pushups: 24000000330000002e0000002d00000038000000
+      _restingTime: 48
+    - _pushups: 17000000170000001e000000200000001a0000001800000014000000140000003e000000
+      _restingTime: 48
+    - _pushups: 1e0000001c00000022000000220000001c0000001c000000180000001800000041000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 4b000000
+      _restingTime: 48
+  - _level: 16
+    _levelRequirement: requirement_16
+    _difficultyLevel: 3
+    _trainingDays:
+    - _pushups: 280000003500000030000000300000003e000000
+      _restingTime: 48
+    - _pushups: 1c0000001800000021000000210000001c0000001c000000160000001600000041000000
+      _restingTime: 48
+    - _pushups: 200000001d00000023000000230000001e0000001e000000170000001600000044000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 50000000
+      _restingTime: 48
+  - _level: 17
+    _levelRequirement: requirement_17
+    _difficultyLevel: 3
+    _trainingDays:
+    - _pushups: 280000003500000030000000300000003e000000
+      _restingTime: 48
+    - _pushups: 1c0000001800000021000000210000001c0000001c000000160000001600000041000000
+      _restingTime: 48
+    - _pushups: 200000001e00000023000000230000001e0000001e000000170000001600000044000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 55000000
+      _restingTime: 48
+  - _level: 18
+    _levelRequirement: requirement_18
+    _difficultyLevel: 4
+    _trainingDays:
+    - _pushups: 2c0000003a000000340000003500000046000000
+      _restingTime: 48
+    - _pushups: 1e0000001a00000023000000230000001f000000200000001a0000001a00000046000000
+      _restingTime: 48
+    - _pushups: 220000001f000000250000002500000020000000200000001c0000001c00000049000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 5a000000
+      _restingTime: 48
+  - _level: 19
+    _levelRequirement: requirement_19
+    _difficultyLevel: 4
+    _trainingDays:
+    - _pushups: 2f0000003e00000037000000390000004b000000
+      _restingTime: 48
+    - _pushups: 210000001c000000250000002500000020000000210000001c0000001c00000048000000
+      _restingTime: 48
+    - _pushups: 2300000020000000260000002600000022000000220000001e0000001e0000004b000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 5f000000
+      _restingTime: 48
+  - _level: 20
+    _levelRequirement: requirement_20
+    _difficultyLevel: 4
+    _trainingDays:
+    - _pushups: 32000000410000003a0000003c0000004e000000
+      _restingTime: 48
+    - _pushups: 230000001e000000270000002700000023000000230000001e0000001e0000004b000000
+      _restingTime: 48
+    - _pushups: 25000000230000002700000028000000240000002400000021000000200000004d000000
+      _restingTime: 72
+    _testDay:
+      _pushups: 64000000
       _restingTime: 48

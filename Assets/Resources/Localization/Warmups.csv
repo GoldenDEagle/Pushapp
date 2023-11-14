@@ -1,7 +1,24 @@
 Key,English,Russian
 warmup_header,Warm Up!,Разомнись!
 timer_getReady,Get Ready!,Приготовьтесь!
-warmup_0,Turn your head!,Покрути головой
-warmup_1,Lift your leg!,Подними ногу!
-warmup_2,Jump!,Прыгай!
-stretching_0,Stretch your arm.,Потяни руку.
+warmup_0,Circular head movements (tilts),Круговые движения головой (наклоны)
+warmup_1,Forearm rotations,Вращения предплечьями
+warmup_2,Two-handed rotations,Вращения двумя руками
+warmup_3,Forward and backward shoulder rotations,Вращения плечами вперед и назад
+warmup_4,Hand rotation,Вращение кистями
+warmup_5,Hip rotations,Круговые вращения бедрами
+warmup_6,Swings left and right,Махи влево и вправо
+warmup_7,Left and right leg bends,Наклоны к левой и правой ноге
+warmup_8,Rotation with leg bent at the knee,"Вращение ногой, согнутой в колене"
+warmup_9,Rotation of the heel of the foot,Вращение пяткой стопы
+warmup_10,Scissors,Ножницы
+warmup_11,Superman,Супермен
+stretching_0,Put your elbow on your shoulder,Прижимаем локоть к плечу
+stretching_1,Pull your elbow behind your back,Тянем локоть за спиной
+stretching_2,Put your hands behind your back,Заводим руки за спину
+stretching_3,Bring your hands together behind your back,Сведение рук за спиной
+stretching_4,Backstroke,Отведение рук за спиной
+stretching_5,Semi-recumbent bends,Наклоны полулежа
+stretching_6,Lying back flexion (cobra),Прогиб спины лежа (кобра)
+stretching_7,Stretch in the doorway,Растяжка в дверном проеме
+stretching_8,Stretch with wall support,Ратяжка с упором на стену
