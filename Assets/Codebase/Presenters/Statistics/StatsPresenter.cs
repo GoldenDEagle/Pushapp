@@ -83,6 +83,7 @@ namespace Assets.Codebase.Presenters.Statistics
             string trainingsCountString = NumberConverter.Convert(resultList.Count);
             string caloriesString = NumberConverter.Convert(totalPushups * Constants.CaloriesPerPushup);
             string time = TimeConverter.TimeInHours(totalTime);
+            string level = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
 
             string recordString;
             if (!resultList.Any())
@@ -94,7 +95,7 @@ namespace Assets.Codebase.Presenters.Statistics
                 recordString = NumberConverter.Convert(resultList.Max(x => x.TotalPushups));
             }
 
-            return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString, string.Empty, time);
+            return new StatsWidgetInfo(totalPushupsString, recordString, trainingsCountString, caloriesString, level, time);
         }
 
         public void GoToNextResultsSegment()
