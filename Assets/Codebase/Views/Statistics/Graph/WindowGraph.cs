@@ -63,31 +63,35 @@ namespace Assets.Codebase.Views.Statistics.Graph
         public async UniTaskVoid ShowGraph(PeriodWithTrainingResults resultsForPeriod)
         {
             ClearGraph();
-            var results = resultsForPeriod.List;
+            var initialResults = resultsForPeriod.List;
+            var bestResults = GetBestResults(initialResults);
 
-            if (!results.Any()) return;
+            if (!bestResults.Any()) return;
 
             await UniTask.DelayFrame(2);
             float graphHeight = _graphContainer.sizeDelta.y;
-            float yMaximum = results.Max(x => x.TotalPushups);
+            float yMaximum = bestResults.Max(x => x.TotalPushups);
             float xStep = 75f;
 
             GraphNode previousNode = null;
-            TrainingResult previousDrawnResult = null;
-            for (int i = 0; i < results.Count; i++)
+            //TrainingResult previousDrawnResult = null;
+            for (int i = 0; i < bestResults.Count; i++)
             {
                 // Only best result for each date
-                if (previousDrawnResult != null)
-                {
-                    if (results[i].Date.DateTime.Date == previousDrawnResult.Date.DateTime.Date)
-                    {
-                        if (results[i].TotalPushups <= previousDrawnResult.TotalPushups) break;
-                    }
-                }
-                previousDrawnResult = results[i];
+                //if (previousDrawnResult != null)
+                //{
+                //    if (bestResults[i].Date.DateTime.Date == previousDrawnResult.Date.DateTime.Date)
+                //    {
+                //        if (bestResults[i].TotalPushups <= previousDrawnResult.TotalPushups)
+                //        {
+                //            break;
+                //        }
+                //    }
+                //}
+                //previousDrawnResult = bestResults[i];
 
                 float xPosition = 10f + i * xStep;
-                float yPosition = (results[i].TotalPushups / yMaximum) * graphHeight;
+                float yPosition = (bestResults[i].TotalPushups / yMaximum) * graphHeight;
                 var newNode = CreateNode(new Vector2(xPosition, yPosition));
 
                 if (previousNode != null)
@@ -100,7 +104,7 @@ namespace Assets.Codebase.Views.Statistics.Graph
                 var label = _uiFactory.CreateGraphTextLabel();
                 label.RectTransform.SetParent(_graphContainer);
                 label.RectTransform.anchoredPosition = new Vector2(xPosition - 5f, -50f);
-                string labelText = results[i].Date.DateTime.ToShortDateString().Substring(0,5);
+                string labelText = bestResults[i].Date.DateTime.ToShortDateString().Substring(0,5);
                 label.SetText(labelText);
                 _displayedLabels.Add(label);
             }
@@ -117,6 +121,17 @@ namespace Assets.Codebase.Views.Statistics.Graph
             connectionRect.sizeDelta = new Vector2(distance, 3f);
             connectionRect.anchoredPosition = nodePositionA + dir * distance * 0.5f;
             connectionRect.localEulerAngles = new Vector3(0, 0, GeometryHelpers.GetAngleFromVectorFloat(dir));
+        }
+
+        private List<TrainingResult> GetBestResults(List<TrainingResult> trainingResults)
+        {
+            // Group by date and select the result with the maximum value for each date
+            var bestResults = trainingResults
+                .GroupBy(result => result.Date.DateTime.Date)
+                .Select(group => group.OrderByDescending(result => result.TotalPushups).First())
+                .ToList();
+
+            return bestResults;
         }
     }
 }
