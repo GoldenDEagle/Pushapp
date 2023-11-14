@@ -16,12 +16,36 @@ MonoBehaviour:
   - _stepId: 0
     _stepDescription: warmup_0
     _stepGraphic: {fileID: 0}
-    _stepDurationSeconds: 30
   - _stepId: 1
     _stepDescription: warmup_1
     _stepGraphic: {fileID: 0}
-    _stepDurationSeconds: 30
   - _stepId: 2
     _stepDescription: warmup_2
     _stepGraphic: {fileID: 0}
-    _stepDurationSeconds: 30
+  - _stepId: 3
+    _stepDescription: warmup_3
+    _stepGraphic: {fileID: 0}
+  - _stepId: 4
+    _stepDescription: warmup_4
+    _stepGraphic: {fileID: 0}
+  - _stepId: 5
+    _stepDescription: warmup_5
+    _stepGraphic: {fileID: 0}
+  - _stepId: 6
+    _stepDescription: warmup_6
+    _stepGraphic: {fileID: 0}
+  - _stepId: 7
+    _stepDescription: warmup_7
+    _stepGraphic: {fileID: 0}
+  - _stepId: 8
+    _stepDescription: warmup_8
+    _stepGraphic: {fileID: 0}
+  - _stepId: 9
+    _stepDescription: warmup_9
+    _stepGraphic: {fileID: 0}
+  - _stepId: 10
+    _stepDescription: warmup_10
+    _stepGraphic: {fileID: 0}
+  - _stepId: 11
+    _stepDescription: warmup_11
+    _stepGraphic: {fileID: 0}

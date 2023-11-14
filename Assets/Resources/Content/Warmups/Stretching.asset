@@ -16,8 +16,27 @@ MonoBehaviour:
   - _stepId: 0
     _stepDescription: stretching_0
     _stepGraphic: {fileID: 0}
-    _stepDurationSeconds: 30
   - _stepId: 1
     _stepDescription: stretching_1
     _stepGraphic: {fileID: 0}
-    _stepDurationSeconds: 30
+  - _stepId: 2
+    _stepDescription: stretching_2
+    _stepGraphic: {fileID: 0}
+  - _stepId: 3
+    _stepDescription: stretching_3
+    _stepGraphic: {fileID: 0}
+  - _stepId: 4
+    _stepDescription: stretching_4
+    _stepGraphic: {fileID: 0}
+  - _stepId: 5
+    _stepDescription: stretching_5
+    _stepGraphic: {fileID: 0}
+  - _stepId: 6
+    _stepDescription: stretching_6
+    _stepGraphic: {fileID: 0}
+  - _stepId: 7
+    _stepDescription: stretching_7
+    _stepGraphic: {fileID: 0}
+  - _stepId: 8
+    _stepDescription: stretching_8
+    _stepGraphic: {fileID: 0}
