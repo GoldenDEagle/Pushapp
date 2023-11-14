@@ -50,6 +50,8 @@ namespace Assets.Codebase.Views.Statistics
             _presenter.CurrentLevelString.SubscribeToTMPText(_currentLevelText).AddTo(CompositeDisposable);
             _presenter.TotalPushupsString.SubscribeToTMPText(_totalPushupsText).AddTo(CompositeDisposable);
             _presenter.OnShowGraph.Subscribe(value => ShowStatsGraph(value)).AddTo(CompositeDisposable);
+            _presenter.IsNextGraphButtonActive.SubscribeToInteractable(_nextGraphButton).AddTo(CompositeDisposable);
+            _presenter.IsPreviousGraphButtonActive.SubscribeToInteractable(_previousGraphButton).AddTo(CompositeDisposable);
         }
 
 

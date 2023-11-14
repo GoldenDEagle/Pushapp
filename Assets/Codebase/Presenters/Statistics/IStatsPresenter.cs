@@ -8,6 +8,8 @@ namespace Assets.Codebase.Presenters.Statistics
 {
     public interface IStatsPresenter : IPresenter
     {
+        public ReactiveProperty<bool> IsNextGraphButtonActive { get; }
+        public ReactiveProperty<bool> IsPreviousGraphButtonActive { get; }
         public ReactiveProperty<string> CurrentLevelString { get; }
         public ReactiveProperty<string> TotalPushupsString { get; }
         public ReactiveProperty<string> GraphPeriodString { get; }

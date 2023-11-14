@@ -17,6 +17,8 @@ namespace Assets.Codebase.Presenters.Statistics
 {
     public class StatsPresenter : BasePresenter, IStatsPresenter
     {
+        public ReactiveProperty<bool> IsNextGraphButtonActive { get; private set; }
+        public ReactiveProperty<bool> IsPreviousGraphButtonActive { get; private set; }
         public ReactiveProperty<string> CurrentLevelString { get; private set; }
         public ReactiveProperty<string> TotalPushupsString { get; private set; }
         public ReactiveProperty<string> GraphPeriodString { get; private set; }
@@ -38,6 +40,8 @@ namespace Assets.Codebase.Presenters.Statistics
             CurrentLevelString = new ReactiveProperty<string>();
             TotalPushupsString = new ReactiveProperty<string>();
             GraphPeriodString = new ReactiveProperty<string>();
+            IsNextGraphButtonActive = new ReactiveProperty<bool>(true);
+            IsPreviousGraphButtonActive = new ReactiveProperty<bool>(true);
             _graphPeriodSB = new StringBuilder();
             OnShowGraph = new Subject<PeriodWithTrainingResults>();
 
@@ -55,6 +59,7 @@ namespace Assets.Codebase.Presenters.Statistics
             _graphEndingDate = DateTime.Now;
             _graphStartingDate = DateTime.Now.Subtract(_graphSwitchStep);
             UpdateGraph();
+            ManageButtonStates();
         }
 
         public void GoToMain()
@@ -97,6 +102,7 @@ namespace Assets.Codebase.Presenters.Statistics
             _graphStartingDate = _graphStartingDate.AddDays(_graphStepInDays);
             _graphEndingDate = _graphEndingDate.AddDays(_graphStepInDays);
             UpdateGraph();
+            ManageButtonStates();
         }
 
         public void GoToPreviousResultsSegment()
@@ -104,8 +110,25 @@ namespace Assets.Codebase.Presenters.Statistics
             _graphStartingDate = _graphStartingDate.Subtract(_graphSwitchStep);
             _graphEndingDate = _graphEndingDate.Subtract(_graphSwitchStep);
             UpdateGraph();
+            ManageButtonStates();
         }
 
+
+        /// <summary>
+        /// Disables graph buttons if needed
+        /// </summary>
+        private void ManageButtonStates()
+        {
+            var furtherResults = ProgressModel.SessionProgress.AllResults.Where(x => x.Date.DateTime > _graphEndingDate);
+            if (!furtherResults.Any())
+            {
+                IsNextGraphButtonActive.Value = false;
+            }
+            else
+            {
+                IsNextGraphButtonActive.Value = true;
+            }
+        }
 
         private void UpdateGraph()
         {
@@ -114,11 +137,11 @@ namespace Assets.Codebase.Presenters.Statistics
             // Testing
             //var trainingResults = _testingResults.Where(x => (x.Date.DateTime >= _graphStartingDate) && (x.Date.DateTime <= _graphEndingDate)).ToList();
 
+            OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
+
             _graphPeriodSB.Clear();
             _graphPeriodSB.Append(_graphStartingDate.ToShortDateString()).Append(" - ").Append(_graphEndingDate.ToShortDateString());
             GraphPeriodString.Value = _graphPeriodSB.ToString();
-
-            OnShowGraph?.OnNext(new PeriodWithTrainingResults(trainingResults));
         }
 
 
