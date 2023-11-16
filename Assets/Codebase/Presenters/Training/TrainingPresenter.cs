@@ -212,9 +212,18 @@ namespace Assets.Codebase.Presenters.Training
             _restingTimer = _currentTimeToRest;
             while (_restingTimer >= 0)
             {
+                // final countdown
                 if (_restingTimer == 3)
                 {
                     audioService.PlaySfxSound(SoundId.FinalSeconds);
+                }
+                // reminder every 30 sec
+                if (_restingTimer % 30 == 0)
+                {
+                    if (_restingTimer != 0)
+                    {
+                        audioService.PlaySfxSound(SoundId.TimerPop);
+                    }
                 }
 
                 TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);

@@ -9,5 +9,6 @@
         Warning,
         FinalSeconds,
         TrainingEnd,
+        TimerPop,
     }
 }
