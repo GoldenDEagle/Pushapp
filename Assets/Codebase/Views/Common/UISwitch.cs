@@ -55,5 +55,10 @@ namespace Assets.Codebase.Views.Common
                 _displayedImage.sprite = _offSprite;
             }
         }
+
+        public void MakeInteractable(bool isInteractable)
+        {
+            _button.interactable = isInteractable;
+        }
     }
 }

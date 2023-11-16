@@ -7,6 +7,8 @@ namespace Assets.Codebase.Presenters.Settings
     {
         public ReactiveProperty<string> WarmupTimeString { get; }
         public ReactiveProperty<string> StretchingTimeString { get; }
+        public ReactiveProperty<bool> IsAutoWarmupSwitchInteractable { get; }
+        public ReactiveProperty<bool> IsAutoStretchingSwitchInteractable { get; }
 
         public void GoToMain();
         public void GoToStatistics();

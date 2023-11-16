@@ -47,6 +47,8 @@ namespace Assets.Codebase.Views.Settings
             base.SubscribeToPresenterEvents();
             _presenter.WarmupTimeString.SubscribeToTMPText(_warmupTime.ValueText).AddTo(CompositeDisposable);
             _presenter.StretchingTimeString.SubscribeToTMPText(_stretchingTime.ValueText).AddTo(CompositeDisposable);
+            _presenter.IsAutoWarmupSwitchInteractable.Subscribe(value => _autoWarmupSwitchToggle.MakeInteractable(value)).AddTo(CompositeDisposable);
+            _presenter.IsAutoStretchingSwitchInteractable.Subscribe(value => _autoStretchingSwitchToggle.MakeInteractable(value)).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToUserInput()
