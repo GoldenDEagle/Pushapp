@@ -120,7 +120,15 @@ namespace Assets.Codebase.Presenters.Statistics
         /// </summary>
         private void ManageButtonStates()
         {
+            if (!ProgressModel.SessionProgress.AllResults.Any())
+            {
+                IsNextGraphButtonActive.Value = false;
+                IsPreviousGraphButtonActive.Value = false;
+                return;
+            }
+
             var furtherResults = ProgressModel.SessionProgress.AllResults.Where(x => x.Date.DateTime > _graphEndingDate);
+            var previousResults = ProgressModel.SessionProgress.AllResults.Where(x => x.Date.DateTime < _graphStartingDate);
             if (!furtherResults.Any())
             {
                 IsNextGraphButtonActive.Value = false;
@@ -128,6 +136,15 @@ namespace Assets.Codebase.Presenters.Statistics
             else
             {
                 IsNextGraphButtonActive.Value = true;
+            }
+
+            if (!previousResults.Any())
+            {
+                IsPreviousGraphButtonActive.Value = false;
+            }
+            else
+            {
+                IsPreviousGraphButtonActive.Value = true;
             }
         }
 
