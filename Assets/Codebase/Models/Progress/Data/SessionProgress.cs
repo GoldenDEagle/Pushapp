@@ -175,11 +175,13 @@ namespace Assets.Codebase.Models.Progress.Data
         {
             if (NextPushupTargetId.Value >= Constants.PushupTargets.Count) { return; }
 
-            if (TotalPushups.Value >= Constants.PushupTargets[NextPushupTargetId.Value])
+            while (TotalPushups.Value >= Constants.PushupTargets[NextPushupTargetId.Value])
             {
                 ServiceLocator.Container.Single<IAchievementsService>().UnlockPushupsAchievement(NextPushupTargetId.Value);
 
                 NextPushupTargetId.Value += 1;
+
+                if (NextPushupTargetId.Value >= Constants.PushupTargets.Count) break;
             }
         }
         private void CheckCaloriesTargets()
@@ -188,22 +190,26 @@ namespace Assets.Codebase.Models.Progress.Data
 
             var calories = TotalPushups.Value * Constants.CaloriesPerPushup;
 
-            if (calories >= Constants.CaloriesTargets[NextCaloriesTargetId.Value])
+            while (calories >= Constants.CaloriesTargets[NextCaloriesTargetId.Value])
             {
                 ServiceLocator.Container.Single<IAchievementsService>().UnlockCaloriesAchievement(NextCaloriesTargetId.Value);
 
                 NextCaloriesTargetId.Value += 1;
+
+                if (NextCaloriesTargetId.Value >= Constants.CaloriesTargets.Count) break;
             }
         }
         private void CheckTrainingCountTargets()
         {
             if (NextTrainingCountTargetId.Value >= Constants.TrainingCountTargets.Count) { return; }
 
-            if (AllResults.Count >= Constants.TrainingCountTargets[NextTrainingCountTargetId.Value])
+            while (AllResults.Count >= Constants.TrainingCountTargets[NextTrainingCountTargetId.Value])
             {
                 ServiceLocator.Container.Single<IAchievementsService>().UnlockTrainingCountAchievement(NextTrainingCountTargetId.Value);
 
                 NextTrainingCountTargetId.Value += 1;
+
+                if (NextTrainingCountTargetId.Value >= Constants.TrainingCountTargets.Count) break;
             }
         }
     }
