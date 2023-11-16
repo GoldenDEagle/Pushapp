@@ -60,7 +60,7 @@ namespace Assets.Codebase.Views.MainMenu
             _presenter.CurrentLevelText.SubscribeToTMPText(_currentLevelText).AddTo(CompositeDisposable);
             _presenter.TotalPushupsText.SubscribeToTMPText(_totalPushupsText).AddTo(CompositeDisposable);
             _presenter.NextPushupsTargetText.SubscribeToTMPText(_nextPushupsTargetText).AddTo(CompositeDisposable);
-            _presenter.PushupsSliderValue.Subscribe(value => _pushupsProgressSlider.value = value).AddTo(CompositeDisposable);
+            _presenter.PushupsSliderValue.Subscribe(value => _pushupsProgressSlider.SetValueWithoutNotify(value)).AddTo(CompositeDisposable);
             _presenter.NextTrainingDateText.SubscribeToTMPText(_nextTrainingDate).AddTo(CompositeDisposable);
             _presenter.NextTrainingLevelText.SubscribeToTMPText(_nextTrainingLevel).AddTo(CompositeDisposable);
             _presenter.NextTrainingNameText.SubscribeToTMPText(_nextTrainingName).AddTo(CompositeDisposable);

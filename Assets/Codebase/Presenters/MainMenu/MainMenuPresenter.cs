@@ -107,7 +107,7 @@ namespace Assets.Codebase.Presenters.MainMenu
             CurrentLevelText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
             TotalPushupsText.Value = NumberConverter.Convert(currentPushups);
             NextPushupsTargetText.Value = NumberConverter.Convert(pushupsTarget);
-            PushupsSliderValue.Value = currentPushups / pushupsTarget;
+            PushupsSliderValue.Value = (float) currentPushups / pushupsTarget;
             NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
             NextTrainingLevelText.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
 
