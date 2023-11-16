@@ -74,25 +74,13 @@ namespace Assets.Codebase.Views.Statistics.Graph
             float xStep = 75f;
 
             GraphNode previousNode = null;
-            //TrainingResult previousDrawnResult = null;
+
             for (int i = 0; i < bestResults.Count; i++)
             {
-                // Only best result for each date
-                //if (previousDrawnResult != null)
-                //{
-                //    if (bestResults[i].Date.DateTime.Date == previousDrawnResult.Date.DateTime.Date)
-                //    {
-                //        if (bestResults[i].TotalPushups <= previousDrawnResult.TotalPushups)
-                //        {
-                //            break;
-                //        }
-                //    }
-                //}
-                //previousDrawnResult = bestResults[i];
-
                 float xPosition = 10f + i * xStep;
                 float yPosition = (bestResults[i].TotalPushups / yMaximum) * graphHeight;
                 var newNode = CreateNode(new Vector2(xPosition, yPosition));
+                newNode.SetInfo(NumberConverter.Convert(bestResults[i].TotalPushups));
 
                 if (previousNode != null)
                 {
