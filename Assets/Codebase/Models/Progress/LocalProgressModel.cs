@@ -23,7 +23,6 @@ namespace Assets.Codebase.Models.Progress
 
         private PersistantProgress _persistantProgress;
 
-        private JsonSerializer _serializer;
 
         public LocalProgressModel()
         {
