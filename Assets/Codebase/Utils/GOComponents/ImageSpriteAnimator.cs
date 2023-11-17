@@ -20,6 +20,10 @@ namespace Assets.Codebase.Utils.GOComponents
         private int _currentFrame;
         private bool _isPlaying = true;
 
+        private void Awake()
+        {
+            _spiteList = new List<Sprite>();
+        }
 
         private void Start()
         {
@@ -41,6 +45,8 @@ namespace Assets.Codebase.Utils.GOComponents
 
         public void SetAnimationClip(SimpleAnimationClip newClip)
         {
+            if (newClip.Sprites == null) return;
+
             _spiteList = newClip.Sprites;
             _currentFrame = 0;
         }

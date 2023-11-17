@@ -1,6 +1,7 @@
 ﻿using Assets.Codebase.Presenter.Base;
 using Assets.Codebase.Presenters.Warmup;
 using Assets.Codebase.Utils.Extensions;
+using Assets.Codebase.Utils.GOComponents;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.Common;
 using TMPro;
@@ -19,6 +20,7 @@ namespace Assets.Codebase.Views.Warmup
         [SerializeField] private Button _nextStepButton;
         [SerializeField] private TMP_Text _stepNumberText;
         [SerializeField] private TMP_Text _stepDescriptionText;
+        [SerializeField] private ImageSpriteAnimator _animatedImage;
         [Header("Timer")]
         [SerializeField] private Transform _timerObject;
         [SerializeField] private TMP_Text _timerText;
@@ -49,6 +51,7 @@ namespace Assets.Codebase.Views.Warmup
             _presenter.IsTimerEnabled.Subscribe(value => SetTimerState(value)).AddTo(CompositeDisposable);
             _presenter.TimerSliderValue.Subscribe(value => _timerSlider.value = value).AddTo(CompositeDisposable);
             _presenter.IsBackButtonActive.Subscribe(value => SetBackButtonState(value)).AddTo(CompositeDisposable);
+            _presenter.WarmupAnimationClip.Subscribe(value => _animatedImage.SetAnimationClip(value)).AddTo(CompositeDisposable);
         }
 
 

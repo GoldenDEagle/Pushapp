@@ -31,6 +31,10 @@ namespace Assets.Codebase.Presenters.Warmup
         /// Is timer enabled?
         /// </summary>
         public ReactiveProperty<bool> IsTimerEnabled { get; }
+        /// <summary>
+        /// Current animation clip
+        /// </summary>
+        public ReactiveProperty<SimpleAnimationClip> WarmupAnimationClip { get; }
 
         public void StartWarmup();
         public void SkipWarmup();

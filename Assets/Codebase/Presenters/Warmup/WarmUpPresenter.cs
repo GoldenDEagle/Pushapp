@@ -22,6 +22,7 @@ namespace Assets.Codebase.Presenters.Warmup
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerSliderValue { get; private set; }
         public ReactiveProperty<bool> IsTimerEnabled { get; private set; }
+        public ReactiveProperty<SimpleAnimationClip> WarmupAnimationClip { get; private set; }
 
         private const string GetReadyTimerKey = "timer_getReady";
 
@@ -42,6 +43,7 @@ namespace Assets.Codebase.Presenters.Warmup
             IsBackButtonActive = new ReactiveProperty<bool>(false);
             StepDescriptionString = new ReactiveProperty<string>(string.Empty);
             StepNumberString = new ReactiveProperty<string>(string.Empty);
+            WarmupAnimationClip = new ReactiveProperty<SimpleAnimationClip>(new SimpleAnimationClip());
         }
 
         public override void CreateView()
@@ -173,6 +175,7 @@ namespace Assets.Codebase.Presenters.Warmup
             var currentStep = _description.Steps[_stepNumber];
             StepDescriptionString.Value = ServiceLocator.Container.Single<ILocalizationService>().LocalizeTextByKey(currentStep.StepDescription);
             StepNumberString.Value = (_stepNumber + 1) + " / " + _description.Steps.Count;
+            WarmupAnimationClip.Value = _description.Steps[_stepNumber].StepGraphic;
         }
     }
 }

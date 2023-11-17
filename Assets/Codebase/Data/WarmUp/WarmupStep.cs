@@ -8,10 +8,10 @@ namespace Assets.Codebase.Data.WarmUp
     {
         [SerializeField] private int _stepId;
         [SerializeField] private string _stepDescription;
-        [SerializeField] private Sprite _stepGraphic;
+        [SerializeField] private SimpleAnimationClip _stepGraphic;
 
         public int StepId => _stepId;
         public string StepDescription => _stepDescription;
-        public Sprite StepGraphic => _stepGraphic;
+        public SimpleAnimationClip StepGraphic => _stepGraphic;
     }
 }
