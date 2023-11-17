@@ -31,6 +31,7 @@ namespace Assets.Codebase.Models.Progress
 
         protected bool CanFindSave()
         {
+            GP_Player.Sync();
             if (GP_Player.Has(ProgressKey))
             {
                 if (GP_Player.GetString(ProgressKey) == string.Empty)
@@ -58,6 +59,7 @@ namespace Assets.Codebase.Models.Progress
 
             _persistantProgress.SetValues(SessionProgress);
             GP_Player.Set(ProgressKey, _persistantProgress.ToJson());
+            GP_Player.Sync(true);
         }
 
         public void LoadProgress()

@@ -11,6 +11,7 @@ namespace Assets.Codebase.Utils.GOComponents
         [SerializeField] private RectTransform _uiRootPrefab;
         [SerializeField] GameLaunchParams _gameLaunchParams;
 
+
 #if UNITY_EDITOR
 
         private void Awake()
