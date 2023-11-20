@@ -15,28 +15,46 @@ MonoBehaviour:
   _steps:
   - _stepId: 0
     _stepDescription: stretching_0
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 42992e9f0c58d8a46be82079504efe20, type: 3}
   - _stepId: 1
     _stepDescription: stretching_1
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: aa676bac6b5805f47ac4b4e7165763e1, type: 3}
   - _stepId: 2
     _stepDescription: stretching_2
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 836e5d624ae02b34c8f170b298801a8e, type: 3}
   - _stepId: 3
     _stepDescription: stretching_3
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 1260287f739d828478b7447dcb6d5408, type: 3}
   - _stepId: 4
     _stepDescription: stretching_4
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 9296b89af980b8f4fb116184d51a8d51, type: 3}
   - _stepId: 5
     _stepDescription: stretching_5
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 63206d6dd8efcc443838006c8d68043b, type: 3}
   - _stepId: 6
     _stepDescription: stretching_6
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 9ace1bca632e9b64d8b9692af5e4c919, type: 3}
   - _stepId: 7
     _stepDescription: stretching_7
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: b7bf3e45442f4bf4bb5786c4dfb3ffb5, type: 3}
   - _stepId: 8
     _stepDescription: stretching_8
-    _stepGraphic: {fileID: 0}
+    _stepGraphic:
+      _sprites:
+      - {fileID: 21300000, guid: 406bcc4fd37fd4f4bbb728fe13641980, type: 3}
