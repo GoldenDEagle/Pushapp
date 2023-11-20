@@ -12,7 +12,6 @@ using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using UniRx;
-using Unity.VisualScripting;
 
 namespace Assets.Codebase.Presenters.TrainingResults
 {
