@@ -74,9 +74,9 @@ namespace Assets.Codebase.Infrastructure.Initialization
 
         private void CreateModels()
         {
-            _progressModel = new LocalProgressModel();
+            //_progressModel = new LocalProgressModel();
 
-            //_progressModel = new ServerProgressModel();
+            _progressModel = new ServerProgressModel();
 
             _gameplayModel = new GameplayModel();
         }
