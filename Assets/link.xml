@@ -1,0 +1,6 @@
+<linker>
+    <assembly fullname="TMPro">
+        <type fullname="TMPro.TextMeshProUGUI" preserve="all"/>
+	<type fullname="TMPro.TMP_Text" preserve="all"/>
+    </assembly>
+</linker>
