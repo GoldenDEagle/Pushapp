@@ -45,10 +45,16 @@ namespace Assets.Codebase.Infrastructure.Initialization
         private IGameplayModel _gameplayModel;
         private List<BasePresenter> _presenters;
 
+        private bool _isInEditor = false;
+
         public GameStructure(RectTransform uiRoot, AudioSource sfxSource = null, GameLaunchParams launchParams = null)
         {
             if (IsGameInitialized) { return; }
             IsGameInitialized = true;
+
+#if UNITY_EDITOR
+            _isInEditor = true;
+#endif
 
             _uiRoot = uiRoot;
             _sfxSource = sfxSource;
@@ -74,9 +80,14 @@ namespace Assets.Codebase.Infrastructure.Initialization
 
         private void CreateModels()
         {
-            //_progressModel = new LocalProgressModel();
-
-            _progressModel = new ServerProgressModel();
+            if (_isInEditor)
+            {
+                _progressModel = new LocalProgressModel();
+            }
+            else
+            {
+                _progressModel = new ServerProgressModel();
+            }
 
             _gameplayModel = new GameplayModel();
         }
