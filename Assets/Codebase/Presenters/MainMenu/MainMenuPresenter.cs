@@ -1,6 +1,7 @@
 ﻿using Assets.Codebase.Data.WarmUp;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Achievements;
+using Assets.Codebase.Infrastructure.ServicesManagment.Ads;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
@@ -26,6 +27,7 @@ namespace Assets.Codebase.Presenters.MainMenu
         public ReactiveProperty<string> NextTrainingPushupListText { get; private set; }
 
         private IDisposable _warningWindowSubscription;
+        private IDisposable _adClosingSubscription;
 
         public MainMenuPresenter()
         {
@@ -81,7 +83,7 @@ namespace Assets.Codebase.Presenters.MainMenu
             }
             else
             {
-                StartTraining();
+                StartTrainingAfterAd();
             }
         }
 
@@ -123,8 +125,31 @@ namespace Assets.Codebase.Presenters.MainMenu
             }
         }
 
+        private void StartTrainingAfterAd()
+        {
+            var adService = ServiceLocator.Container.Single<IAdsService>();
+            if (adService.CheckIfFullscreenIsAvailable())
+            {
+                _adClosingSubscription = adService.OnFullscreenClosed.Subscribe(_ => StartTraining()).AddTo(CompositeDisposable);
+                adService.ShowFullscreen();
+#if UNITY_EDITOR
+                StartTraining();
+#endif
+            }
+            else
+            {
+                StartTraining();
+            }
+        }
+
         private void StartTraining()
         {
+            if (_adClosingSubscription != null)
+            {
+                CompositeDisposable.Remove(_adClosingSubscription);
+                _adClosingSubscription = null;
+            }
+
             GameplayModel.StartTrainingTimer();
             if (ProgressModel.SessionProgress.IsWarmupEnabled.Value)
             {
@@ -143,7 +168,7 @@ namespace Assets.Codebase.Presenters.MainMenu
 
             if (wasAccepted)
             {
-                StartTraining();
+                StartTrainingAfterAd();
             }
         }
     }

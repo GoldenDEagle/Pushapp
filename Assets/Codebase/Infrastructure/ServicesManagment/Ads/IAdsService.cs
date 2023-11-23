@@ -1,4 +1,6 @@
-﻿namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
+﻿using UniRx;
+
+namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
 {
     /// <summary>
     /// Managing ads.
@@ -12,6 +14,7 @@
         // Fullscreen Ad
         public bool CheckIfFullscreenIsAvailable();
         public void ShowFullscreen();
+        public Subject<Unit> OnFullscreenClosed { get; }
 
         /// <summary>
         /// Enables or disables ads.

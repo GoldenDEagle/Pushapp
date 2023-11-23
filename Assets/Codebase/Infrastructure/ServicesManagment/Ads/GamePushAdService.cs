@@ -1,5 +1,6 @@
 ﻿using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
 using GamePush;
+using UniRx;
 using UnityEngine;
 
 namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
@@ -9,12 +10,17 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
         private bool _adsEnabled = true;
         private IAudioService _audioService;
 
+        public Subject<Unit> OnFullscreenClosed { get; private set; }
+
         public GamePushAdService(IAudioService audioService)
         {
             _audioService = audioService;
+            OnFullscreenClosed = new Subject<Unit>();
 
             GP_Game.OnPause += OnAdStarted;
             GP_Game.OnResume += OnAdEnded;
+
+            GP_Ads.OnFullscreenClose += FullscreenClosed;
         }
 
         public void SetAdsStatus(bool adsEnabled)
@@ -35,10 +41,7 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
                 return;
             }
 
-            if (CheckIfFullscreenIsAvailable())
-            {
-                GP_Ads.ShowFullscreen();
-            }
+            GP_Ads.ShowFullscreen();
         }
 
         public bool CheckIfRewardedIsAvailable()
@@ -62,6 +65,10 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
         private void OnAdEnded()
         {
             _audioService.UnmuteAll();
+        }
+        private void FullscreenClosed(bool wasWatched)
+        {
+            OnFullscreenClosed?.OnNext(Unit.Default);
         }
     }
 }
