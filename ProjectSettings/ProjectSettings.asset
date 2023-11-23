@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: GoldenDEagle
-  productName: Architecture
+  productName: Pushups
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -138,8 +138,14 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0
   preloadedAssets:
+  - {fileID: 11400000, guid: bb96f7cefa6ae7e4280be19eb0995fa2, type: 2}
   - {fileID: -3876856694894386736, guid: bb96f7cefa6ae7e4280be19eb0995fa2, type: 2}
+  - {fileID: 11400000, guid: 70c32847a0042b345b709d4ccd1da5df, type: 2}
   - {fileID: -4821166297203851352, guid: 70c32847a0042b345b709d4ccd1da5df, type: 2}
+  - {fileID: 11400000, guid: 4e43ed8cada2b4343ad0fcc0e26260d0, type: 2}
+  - {fileID: 6239064091948901117, guid: 4e43ed8cada2b4343ad0fcc0e26260d0, type: 2}
+  - {fileID: 11400000, guid: f93d7107b791b534090315651ec9b96d, type: 2}
+  - {fileID: 9209017597875809747, guid: f93d7107b791b534090315651ec9b96d, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
