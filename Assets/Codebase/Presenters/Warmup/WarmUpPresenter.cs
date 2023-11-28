@@ -30,7 +30,7 @@ namespace Assets.Codebase.Presenters.Warmup
         private int _stepNumber;
         private float _secondsToPrepare = 5f;
         private float _exerciseTime;
-        private CancellationTokenSource _restingCancellationToken;
+        private CancellationTokenSource _timerCancellationToken;
 
         public WarmUpPresenter()
         {
@@ -70,6 +70,7 @@ namespace Assets.Codebase.Presenters.Warmup
 
         public void BackToMenu()
         {
+            StopTimer();
             GameplayModel.GetTrainingTime();
             GameplayModel.ActivateView(ViewId.MainView);
         }
@@ -120,18 +121,18 @@ namespace Assets.Codebase.Presenters.Warmup
             || (GameplayModel.CurrentWarmupMode.Value == WarmupMode.Stretching && ProgressModel.SessionProgress.AutoStretchingSwitchEnabled.Value))
             {
                 StopTimer();
-                _restingCancellationToken = new CancellationTokenSource();
-                ExerciseCycle(_restingCancellationToken.Token).Forget();
+                _timerCancellationToken = new CancellationTokenSource();
+                ExerciseCycle(_timerCancellationToken.Token).Forget();
             }
         }
 
         public void StopTimer()
         {
-            if (_restingCancellationToken != null)
+            if (_timerCancellationToken != null)
             {
-                _restingCancellationToken.Cancel();
-                _restingCancellationToken.Dispose();
-                _restingCancellationToken = null;
+                _timerCancellationToken.Cancel();
+                _timerCancellationToken.Dispose();
+                _timerCancellationToken = null;
             }
         }
 
