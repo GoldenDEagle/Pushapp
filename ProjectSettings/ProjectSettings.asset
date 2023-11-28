@@ -137,15 +137,7 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0
-  preloadedAssets:
-  - {fileID: 11400000, guid: bb96f7cefa6ae7e4280be19eb0995fa2, type: 2}
-  - {fileID: -3876856694894386736, guid: bb96f7cefa6ae7e4280be19eb0995fa2, type: 2}
-  - {fileID: 11400000, guid: 70c32847a0042b345b709d4ccd1da5df, type: 2}
-  - {fileID: -4821166297203851352, guid: 70c32847a0042b345b709d4ccd1da5df, type: 2}
-  - {fileID: 11400000, guid: 4e43ed8cada2b4343ad0fcc0e26260d0, type: 2}
-  - {fileID: 6239064091948901117, guid: 4e43ed8cada2b4343ad0fcc0e26260d0, type: 2}
-  - {fileID: 11400000, guid: f93d7107b791b534090315651ec9b96d, type: 2}
-  - {fileID: 9209017597875809747, guid: f93d7107b791b534090315651ec9b96d, type: 2}
+  preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -178,7 +170,7 @@ PlayerSettings:
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
   aotOptions: 
-  stripEngineCode: 1
+  stripEngineCode: 0
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
   ForceInternetPermission: 0
@@ -702,11 +694,11 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 32
-  webGLExceptionSupport: 0
+  webGLExceptionSupport: 3
   webGLNameFilesAsHashes: 0
   webGLShowDiagnostics: 0
   webGLDataCaching: 1
-  webGLDebugSymbols: 0
+  webGLDebugSymbols: 2
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
   webGLTemplate: PROJECT:ATP_GP1.1.0
@@ -742,7 +734,7 @@ PlayerSettings:
     QNX: 1
     Stadia: 1
     VisionOS: 1
-    WebGL: 2
+    WebGL: 4
     Windows Store Apps: 1
     XboxOne: 1
     iPhone: 1
