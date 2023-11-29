@@ -6,6 +6,7 @@ using Assets.Codebase.Models.Progress.Data.TrainingPlans;
 using Assets.Codebase.Utils.CustomTypes;
 using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
+using System;
 using System.Collections.Generic;
 using UniRx;
 
@@ -134,6 +135,7 @@ namespace Assets.Codebase.Models.Progress.Data
             CurrentTrainingDayId.Value = 1;
             IsOnTestingStage.Value = false;
             NextPushupTargetId.Value = 0;
+            NextTrainingDate.Value = new SerializableDateTime(TimeProvider.GetServerTime());
         }
 
         /// <summary>

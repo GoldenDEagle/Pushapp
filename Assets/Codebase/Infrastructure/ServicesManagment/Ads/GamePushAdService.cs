@@ -35,12 +35,6 @@ namespace Assets.Codebase.Infrastructure.ServicesManagment.Ads
 
         public void ShowFullscreen()
         {
-            if (!_adsEnabled)
-            {
-                Debug.Log("Ads are disabled!");
-                return;
-            }
-
             GP_Ads.ShowFullscreen();
         }
 

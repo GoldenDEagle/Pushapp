@@ -2,6 +2,8 @@
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
 using Assets.Codebase.Infrastructure.ServicesManagment.UI;
 using Assets.Codebase.Presenters.Base;
+using Assets.Codebase.Utils.CustomTypes;
+using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using Assets.Codebase.Views.PlanPreview;
@@ -69,6 +71,7 @@ namespace Assets.Codebase.Presenters.PlanPreview
             ProgressModel.SessionProgress.IsTrainingPlanSelected.Value = true;
             ProgressModel.SessionProgress.CurrentTrainingPlan.Value = GameplayModel.PreviewedPlan.Value;
             ProgressModel.SessionProgress.CurrentTrainingDayId.Value = 1;
+            ProgressModel.SessionProgress.NextTrainingDate.Value = new SerializableDateTime(TimeProvider.GetServerTime());
             GameplayModel.PreviewedPlan.Value = null;
             GameplayModel.ActivateView(ViewId.MainView);
         }

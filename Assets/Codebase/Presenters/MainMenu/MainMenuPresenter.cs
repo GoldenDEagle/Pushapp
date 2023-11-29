@@ -97,8 +97,6 @@ namespace Assets.Codebase.Presenters.MainMenu
             GameplayModel.ActivateView(ViewId.SettingsView);
         }
 
-        
-
         private void ConfigureView()
         {
             var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
@@ -110,9 +108,9 @@ namespace Assets.Codebase.Presenters.MainMenu
             TotalPushupsText.Value = NumberConverter.Convert(currentPushups);
             NextPushupsTargetText.Value = NumberConverter.Convert(pushupsTarget);
             PushupsSliderValue.Value = (float) currentPushups / pushupsTarget;
-            NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
             NextTrainingLevelText.Value = localizationService.LocalizeTextByKey(Constants.LevelWordKey) + " " + ProgressModel.SessionProgress.CurrentTrainingPlan.Value.Level.ToString();
 
+            // Test or normal training
             if (ProgressModel.SessionProgress.IsOnTestingStage.Value)
             {
                 NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.TestTrainingNameKey);
@@ -122,6 +120,17 @@ namespace Assets.Codebase.Presenters.MainMenu
             {
                 NextTrainingNameText.Value = localizationService.LocalizeTextByKey(Constants.DayTrainingNameKey) + " " + ProgressModel.SessionProgress.CurrentTrainingDayId.Value.ToString();
                 NextTrainingPushupListText.Value = ProgressModel.SessionProgress.CurrentTrainingPlan.Value.TrainingDays[ProgressModel.SessionProgress.CurrentTrainingDayId.Value - 1].Pushups.ToPushupsListString();
+            }
+
+            // Show current date if missed training
+            var currentDateTime = TimeProvider.GetServerTime();
+            if (currentDateTime.Date > ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date)
+            {
+                NextTrainingDateText.Value = currentDateTime.Date.ToShortDateString();
+            }
+            else
+            {
+                NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
             }
         }
 
