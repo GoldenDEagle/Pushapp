@@ -249,7 +249,7 @@ MonoBehaviour:
   _sfxSource: {fileID: 866794709}
   _launchParams:
     ManualParamSet: 1
-    Language: 1
+    Language: 0
     ClearPlayerPrefs: 0
     CheatsEnabled: 0
 --- !u!114 &601118956

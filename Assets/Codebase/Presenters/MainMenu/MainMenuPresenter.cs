@@ -10,6 +10,7 @@ using Assets.Codebase.Utils.Helpers;
 using Assets.Codebase.Utils.Values;
 using Assets.Codebase.Views.Base;
 using System;
+using System.Text;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.MainMenu
@@ -126,11 +127,11 @@ namespace Assets.Codebase.Presenters.MainMenu
             var currentDateTime = TimeProvider.GetServerTime();
             if (currentDateTime.Date > ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date)
             {
-                NextTrainingDateText.Value = currentDateTime.Date.ToShortDateString();
+                NextTrainingDateText.Value = localizationService.LocalizeTextByKey(Constants.NextTrainingDateKey) + " " + currentDateTime.Date.ToShortDateString();
             }
             else
             {
-                NextTrainingDateText.Value = ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
+                NextTrainingDateText.Value = localizationService.LocalizeTextByKey(Constants.NextTrainingDateKey) + " " + ProgressModel.SessionProgress.NextTrainingDate.Value.DateTime.Date.ToShortDateString();
             }
         }
 
