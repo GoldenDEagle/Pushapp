@@ -176,6 +176,11 @@ namespace Assets.Codebase.Presenters.Training
                 _resultsString.Append(_currentTrainingResults[resultIndex]).Append(" ");
                 resultIndex++;
             }
+            
+            // Current
+            _resultsString.Append("<size=130%> <color=#FFA902>").Append(_trainingDescription.Pushups[resultIndex]).Append("</color> </size>").Append(" ");
+            resultIndex++;
+
             // plan
             while (resultIndex < _trainingDescription.Pushups.Count)
             {
