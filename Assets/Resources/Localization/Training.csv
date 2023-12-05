@@ -3,3 +3,4 @@ training_header,Training,Тренировка
 work_word,WORK,РАБОТА
 done_word,DONE,ГОТОВО
 instruction_text,Finish approach and click DONE,Выполните подход и нажмите кнопку ГОТОВО
+approaches_withCount,Approach:,Подход:

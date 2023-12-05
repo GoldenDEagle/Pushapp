@@ -29,6 +29,7 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TrainingLiveResults { get; private set; }
         public ReactiveProperty<string> TrainingNameString { get; private set; }
         public ReactiveProperty<string> TotalPushupsString { get; private set; }
+        public ReactiveProperty<string> CurrentApproachString { get; private set; }
 
         // Resting widget
         public ReactiveProperty<string> StathamPhrase { get; private set; }
@@ -71,6 +72,7 @@ namespace Assets.Codebase.Presenters.Training
             StathamPhrase = new ReactiveProperty<string>(string.Empty);
             TrainingNameString = new ReactiveProperty<string>(string.Empty);
             TotalPushupsString = new ReactiveProperty<string>(string.Empty);
+            CurrentApproachString = new ReactiveProperty<string>(string.Empty);
             CurrentTutorialStep = new ReactiveProperty<TutorialStep>(TutorialStep.None);
             TutorialActiveState = new ReactiveProperty<bool>(false);
             TutorialStepNumberString = new ReactiveProperty<string>();
@@ -169,8 +171,10 @@ namespace Assets.Codebase.Presenters.Training
         // Internal ....................................................
         private void ShowStepInfo()
         {
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
             CurrentPushupCountText.Value = _currentStepValue.ToString();
             TrainingLiveResults.Value = CreateResultsString();
+            CurrentApproachString.Value = localizationService.LocalizeTextByKey(Constants.ApproachesWithCountKey) + " " + (_currentTrainingResults.Count + 1).ToString() + "/" + _trainingDescription.Pushups.Count;
 
             if (_currentTrainingResults.Any())
             {

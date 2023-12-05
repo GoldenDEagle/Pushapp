@@ -20,6 +20,7 @@ namespace Assets.Codebase.Views.Training
         [SerializeField] private Button _subtractPushupButton;
         [SerializeField] private TMP_Text _resultsLineText;
         [SerializeField] private TMP_Text _totalPushupsCountText;
+        [SerializeField] private TMP_Text _approachNumberText;
         [SerializeField] private TMP_Text _currentStepValue;
         [SerializeField] private RestingWidget _restingWidget;
         [SerializeField] private TutorialWindow _tutorialWindow;
@@ -57,6 +58,7 @@ namespace Assets.Codebase.Views.Training
             _presenter.OnShowRestingWidget.Subscribe(_ => ShowRestingWidget()).AddTo(CompositeDisposable);
             _presenter.OnHideRestingWidget.Subscribe(_ => HideRestingWidget()).AddTo(CompositeDisposable);
 
+            _presenter.CurrentApproachString.SubscribeToTMPText(_approachNumberText).AddTo(CompositeDisposable);
             _presenter.CurrentPushupCountText.SubscribeToTMPText(_currentStepValue).AddTo(CompositeDisposable);
             _presenter.TrainingLiveResults.SubscribeToTMPText(_resultsLineText).AddTo(CompositeDisposable);
             _presenter.TrainingNameString.SubscribeToTMPText(_trainingNameText).AddTo(CompositeDisposable);

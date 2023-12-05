@@ -15,6 +15,7 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TrainingLiveResults { get; }
         public ReactiveProperty<string> TrainingNameString { get; }
         public ReactiveProperty<string> TotalPushupsString { get; }
+        public ReactiveProperty<string> CurrentApproachString { get; }
 
         // Resting widget
         public ReactiveProperty<string> StathamPhrase { get; }

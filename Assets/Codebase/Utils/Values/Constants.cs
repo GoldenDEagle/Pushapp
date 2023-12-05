@@ -21,6 +21,7 @@ namespace Assets.Codebase.Utils.Values
         public static readonly string LevelWithNumberKey = "level_withNumber";
         public static readonly string HoursWordKey = "hours_word";
         public static readonly string NextTrainingDateKey = "nextTraining_text";
+        public static readonly string ApproachesWithCountKey = "approaches_withCount";
         // Warnings
         public static readonly string DeleteProgressWarningKey = "warning_deleteProgress";
         public static readonly string EarlyTrainingWarningKey = "warning_earlyTraining";
