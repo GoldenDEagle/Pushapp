@@ -2,6 +2,7 @@
 using Assets.Codebase.Presenters.Training;
 using Assets.Codebase.Utils.Extensions;
 using Assets.Codebase.Views.Base;
+using Assets.Codebase.Views.Common;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UniRx;
@@ -21,12 +22,15 @@ namespace Assets.Codebase.Views.Training
         [SerializeField] private TMP_Text _totalPushupsCountText;
         [SerializeField] private TMP_Text _currentStepValue;
         [SerializeField] private RestingWidget _restingWidget;
+        [SerializeField] private TutorialWindow _tutorialWindow;
 
         private ITrainingPresenter _presenter;
+        private CanvasWithHoles _canvasWithHoles;
 
         public override void Init(IPresenter presenter)
         {
             _presenter = presenter as ITrainingPresenter;
+            _canvasWithHoles = FindObjectOfType<CanvasWithHoles>();
 
             base.Init(presenter);
         }
@@ -42,6 +46,9 @@ namespace Assets.Codebase.Views.Training
             _restingWidget.CancelButton.OnClickAsObservable().Subscribe(_ => _presenter.CancelResting()).AddTo(CompositeDisposable);
             _restingWidget.IncreaseRestingTimeButton.OnClickAsObservable().Subscribe(_ => _presenter.IncreaseRestingTime()).AddTo(CompositeDisposable);
             _restingWidget.DecreaseRestingTimeButton.OnClickAsObservable().Subscribe(_ => _presenter.DecreaseRestingTime()).AddTo(CompositeDisposable);
+
+            // Tutorial
+            _tutorialWindow.NextButton.OnClickAsObservable().Subscribe(_ => _presenter.GoToNextTutorialStage()).AddTo(CompositeDisposable);
         }
 
         protected override void SubscribeToPresenterEvents()
@@ -58,6 +65,13 @@ namespace Assets.Codebase.Views.Training
             _presenter.StathamPhrase.SubscribeToTMPText(_restingWidget.StathamPhraseText).AddTo(CompositeDisposable);
             _presenter.TimerText.SubscribeToTMPText(_restingWidget.RestingTimerText).AddTo(CompositeDisposable);
             _presenter.TimerFillValue.Subscribe(value => _restingWidget.TimerFill.fillAmount = value).AddTo(CompositeDisposable);
+
+            // Tutorial
+            _presenter.TutorialActiveState.Subscribe(value => ShowHideTutorial(value)).AddTo(CompositeDisposable);
+            _presenter.CurrentTutorialStep.Subscribe(_ => ConfigureStepVisual()).AddTo(CompositeDisposable);
+            _presenter.TutorialStepNumberString.SubscribeToTMPText(_tutorialWindow.StepNumberText).AddTo(CompositeDisposable);
+            _presenter.TutorialDescriptionString.SubscribeToTMPText(_tutorialWindow.StepDescription).AddTo(CompositeDisposable);
+            _presenter.TutorialButtonString.SubscribeToTMPText(_tutorialWindow.ButtonText).AddTo(CompositeDisposable);
         }
 
 
@@ -69,6 +83,16 @@ namespace Assets.Codebase.Views.Training
         private void HideRestingWidget()
         {
             _restingWidget.gameObject.SetActive(false);
+        }
+
+        // Tutorial
+        private void ShowHideTutorial(bool isShown)
+        {
+            _tutorialWindow.gameObject.SetActive(isShown);
+        }
+        private void ConfigureStepVisual()
+        {
+            _canvasWithHoles.ShowStep(_presenter.CurrentTutorialStep.Value);
         }
     }
 }

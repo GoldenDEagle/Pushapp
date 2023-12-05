@@ -20,6 +20,7 @@ namespace Assets.Codebase.Models.Progress.Data
 
         // Trainings
         public bool IsTrainingPlanSelected;
+        public bool IsTutorialCompleted;
         public TrainingPlan CurrentTrainingPlan;
         public int CurrentTrainingDayId;
         public int TotalPushups;
@@ -62,6 +63,7 @@ namespace Assets.Codebase.Models.Progress.Data
             NextCaloriesTargetId = progress.NextCaloriesTargetId.Value;
             WarmupExerciseTime = progress.WarmupExerciseTime.Value;
             StretchingExerciseTime = progress.StretchingExerciseTime.Value;
+            IsTutorialCompleted = progress.IsTutorialCompleted.Value;
         }
     }
 }

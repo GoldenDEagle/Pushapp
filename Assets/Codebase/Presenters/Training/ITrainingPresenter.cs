@@ -1,4 +1,5 @@
-﻿using Assets.Codebase.Presenter.Base;
+﻿using Assets.Codebase.Data.Tutorial;
+using Assets.Codebase.Presenter.Base;
 using UniRx;
 
 namespace Assets.Codebase.Presenters.Training
@@ -20,6 +21,13 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TimerText { get; }
         public ReactiveProperty<float> TimerFillValue { get; }
 
+        // Tutorial
+        public ReactiveProperty<TutorialStep> CurrentTutorialStep { get; }
+        public ReactiveProperty<bool> TutorialActiveState { get; }
+        public ReactiveProperty<string> TutorialStepNumberString { get; }
+        public ReactiveProperty<string> TutorialDescriptionString { get; }
+        public ReactiveProperty<string> TutorialButtonString { get; }
+
         public void BackToMenu();
         public void CompleteStep();
         public void CancelResting();
@@ -28,5 +36,6 @@ namespace Assets.Codebase.Presenters.Training
         public void IncreaseStepValue();
         public void IncreaseRestingTime();
         public void DecreaseRestingTime();
+        public void GoToNextTutorialStage();
     }
 }

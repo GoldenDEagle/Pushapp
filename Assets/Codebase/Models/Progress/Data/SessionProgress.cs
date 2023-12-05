@@ -24,6 +24,7 @@ namespace Assets.Codebase.Models.Progress.Data
 
         // Trainings
         public ReactiveProperty<bool> IsTrainingPlanSelected;
+        public ReactiveProperty<bool> IsTutorialCompleted;
         public ReactiveProperty<TrainingPlan> CurrentTrainingPlan;
         public ReactiveProperty<int> CurrentTrainingDayId;
         public ReactiveProperty<int> TotalPushups;
@@ -67,6 +68,7 @@ namespace Assets.Codebase.Models.Progress.Data
             NextTrainingCountTargetId = new ReactiveProperty<int>(0);
             WarmupExerciseTime = new ReactiveProperty<float>(30f);
             StretchingExerciseTime = new ReactiveProperty<float>(30f);
+            IsTutorialCompleted = new ReactiveProperty<bool>(false);
 
             AllResults = new List<TrainingResult>();
         }
@@ -94,6 +96,7 @@ namespace Assets.Codebase.Models.Progress.Data
             NextPushupTargetId = new ReactiveProperty<int>(progress.NextPushupTargetId);
             NextCaloriesTargetId = new ReactiveProperty<int>(progress.NextCaloriesTargetId);
             NextTrainingCountTargetId = new ReactiveProperty<int>(progress.NextTrainingCountTargetId);
+            IsTutorialCompleted = new ReactiveProperty<bool>(progress.IsTutorialCompleted);
 
             AllResults = progress.AllResults;
         }

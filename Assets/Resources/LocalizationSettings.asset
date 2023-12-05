@@ -17,6 +17,9 @@ MonoBehaviour:
   - Name: Base
     Id: 0
     TextAsset: {fileID: 4900000, guid: 379ec4b44807dd64abc0c0f631ed7bff, type: 3}
+  - Name: Tutorial
+    Id: 2036329190
+    TextAsset: {fileID: 4900000, guid: 70ec769062a26964a92abfc22910d92d, type: 3}
   - Name: Main
     Id: 291030746
     TextAsset: {fileID: 4900000, guid: 4e44a5ca749d6ca4583ca767f865419a, type: 3}

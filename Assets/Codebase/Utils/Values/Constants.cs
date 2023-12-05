@@ -25,7 +25,13 @@ namespace Assets.Codebase.Utils.Values
         public static readonly string DeleteProgressWarningKey = "warning_deleteProgress";
         public static readonly string EarlyTrainingWarningKey = "warning_earlyTraining";
         public static readonly string ProgramSwitchWarningKey = "warning_programSwitch";
-
+        // Tutorial step descriptions
+        public static readonly string TutorialDescription1Key = "tutorial_1";
+        public static readonly string TutorialDescription2Key = "tutorial_2";
+        public static readonly string TutorialDescription3Key = "tutorial_3";
+        public static readonly string TutorialDescription4Key = "tutorial_4";
+        public static readonly string TutorialNextButtonKey = "tutorial_nextButton";
+        public static readonly string TutorialEndButtonKey = "tutorial_endButton";
 
         // Difficulty level colors
         public static Dictionary<DifficultyLevel, Color> LevelColors = new Dictionary<DifficultyLevel, Color>()

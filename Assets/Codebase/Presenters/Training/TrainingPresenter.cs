@@ -1,5 +1,6 @@
 ﻿using Assets.Codebase.Data.Audio;
 using Assets.Codebase.Data.Trainings;
+using Assets.Codebase.Data.Tutorial;
 using Assets.Codebase.Infrastructure.ServicesManagment;
 using Assets.Codebase.Infrastructure.ServicesManagment.Audio;
 using Assets.Codebase.Infrastructure.ServicesManagment.Localization;
@@ -34,6 +35,13 @@ namespace Assets.Codebase.Presenters.Training
         public ReactiveProperty<string> TimerText { get; private set; }
         public ReactiveProperty<float> TimerFillValue { get; private set; }
 
+        // Tutorial
+        public ReactiveProperty<bool> TutorialActiveState { get; private set; }
+        public ReactiveProperty<TutorialStep> CurrentTutorialStep { get; private set; }
+        public ReactiveProperty<string> TutorialStepNumberString { get; private set; }
+        public ReactiveProperty<string> TutorialDescriptionString { get; private set; }
+        public ReactiveProperty<string> TutorialButtonString { get; private set; }
+
         // General
         private TrainingDay _trainingDescription;
         private int _stepNumber;
@@ -63,6 +71,11 @@ namespace Assets.Codebase.Presenters.Training
             StathamPhrase = new ReactiveProperty<string>(string.Empty);
             TrainingNameString = new ReactiveProperty<string>(string.Empty);
             TotalPushupsString = new ReactiveProperty<string>(string.Empty);
+            CurrentTutorialStep = new ReactiveProperty<TutorialStep>(TutorialStep.None);
+            TutorialActiveState = new ReactiveProperty<bool>(false);
+            TutorialStepNumberString = new ReactiveProperty<string>();
+            TutorialDescriptionString = new ReactiveProperty<string>();
+            TutorialButtonString = new ReactiveProperty<string>();
         }
 
         public override void CreateView()
@@ -90,6 +103,10 @@ namespace Assets.Codebase.Presenters.Training
             base.CreateView();
 
             ShowStepInfo();
+            if (!ProgressModel.SessionProgress.IsTutorialCompleted.Value)
+            {
+                ShowTutorialWindow();
+            }
         }
 
         public void BackToMenu()
@@ -270,5 +287,60 @@ namespace Assets.Codebase.Presenters.Training
             TimerText.Value = TimeConverter.TimeInMinutes(_restingTimer);
             TimerFillValue.Value = (_currentTimeToRest - _restingTimer) / _currentTimeToRest;
         }
+
+
+        // Tutorial
+        private void ShowTutorialWindow()
+        {
+            TutorialActiveState.Value = true;
+            CurrentTutorialStep.Value = TutorialStep.Step1;
+            ConfigureTutorialWindow();
+        }
+
+        public void GoToNextTutorialStage()
+        {
+            if (CurrentTutorialStep.Value == TutorialStep.Step4) 
+            { 
+                EndTutorial();
+                return;
+            }
+
+            CurrentTutorialStep.Value++;
+            ConfigureTutorialWindow();
+        }
+
+        private void EndTutorial()
+        {
+            TutorialActiveState.Value = false;
+            CurrentTutorialStep.Value = TutorialStep.None;
+            ProgressModel.SessionProgress.IsTutorialCompleted.Value = true;
+        }
+
+        private void ConfigureTutorialWindow()
+        {
+            var localizationService = ServiceLocator.Container.Single<ILocalizationService>();
+            TutorialStepNumberString.Value = ((int)CurrentTutorialStep.Value).ToString() + " / " + 4.ToString();
+            TutorialButtonString.Value = localizationService.LocalizeTextByKey(Constants.TutorialNextButtonKey);
+            switch (CurrentTutorialStep.Value)
+            {
+                case TutorialStep.None:
+                    TutorialDescriptionString.Value = string.Empty;
+                    break;
+                case TutorialStep.Step1:
+                    TutorialDescriptionString.Value = localizationService.LocalizeTextByKey(Constants.TutorialDescription1Key);
+                    break;
+                case TutorialStep.Step2:
+                    TutorialDescriptionString.Value = localizationService.LocalizeTextByKey(Constants.TutorialDescription2Key);
+                    break;
+                case TutorialStep.Step3:
+                    TutorialDescriptionString.Value = localizationService.LocalizeTextByKey(Constants.TutorialDescription3Key);
+                    break;
+                case TutorialStep.Step4:
+                    TutorialDescriptionString.Value = localizationService.LocalizeTextByKey(Constants.TutorialDescription4Key);
+                    TutorialButtonString.Value = localizationService.LocalizeTextByKey(Constants.TutorialEndButtonKey);
+                    break;
+            }
+        }
+
     }
 }
