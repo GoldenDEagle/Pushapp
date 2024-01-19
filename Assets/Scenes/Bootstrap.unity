@@ -248,7 +248,7 @@ MonoBehaviour:
   _uiRoot: {fileID: 1266598011}
   _sfxSource: {fileID: 866794709}
   _launchParams:
-    ManualParamSet: 0
+    ManualParamSet: 1
     Language: 1
     ClearPlayerPrefs: 0
     CheatsEnabled: 0
